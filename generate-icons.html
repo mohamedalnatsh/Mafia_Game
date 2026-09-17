@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+  <body>
+    <canvas id="c192" width="192" height="192"></canvas>
+    <canvas id="c512" width="512" height="512"></canvas>
+    <script>
+      function drawIcon(canvasId, size) {
+        const canvas = document.getElementById(canvasId);
+        const ctx = canvas.getContext("2d");
+        const scale = size / 512;
+        ctx.scale(scale, scale);
+
+        const bgGrad = ctx.createLinearGradient(0, 0, 512, 512);
+        bgGrad.addColorStop(0, "#2A0A12");
+        bgGrad.addColorStop(0.5, "#140408");
+        bgGrad.addColorStop(1, "#080103");
+        ctx.fillStyle = bgGrad;
+        ctx.beginPath();
+        ctx.roundRect(0, 0, 512, 512, 110);
+        ctx.fill();
+
+        const goldGrad = ctx.createLinearGradient(0, 0, 512, 512);
+        goldGrad.addColorStop(0, "#FFE885");
+        goldGrad.addColorStop(0.5, "#D4AF37");
+        goldGrad.addColorStop(1, "#997315");
+        ctx.strokeStyle = goldGrad;
+        ctx.lineWidth = 6;
+        ctx.globalAlpha = 0.4;
+        ctx.beginPath();
+        ctx.roundRect(12, 12, 488, 488, 98);
+        ctx.stroke();
+        ctx.globalAlpha = 1;
+
+        const crimsonGrad = ctx.createLinearGradient(0, 0, 0, 512);
+        crimsonGrad.addColorStop(0, "#990011");
+        crimsonGrad.addColorStop(1, "#4A0008");
+        ctx.beginPath();
+        ctx.moveTo(256, 95);
+        ctx.lineTo(380, 138);
+        ctx.quadraticCurveTo(380, 285, 256, 432);
+        ctx.quadraticCurveTo(132, 285, 132, 138);
+        ctx.closePath();
+        ctx.fillStyle = crimsonGrad;
+        ctx.fill();
+        ctx.strokeStyle = goldGrad;
+        ctx.lineWidth = 14;
+        ctx.lineJoin = "round";
+        ctx.stroke();
+
+        ctx.fillStyle = goldGrad;
+        ctx.beginPath();
+        ctx.moveTo(198, 270);
+        ctx.lineTo(198, 200);
+        ctx.lineTo(230, 228);
+        ctx.lineTo(256, 185);
+        ctx.lineTo(282, 228);
+        ctx.lineTo(314, 200);
+        ctx.lineTo(314, 270);
+        ctx.closePath();
+        ctx.fill();
+
+        [[198, 184, 9], [256, 165, 11], [314, 184, 9]].forEach(([x, y, r]) => {
+          ctx.beginPath();
+          ctx.arc(x, y, r, 0, Math.PI * 2);
+          ctx.fill();
+        });
+
+        ctx.beginPath();
+        ctx.roundRect(190, 270, 132, 16, 4);
+        ctx.fill();
+      }
+
+      drawIcon("c192", 192);
+      drawIcon("c512", 512);
+    </script>
+  </body>
+</html>

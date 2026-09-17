@@ -1,10 +1,12 @@
-const CACHE_NAME = 'mafia-pwa-v1';
+const CACHE_NAME = 'mafia-pwa-v2';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
   './imges/favicon.svg',
+  './imges/icon-192.png',
+  './imges/icon-512.png',
   './imges/Start_menu.png',
   './imges/card_bodyguard_v3.png',
   './imges/card_citizen_v3.png',
