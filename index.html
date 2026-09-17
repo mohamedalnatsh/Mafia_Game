@@ -797,6 +797,27 @@
       padding: 1.5rem 0;
     }
 
+    .scoring-guide-section {
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.14);
+    }
+
+    .scoring-guide-section h3 {
+      color: var(--gold-light);
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .scoring-guide-section p {
+      color: var(--parchment);
+      font-size: 0.88rem;
+      line-height: 1.65;
+    }
+
+    .scoring-guide-lines {
+      white-space: pre-line;
+    }
+
     .seating-panel {
       text-align: center;
       padding: 1.5rem 1rem 1.25rem;
@@ -890,9 +911,91 @@
     .gold-gradient-link:hover {
       filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.8));
     }
+
+    .top-bar-controls {
+      position: fixed;
+      top: 0.75rem;
+      left: 0.75rem;
+      right: 0.75rem;
+      z-index: 90;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .btn-top-bar {
+      pointer-events: auto;
+      border: 1px solid var(--border-gold);
+      border-radius: 8px;
+      padding: 0.45rem 0.7rem;
+      font: 700 0.8rem var(--font-body);
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+    }
+
+    .btn-lang {
+      background: #181822;
+      color: var(--gold-light);
+    }
+
+    .btn-exit-icon {
+      display: none;
+      background: #6f111b;
+      color: #fff;
+      border-color: #dc3545;
+      font-size: 1rem;
+    }
+
+    body.game-active .btn-exit-icon {
+      display: inline-flex;
+    }
+
+    .exit-warning {
+      margin: 1rem 0;
+      padding: 0.8rem;
+      border: 1px solid #9b6b1a;
+      border-radius: 8px;
+      background: rgba(212, 175, 55, 0.1);
+      color: var(--gold-light);
+      line-height: 1.5;
+      font-size: 0.9rem;
+    }
+
+    .exit-actions {
+      display: flex;
+      gap: 0.65rem;
+    }
+
+    .exit-actions .btn {
+      flex: 1;
+    }
+
+    .btn-exit-confirm {
+      background: #dc3545;
+      color: #fff;
+    }
+
+    .btn-continue {
+      background: var(--gold);
+      color: #1a0000;
+    }
+
+    [dir="ltr"] .app-container {
+      direction: ltr;
+    }
+
+    [dir="ltr"] .panel-header,
+    [dir="ltr"] .switch-row {
+      text-align: left;
+    }
   </style>
 </head>
 <body>
+
+  <div class="top-bar-controls">
+    <button id="btn-exit-game" class="btn-top-bar btn-exit-icon" onclick="GameApp.openExitModal()" title="Exit Game">🚪</button>
+    <button id="btn-lang-toggle" class="btn-top-bar btn-lang" onclick="GameApp.toggleLanguage()">🌐 EN</button>
+  </div>
 
   <div class="app-container">
     
@@ -901,42 +1004,42 @@
       <svg class="title-crown" viewBox="0 0 24 24">
         <path d="M5 16L3 5l5.5 5L12 4l3.5 6L21 5l-2 11H5m14 3c0 .6-.4 1-1 1H6c-.6 0-1-.4-1-1v-1h14v1z"/>
       </svg>
-      <h1 class="app-title">مافيا الفرسان</h1>
-      <p class="app-subtitle">النسخة الملحمية • بدون مدير (أوفلاين بالكامل)</p>
+      <h1 class="app-title" data-i18n="gameTitle">مافيا الفرسان</h1>
+      <p class="app-subtitle" data-i18n="epicSubtitle">النسخة الملحمية • بدون مدير (أوفلاين بالكامل)</p>
     </header>
 
     <!-- 1. الشاشة الرئيسية (Home Screen) -->
     <section id="screen-home" class="screen active">
       <div class="card-panel gold-border" style="text-align:center; padding: 2rem 1.25rem;">
         <img class="start-menu-image" src="imges/Start_menu.png" alt="شخصيات مملكة الظلال والخيانات" />
-        <h2 style="font-family: var(--font-title); font-size: 1.8rem; color: var(--gold-light); margin-bottom: 0.5rem;">
+        <h2 data-i18n="kingdomTitle" style="font-family: var(--font-title); font-size: 1.8rem; color: var(--gold-light); margin-bottom: 0.5rem;">
         مملكة أبو الجعافير العظيمة
         </h2>
-        <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
+        <p data-i18n="homeDescription" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 1.5rem;">
           تجربة لعبة المافيا الكلاسيكية بحلة فروسية العصور الوسطى. مرر الهاتف سراً بين اللاعبين لتقوم المملكة بحساب القتل، التحقيقات، والتصويت تلقائياً بدون الحاجة لحَكَم!
         </p>
         
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <button class="btn btn-primary" onclick="GameApp.goToSetup()">
+          <button class="btn btn-primary" data-i18n="newGame" onclick="GameApp.goToSetup()">
             <svg class="svg-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
             بدء مغامرة جديدة
           </button>
-          <button class="btn btn-secondary" onclick="GameApp.openEncyclopedia()">
+          <button class="btn btn-secondary" data-i18n="encyclopedia" onclick="GameApp.openEncyclopedia()">
             📖 موسوعة الأدوار والقوانين
           </button>
-          <button class="btn btn-secondary" onclick="GameApp.openStatsModal()">
+          <button class="btn btn-secondary" data-i18n="statistics" onclick="GameApp.openStatsModal()">
             📊 جدول النقاط والأحصائيات
           </button>
-          <button class="btn btn-outline" onclick="GameApp.openPresetModal()">
+          <button class="btn btn-outline" data-i18n="presets" onclick="GameApp.openPresetModal()">
             ⚙️ إعدادات التشكيلات السريعة
           </button>
         </div>
       </div>
 
       <div style="display: flex; justify-content: space-around; font-size: 0.8rem; color: var(--text-muted); padding: 0.5rem;">
-        <span>🛡️ 6 إلى 16 لاعب</span>
-        <span>⚡ 100% أوفلاين</span>
-        <span>🎭 16 دوراً ملكياً</span>
+        <span data-i18n="playerRange">🛡️ 6 إلى 16 لاعب</span>
+        <span data-i18n="offlineMode">⚡ 100% أوفلاين</span>
+        <span data-i18n="roleCount">🎭 16 دوراً ملكياً</span>
       </div>
 
       <footer class="home-footer">
@@ -950,23 +1053,23 @@
     <!-- 2. شاشة إعداد اللاعبين والأدوار (Setup Screen) -->
     <section id="screen-setup" class="screen">
       <div class="tab-bar">
-        <button class="tab-btn active" onclick="GameApp.switchSetupTab('players')">1. أسماء الفرسان</button>
-        <button class="tab-btn" onclick="GameApp.switchSetupTab('roles')">2. اختيار الأدوار</button>
-        <button class="tab-btn" onclick="GameApp.switchSetupTab('rules')">3. القواعد</button>
+        <button class="tab-btn active" data-i18n="setupPlayers" onclick="GameApp.switchSetupTab('players')">1. أسماء الفرسان</button>
+        <button class="tab-btn" data-i18n="setupRoles" onclick="GameApp.switchSetupTab('roles')">2. اختيار الأدوار</button>
+        <button class="tab-btn" data-i18n="setupRules" onclick="GameApp.switchSetupTab('rules')">3. القواعد</button>
       </div>
 
       <!-- تبويب أسماء اللاعبين -->
       <div id="tab-players" class="card-panel">
         <div class="panel-header">
-          <span class="panel-title">👥 تسجيل اللاعبين (<span id="player-count-badge">5</span>)</span>
-          <button class="btn-outline" style="padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;" onclick="GameApp.quickFillPlayers()">أسماء تجريبية</button>
+          <span class="panel-title"><span data-i18n="playerHeading">👥 تسجيل اللاعبين</span> (<span id="player-count-badge">5</span>)</span>
+          <button class="btn-outline" data-i18n="sampleNames" style="padding: 0.3rem 0.6rem; border-radius: 6px; font-size: 0.8rem;" onclick="GameApp.quickFillPlayers()">أسماء تجريبية</button>
         </div>
 
         <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-          <input type="text" id="new-player-input" placeholder="اسم الفارس / اللاعب..." 
+          <input type="text" id="new-player-input" data-i18n-placeholder="playerPlaceholder" placeholder="اسم الفارس / اللاعب..."
                  style="flex: 1; padding: 0.75rem; background: #0c0c12; border: 1px solid #3d3d52; border-radius: 8px; color: #fff; font-family: var(--font-body);"
                  onkeypress="if(event.key==='Enter') GameApp.addPlayer()" />
-          <button class="btn btn-gold" style="width: auto; padding: 0.75rem 1rem;" onclick="GameApp.addPlayer()">إضافة</button>
+          <button class="btn btn-gold" data-i18n="add" style="width: auto; padding: 0.75rem 1rem;" onclick="GameApp.addPlayer()">إضافة</button>
         </div>
 
         <div id="players-chips-container" style="display: flex; flex-wrap: wrap; gap: 0.4rem; max-height: 35vh; overflow-y: auto;">
@@ -977,10 +1080,10 @@
       <!-- تبويب الأدوار -->
       <div id="tab-roles" class="card-panel" style="display: none;">
         <div class="panel-header">
-          <span class="panel-title">🎭 تخصيص تشكيلة الأدوار</span>
+          <span class="panel-title" data-i18n="roleSetup">🎭 تخصيص تشكيلة الأدوار</span>
           <span id="role-balance-badge" style="font-size: 0.85rem; font-weight: bold; color: var(--gold);">0 / 6</span>
         </div>
-        <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+        <p data-i18n="roleSetupNote" style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 0.75rem;">
           اختر الأدوار لتطابق تماماً عدد اللاعبين المسجلين.
         </p>
 
@@ -992,13 +1095,13 @@
       <!-- تبويب القواعد -->
       <div id="tab-rules" class="card-panel" style="display: none;">
         <div class="panel-header">
-          <span class="panel-title">⚖️ خيارات وقواعد المملكة</span>
+          <span class="panel-title" data-i18n="rulesHeading">⚖️ خيارات وقواعد المملكة</span>
         </div>
 
         <div class="switch-row">
           <div>
-            <div style="font-weight: 700;">كشف دور المطرود</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted);">إعلان هوية اللاعب فور إقصائه نهاراً</div>
+            <div style="font-weight: 700;" data-i18n="revealRoleRule">كشف دور المطرود</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="revealRoleNote">إعلان هوية اللاعب فور إقصائه نهاراً</div>
           </div>
           <label class="toggle-switch">
             <input type="checkbox" id="rule-reveal-role" checked>
@@ -1008,8 +1111,8 @@
 
         <div class="switch-row">
           <div>
-            <div style="font-weight: 700;">إظهار تفاصيل الأصوات</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted);">كشف من صوت ضد من بعد انتهاء النهار</div>
+            <div style="font-weight: 700;" data-i18n="showVotesRule">إظهار تفاصيل الأصوات</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="showVotesNote">كشف من صوت ضد من بعد انتهاء النهار</div>
           </div>
           <label class="toggle-switch">
             <input type="checkbox" id="rule-show-votes" checked>
@@ -1019,8 +1122,8 @@
 
         <div class="switch-row">
           <div>
-            <div style="font-weight: 700;">مدة مؤقت النقاش النهاري</div>
-            <div style="font-size: 0.8rem; color: var(--text-muted);">الوقت المخصص للجدال والتحقيق</div>
+            <div style="font-weight: 700;" data-i18n="discussionTimerRule">مدة مؤقت النقاش النهاري</div>
+            <div style="font-size: 0.8rem; color: var(--text-muted);" data-i18n="discussionNote">الوقت المخصص للجدال والتحقيق</div>
           </div>
           <select id="rule-discussion-time" style="background:#0c0c12; color:#fff; border:1px solid #3d3d52; padding:0.4rem; border-radius:6px;">
             <option value="90">90 ثانية</option>
@@ -1031,8 +1134,9 @@
       </div>
 
       <div style="margin-top: 1rem; display: flex; gap: 0.5rem;">
-        <button class="btn btn-secondary" style="flex: 1;" onclick="GameApp.goToHome()">رجوع</button>
-        <button class="btn btn-primary" style="flex: 2;" id="btn-start-distribution" onclick="GameApp.showSeatingArrangement()">
+        <button class="btn btn-secondary" data-i18n="back" style="flex: 1;" onclick="GameApp.goToHome()">رجوع</button>
+        <button class="btn btn-outline" data-i18n="scoringGuide" style="flex: 1;" onclick="GameApp.openScoringGuide()">📜 شرح آلية النقاط</button>
+        <button class="btn btn-primary" data-i18n="seatingNext" style="flex: 2;" id="btn-start-distribution" onclick="GameApp.showSeatingArrangement()">
           ترتيب الجلسة ثم توزيع الأدوار 🎴
         </button>
       </div>
@@ -1041,12 +1145,12 @@
     <!-- 3. شاشة ترتيب الجلسة (Seating Arrangement) -->
     <section id="screen-seating" class="screen">
       <div class="card-panel gold-border seating-panel">
-        <h2 class="seating-title">ترتيب الجلسة</h2>
-        <p class="seating-subtitle">اجلسوا بشكل دائري بهالترتيب عشان يسهل تمرير الجوال</p>
+        <h2 class="seating-title" data-i18n="seatingTitle">ترتيب الجلسة</h2>
+        <p class="seating-subtitle" data-i18n="seatingSubtitle">اجلسوا بشكل دائري بهالترتيب عشان يسهل تمرير الجوال</p>
         <div id="seating-circle">
           <div class="seating-center-mark">⚜️</div>
         </div>
-        <button class="btn btn-primary" onclick="GameApp.startRoleDistribution()">
+        <button class="btn btn-primary" data-i18n="start" onclick="GameApp.startRoleDistribution()">
           ابدأ
         </button>
       </div>
@@ -1056,7 +1160,7 @@
     <section id="screen-reveal" class="screen">
       <div id="distribution-view" class="distribution-view">
         <div class="card-panel gold-border" style="text-align: center;">
-        <span style="font-size: 0.85rem; color: var(--gold); text-transform: uppercase;">مرر الجوال في سرية تامة إلى</span>
+        <span data-i18n="passTo" style="font-size: 0.85rem; color: var(--gold); text-transform: uppercase;">مرر الجوال في سرية تامة إلى</span>
         <h2 id="dist-player-name" style="font-family: var(--font-title); font-size: 2.2rem; color: #fff; margin: 0.3rem 0 1rem 0;">
           اسم اللاعب
         </h2>
@@ -1066,11 +1170,11 @@
           <div class="role-card" id="dist-card-flipper">
             <!-- ظهر الكرت -->
             <div class="card-face card-back">
-              <div style="font-family: var(--font-title); color: var(--gold); font-size: 1.2rem;">⚜️ وثيقة سرية ⚜️</div>
+              <div data-i18n="secretDoc" style="font-family: var(--font-title); color: var(--gold); font-size: 1.2rem;">⚜️ وثيقة سرية ⚜️</div>
               <div class="card-seal">
                 <svg viewBox="0 0 24 24" style="width:40px; height:40px; fill:currentColor;"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 6c1.4 0 2.5 1.1 2.5 2.5S13.4 12 12 12s-2.5-1.1-2.5-2.5S10.6 7 12 7zm0 10c-2.7 0-5.8-1.3-6-2 .2-.8 3.3-2 6-2s5.8 1.2 6 2c-.2.7-3.3 2-6 2z"/></svg>
               </div>
-              <div style="color: var(--gold-light); font-size: 0.85rem;">اضغط للكشف عن هويتك</div>
+              <div data-i18n="clickToReveal" style="color: var(--gold-light); font-size: 0.85rem;">اضغط للكشف عن هويتك</div>
             </div>
             <!-- وجه الكرت -->
             <div class="card-face card-front">
@@ -1082,12 +1186,12 @@
               <div class="card-role-desc" id="dist-role-desc">
                 تستطيع إنقاذ لاعب واحد كل ليلة من مخالب المافيا.
               </div>
-              <div style="font-size: 0.75rem; color: var(--text-muted);">المس الكرت لإخفائه مجدداً</div>
+              <div data-i18n="tapToHide" style="font-size: 0.75rem; color: var(--text-muted);">المس الكرت لإخفائه مجدداً</div>
             </div>
           </div>
         </div>
 
-        <button class="btn btn-primary" id="btn-next-player-dist" style="margin-top: 1rem;" onclick="GameApp.nextDistributionPlayer()">
+        <button class="btn btn-primary" data-i18n="passPhone" id="btn-next-player-dist" style="margin-top: 1rem;" onclick="GameApp.nextDistributionPlayer()">
           حفظ وإخفاء الدور وتمرير الجوال 🔒
         </button>
         </div>
@@ -1095,12 +1199,12 @@
 
       <div id="distribution-handover" class="card-panel gold-border distribution-handover">
         <div style="font-size: 3rem; margin-bottom: 0.75rem;">🔒 ⚜️ 🔒</div>
-        <p style="color: var(--gold); font-size: 0.95rem;">تم إخفاء الوثيقة السرية</p>
+        <p id="distribution-hidden-document" style="color: var(--gold); font-size: 0.95rem;">تم إخفاء الوثيقة السرية</p>
         <h2 style="font-family: var(--font-title); font-size: 2rem; color: #fff; margin: 0.5rem 0 1.5rem;">
-          أعطي الجوال للاعب <span id="distribution-next-player-name">اللاعب التالي</span>
+          <span id="distribution-pass-prompt">أعطي الجوال للاعب اللاعب التالي</span>
         </h2>
         <button class="btn btn-primary" onclick="GameApp.confirmDistributionHandover()">
-          أنا اللاعب <span id="distribution-confirm-player-name">اللاعب التالي</span>
+          <span id="distribution-confirm-prompt">أنا اللاعب اللاعب التالي</span>
         </button>
       </div>
     </section>
@@ -1114,8 +1218,8 @@
         <h2 id="night-current-player-name" style="font-family: var(--font-title); font-size: 2.3rem; color: #fff; margin: 0.5rem 0 1.5rem 0;">
           اسم الفارس
         </h2>
-        <button class="btn btn-primary" onclick="GameApp.showPlayerNightAction()">
-          أنا <span id="night-btn-player-name"></span>، فتح المهمة السرية 🗝️
+        <button class="btn btn-primary" data-i18n="openMission" onclick="GameApp.showPlayerNightAction()">
+          فتح المهمة السرية 🗝️
         </button>
       </div>
 
@@ -1142,9 +1246,8 @@
         <div id="night-extra-options" style="margin-top: 1rem; display: none;"></div>
 
         <div style="margin-top: 1.25rem;">
-          <button class="btn btn-primary" id="btn-confirm-night-action" onclick="GameApp.submitNightAction()">
-            تأكيد وإنهاء الدور 🌙
-          </button>
+          <button class="btn btn-primary" data-i18n="confirmAction" id="btn-confirm-action" onclick="GameApp.submitNightAction()">تأكيد وإنهاء الدور 🌙</button>
+          <small data-i18n="skipActionNote" style="display:block; margin-top:0.45rem; color:var(--text-muted);">(لا تختار أحداً لتخطي دورك)</small>
         </div>
       </div>
     </section>
@@ -1152,9 +1255,9 @@
     <!-- 5. شاشة الصباح والتقرير الإخباري (Morning News Phase) -->
     <section id="screen-morning" class="screen">
       <div class="chronicle-paper">
-        <div class="chronicle-header">📜 وثيقة الصباح الملكية 📜</div>
+        <div class="chronicle-header" data-i18n="royalBulletin">📜 وثيقة الصباح الملكية 📜</div>
         <div style="text-align: center; font-size: 0.85rem; color: var(--gold-light); margin-bottom: 1rem;">
-          اليوم رقم <span id="morning-day-number" style="font-weight:bold;">1</span> في المملكة
+          <span data-i18n="dayInKingdom">اليوم رقم</span> <span id="morning-day-number" style="font-weight:bold;">1</span> <span data-i18n="kingdomWord">في المملكة</span>
         </div>
         
         <div id="morning-news-list">
@@ -1164,14 +1267,14 @@
 
       <div class="card-panel">
         <h3 style="font-family: var(--font-title); color: var(--gold-light); margin-bottom: 0.75rem; font-size: 1.2rem;">
-          🛡️ الفرسان الأحياء في المجلس (<span id="alive-count">0</span>)
+          <span data-i18n="livingKnights">🛡️ الفرسان الأحياء في المجلس</span> (<span id="alive-count">0</span>)
         </h3>
         <div id="morning-alive-grid" style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
           <!-- قائمة الأحياء -->
         </div>
       </div>
 
-      <button class="btn btn-primary" onclick="GameApp.startDayDiscussion()">
+      <button class="btn btn-primary" data-i18n="discussion" onclick="GameApp.startDayDiscussion()">
         بدء جلسة النقاش والمحاكمة ⚖️
       </button>
     </section>
@@ -1181,23 +1284,23 @@
       <!-- مرحلة النقاش والعداد -->
       <div id="day-discussion-box" class="card-panel gold-border" style="text-align: center;">
         <div class="panel-header">
-          <span class="panel-title">⏳ جلسة المشاورة العلنية</span>
-          <span class="role-type-badge team-town">النهار مفتوح</span>
+          <span class="panel-title" data-i18n="publicDiscussion">⏳ جلسة المشاورة العلنية</span>
+          <span class="role-type-badge team-town" data-i18n="daylightActive">النهار مفتوح</span>
         </div>
 
         <div class="timer-display" id="day-timer-display">03:00</div>
         
         <div class="timer-controls">
-          <button class="timer-mini-btn" onclick="GameApp.toggleDiscussionTimer()" id="btn-timer-toggle">إيقاف مؤقت ⏸️</button>
-          <button class="timer-mini-btn" onclick="GameApp.addTimerSeconds(30)">+30 ثانية ⏱️</button>
-          <button class="timer-mini-btn" onclick="GameApp.resetDiscussionTimer()">إعادة ضبط 🔄</button>
+          <button class="timer-mini-btn" data-i18n="pause" onclick="GameApp.toggleDiscussionTimer()" id="btn-timer-toggle">إيقاف مؤقت ⏸️</button>
+          <button class="timer-mini-btn" data-i18n="addThirty" onclick="GameApp.addTimerSeconds(30)">+30 ثانية ⏱️</button>
+          <button class="timer-mini-btn" data-i18n="reset" onclick="GameApp.resetDiscussionTimer()">إعادة ضبط 🔄</button>
         </div>
 
         <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1rem;">
-          تناقشوا واتهموا المشتبه بهم قبل بدء التصويت على الإقصاء بالمقصلة!
+          <span data-i18n="discussionNote">تناقشوا واتهموا المشتبه بهم قبل بدء التصويت على الإقصاء بالمقصلة!</span>
         </p>
 
-        <button class="btn btn-gold" onclick="GameApp.startVotingPhase()">
+        <button class="btn btn-gold" data-i18n="vote" onclick="GameApp.startVotingPhase()">
           الانتقال إلى منصة التصويت 🗳️
         </button>
       </div>
@@ -1205,21 +1308,22 @@
       <!-- مرحلة التصويت السري / العلني -->
       <div id="day-voting-box" class="card-panel" style="display: none;">
         <div class="panel-header">
-          <span class="panel-title">🗳️ تصويت الإقصاء الملكي</span>
+          <span class="panel-title" data-i18n="royalVote">🗳️ تصويت الإقصاء الملكي</span>
           <span id="voting-turn-indicator" style="font-size: 0.85rem; color: var(--gold);">صوت الفارس: 1/6</span>
         </div>
 
-        <p id="voting-voter-prompt" style="font-size: 0.95rem; color: #fff; margin-bottom: 0.75rem;">
-          أيها الفارس <strong id="current-voter-name" style="color:var(--gold);">أحمد</strong>، اختر من تتهمه بالخيانة:
-        </p>
+        <p id="voting-voter-prompt" style="font-size: 0.95rem; color: #fff; margin-bottom: 0.75rem;">أيها الفارس <strong id="current-voter-name" style="color:var(--gold);">أحمد</strong>، اختر من تتهمه بالخيانة:</p>
 
         <div class="player-selection-list" id="voting-candidates-list">
           <!-- المرشحون للتصويت -->
         </div>
 
         <div style="margin-top: 1rem;">
-          <button class="btn btn-danger" id="btn-submit-vote" onclick="GameApp.submitVote()">
+          <button class="btn btn-danger" data-i18n="confirmVote" id="btn-submit-vote" onclick="GameApp.submitVote()">
             تأكيد التصويت ⚔️
+          </button>
+          <button class="btn btn-secondary" data-i18n="skip" id="btn-skip-vote" style="margin-top:0.6rem;" onclick="GameApp.skipVote()">
+            تخطي / امتناع
           </button>
         </div>
       </div>
@@ -1229,16 +1333,16 @@
     <section id="screen-execution" class="screen">
       <div class="card-panel gold-border" style="text-align: center; padding: 2rem 1.25rem;">
         <div style="font-size: 3.5rem; margin-bottom: 0.5rem;" id="exec-icon">⚰️</div>
-        <h2 style="font-family: var(--font-title); font-size: 2rem; color: #ff6b6b; margin-bottom: 0.5rem;" id="exec-title">
+        <h2 data-i18n="tieTitle" style="font-family: var(--font-title); font-size: 2rem; color: #ff6b6b; margin-bottom: 0.5rem;" id="exec-title">
           حكم المقصلة
         </h2>
-        <div id="exec-description" style="font-size: 1rem; line-height: 1.5; color: var(--parchment); margin-bottom: 1.5rem;">
+        <div data-i18n="tieDesc" id="exec-description" style="font-size: 1rem; line-height: 1.5; color: var(--parchment); margin-bottom: 1.5rem;">
           قرر المجلس بالإجماع نفي الفارس [أحمد] وإعدامه.
         </div>
 
         <!-- تفاصيل كشف الدور إن كانت مفعلة -->
         <div id="exec-role-reveal-box" style="background: #111; border: 1px solid var(--gold); border-radius: 10px; padding: 1rem; margin-bottom: 1.5rem; display: none;">
-          <div style="font-size: 0.8rem; color: var(--gold);">الهوية الحقيقية للمقصى:</div>
+          <div data-i18n="executionRole" style="font-size: 0.8rem; color: var(--gold);">الهوية الحقيقية للمقصى:</div>
           <div id="exec-revealed-role" style="font-family: var(--font-title); font-size: 1.4rem; color: var(--gold-light); margin-top: 0.2rem;">
             المافيا
           </div>
@@ -1246,11 +1350,11 @@
 
         <!-- عرض نتائج وتفاصيل التصويت -->
         <div id="exec-votes-tally-box" style="background: rgba(0,0,0,0.4); border-radius: 8px; padding: 0.75rem; text-align: right; margin-bottom: 1.5rem; font-size: 0.85rem; max-height: 150px; overflow-y:auto; display:none;">
-          <div style="font-weight: bold; color: var(--gold); margin-bottom: 0.4rem;">تفاصيل سجل الأصوات:</div>
+          <div data-i18n="voteDetails" style="font-weight: bold; color: var(--gold); margin-bottom: 0.4rem;">تفاصيل سجل الأصوات:</div>
           <div id="exec-votes-tally-list"></div>
         </div>
 
-        <button class="btn btn-primary" id="btn-next-after-exec" onclick="GameApp.proceedAfterExecution()">
+        <button class="btn btn-primary" data-i18n="nextNight" id="btn-next-after-exec" onclick="GameApp.proceedAfterExecution()">
           متابعة حلول الليل التالي 🌙
         </button>
       </div>
@@ -1260,7 +1364,7 @@
     <section id="screen-gameover" class="screen">
       <div class="card-panel gold-border" style="text-align: center; padding: 2.5rem 1.25rem;">
         <div style="font-size: 4rem; margin-bottom: 0.5rem;" id="victory-icon">🏆</div>
-        <span style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase;">انتهاء الصراع الملكي</span>
+        <span data-i18n="conflictEnd" style="font-size: 0.9rem; color: var(--gold); text-transform: uppercase;">انتهاء الصراع الملكي</span>
         <h2 id="victory-title" style="font-family: var(--font-title); font-size: 2.3rem; color: var(--gold-light); margin: 0.5rem 0 1rem 0;">
           انتصار الفرسان والمواطنين!
         </h2>
@@ -1270,15 +1374,15 @@
 
         <!-- كشف جميع أدوار اللاعبين -->
         <div class="card-panel" style="text-align: right; margin-bottom: 1.5rem; max-height: 35vh; overflow-y:auto;">
-          <div style="font-weight: bold; color: var(--gold); margin-bottom: 0.5rem;">سجل هويات جميع اللاعبين:</div>
+          <div data-i18n="rolesRecord" style="font-weight: bold; color: var(--gold); margin-bottom: 0.5rem;">سجل هويات جميع اللاعبين:</div>
           <div id="gameover-roles-list" style="display: flex; flex-direction: column; gap: 0.4rem;"></div>
         </div>
 
         <div style="display: flex; flex-direction: column; gap: 0.75rem;">
-          <button class="btn btn-gold" onclick="GameApp.restartGame(true)">
+          <button class="btn btn-gold" data-i18n="restartSame" onclick="GameApp.restartGame(true)">
             إعادة اللعب بنفس التشكيلة ⚔️
           </button>
-          <button class="btn btn-secondary" onclick="GameApp.goToHome()">
+          <button class="btn btn-secondary" data-i18n="home" onclick="GameApp.goToHome()">
             العودة للقائمة الرئيسية 🏰
           </button>
         </div>
@@ -1291,13 +1395,13 @@
   <div class="modal-overlay" id="modal-encyclopedia">
     <div class="modal-content">
       <div class="panel-header">
-        <span class="panel-title">📖 موسوعة أدوار العصور الوسطى</span>
+        <span class="panel-title" data-i18n="encyclopediaTitle">📖 موسوعة أدوار العصور الوسطى</span>
         <button onclick="GameApp.closeModals()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;">✕</button>
       </div>
       <div id="encyclopedia-list" style="display:flex; flex-direction:column; gap:0.75rem;">
         <!-- يتم ملء الأدوار الـ 16 ديناميكياً -->
       </div>
-      <button class="btn btn-secondary" style="margin-top: 1rem;" onclick="GameApp.closeModals()">إغلاق</button>
+      <button class="btn btn-secondary" data-i18n="close" style="margin-top: 1rem;" onclick="GameApp.closeModals()">إغلاق</button>
     </div>
   </div>
 
@@ -1305,16 +1409,16 @@
   <div class="modal-overlay" id="modal-presets">
     <div class="modal-content">
       <div class="panel-header">
-        <span class="panel-title">⚡ التشكيلات المتوازنة الجاهزة</span>
+        <span class="panel-title" data-i18n="presetTitle">⚡ التشكيلات المتوازنة الجاهزة</span>
         <button onclick="GameApp.closeModals()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;">✕</button>
       </div>
       <div style="display:flex; flex-direction:column; gap:0.6rem;">
-        <button class="btn btn-secondary" onclick="GameApp.applyPreset(6)">🛡️ تشكيلة 6 لاعبين (مبتدئ)</button>
-        <button class="btn btn-secondary" onclick="GameApp.applyPreset(8)">⚔️ تشكيلة 8 لاعبين (كلاسيكية متوازنة)</button>
-        <button class="btn btn-secondary" onclick="GameApp.applyPreset(10)">👑 تشكيلة 10 لاعبين (ملحمية)</button>
-        <button class="btn btn-secondary" onclick="GameApp.applyPreset(12)">🔥 تشكيلة 12 لاعباً (فوضى وظلال)</button>
+        <button class="btn btn-secondary" data-i18n="preset6" onclick="GameApp.applyPreset(6)">🛡️ تشكيلة 6 لاعبين (مبتدئ)</button>
+        <button class="btn btn-secondary" data-i18n="preset8" onclick="GameApp.applyPreset(8)">⚔️ تشكيلة 8 لاعبين (كلاسيكية متوازنة)</button>
+        <button class="btn btn-secondary" data-i18n="preset10" onclick="GameApp.applyPreset(10)">👑 تشكيلة 10 لاعبين (ملحمية)</button>
+        <button class="btn btn-secondary" data-i18n="preset12" onclick="GameApp.applyPreset(12)">🔥 تشكيلة 12 لاعباً (فوضى وظلال)</button>
       </div>
-      <button class="btn btn-outline" style="margin-top: 1rem;" onclick="GameApp.closeModals()">إلغاء</button>
+      <button class="btn btn-outline" data-i18n="cancel" style="margin-top: 1rem;" onclick="GameApp.closeModals()">إلغاء</button>
     </div>
   </div>
 
@@ -1322,24 +1426,84 @@
   <div class="modal-overlay" id="modal-stats">
     <div class="modal-content">
       <div class="panel-header">
-        <span class="panel-title">📊 سجل النقاط والأحصائيات</span>
+        <span class="panel-title" data-i18n="statsTitle">📊 سجل النقاط والأحصائيات</span>
         <button onclick="GameApp.closeModals()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;">✕</button>
       </div>
       <div id="stats-list"></div>
-      <button class="btn btn-danger" style="margin-top: 1rem;" onclick="GameApp.resetAllStats()">
+      <button class="btn btn-danger" data-i18n="resetStats" style="margin-top: 1rem;" onclick="GameApp.resetAllStats()">
         🗑️ تصفير جميع النقاط والبيانات
       </button>
-      <button class="btn btn-secondary" style="margin-top: 0.75rem;" onclick="GameApp.closeModals()">إغلاق</button>
+      <button class="btn btn-outline" data-i18n="scoringGuide" style="margin-top: 0.75rem;" onclick="GameApp.openScoringGuide()">📜 شرح آلية النقاط</button>
+      <button class="btn btn-secondary" data-i18n="close" style="margin-top: 0.75rem;" onclick="GameApp.closeModals()">إغلاق</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-scoring-guide">
+    <div class="modal-content">
+      <div class="panel-header">
+        <span class="panel-title" data-i18n="scoringTitle">📜 دليل توزيع النقاط والفوزات</span>
+        <button onclick="GameApp.closeModals()" style="background:none; border:none; color:#fff; font-size:1.5rem; cursor:pointer;">✕</button>
+      </div>
+      <section class="scoring-guide-section">
+        <h3 data-i18n="baseWinTitle">🏆 الفوز الأساسي</h3>
+        <p data-i18n="baseWinDesc">كل فوز بالجولة يعطي +10 نقاط +1 لسجل الفوز.</p>
+      </section>
+      <section class="scoring-guide-section">
+        <h3 data-i18n="knightsTitle">🛡️ فريق الفرسان (الصالحين)</h3>
+        <p class="scoring-guide-lines" data-i18n="knightsKills">• قتل مافيا عادي: +5 نقاط
+• قتل زعيم المافيا (العرّاب): +15 نقطة
+• التصويت لإقصاء القاتل المتسلسل (السفاح): +10 نقاط لكل من صوت عليه</p>
+      </section>
+      <section class="scoring-guide-section">
+        <h3 data-i18n="mafiaTitle">🗡️ فريق المافيا</h3>
+        <p class="scoring-guide-lines" data-i18n="mafiaKills">• قتل القناص أو الساحرة: +10 نقاط
+• قتل المحقق الإمبراطوري: +10 نقاط
+• قتل طبيب الطاعون: +10 نقاط
+• قتل القاتل المتسلسل (السفاح): +10 نقاط
+• قتل الجاسوس: +15 نقطة</p>
+      </section>
+  <section class="scoring-guide-section">
+    <h3 data-i18n="neutralTitle">🎭 الأدوار المحايدة</h3>
+    <p class="scoring-guide-lines" data-i18n="neutralRules">• إعدام المهرج (الجوكر): فوز فوري +15 نقطة
+• تفجير الانتحاري المتمرد وأخذ مصوت معه: +10 نقاط
+• بقاء عشاق كيوبيد حتى النهاية: +10 نقاط
+• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط</p>
+  </section>
+      <section class="scoring-guide-section">
+        <h3 data-i18n="penaltiesTitle">⚠️ خصومات وعقوبات (مسموح النقاط بالسالب)</h3>
+        <p class="scoring-guide-lines" data-i18n="penaltiesDesc">• التصويت على الجوكر: -5 نقاط
+• التصويت على المجنون: -5 نقاط</p>
+      </section>
+      <button class="btn btn-secondary" data-i18n="close" onclick="GameApp.closeModals()">إغلاق</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-exit-confirm">
+    <div class="modal-content" style="text-align: center;">
+      <h3 data-i18n="exitConfirmTitle" style="font-family:var(--font-title); color:var(--gold-light); font-size:1.6rem; margin-bottom:0.5rem;">⚠️ هل أنت متأكد من الخروج من اللعبة؟</h3>
+      <div class="exit-warning" data-i18n="exitConfirmNote">⚠️ ملاحظة: لن يتم إحتساب هذه الجولة (لن تظهر في الأحصائيات).</div>
+      <div class="exit-actions">
+        <button class="btn btn-exit-confirm" data-i18n="btnExit" onclick="GameApp.confirmExit()">🚪 خروج</button>
+        <button class="btn btn-continue" data-i18n="btnContinue" onclick="GameApp.closeExitModal()">▶️ إكمال اللعب</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modal-skip-vote">
+    <div class="modal-content" style="text-align: center;">
+      <h3 data-i18n="skipVoteTitle" style="font-family:var(--font-title); color:var(--gold-light); font-size:1.6rem; margin-bottom:0.75rem;">📜 قرر المجلس التخطي وعدم إعدام أي فارس اليوم.</h3>
+      <p data-i18n="skipVoteDesc" style="font-size:0.95rem; color:var(--parchment); line-height:1.5; margin-bottom:1.25rem;">كانت أصوات التخطي مساوية أو أعلى من أصوات أكثر مشتبه به حصولاً على الأصوات. ستبدأ الليلة التالية الآن.</p>
+      <button class="btn btn-primary" data-i18n="skipVoteContinue" onclick="GameApp.continueAfterSkipVote()">الانتقال إلى الليل 🌙</button>
     </div>
   </div>
 
   <!-- مودال حدث تفاعلي خاص (الصياد، الانتحاري، العشاق) -->
   <div class="modal-overlay" id="modal-special-action">
     <div class="modal-content" style="text-align: center;">
-      <h3 id="special-modal-title" style="font-family:var(--font-title); color:var(--gold-light); font-size:1.6rem; margin-bottom:0.5rem;">انتقام الصياد!</h3>
-      <p id="special-modal-desc" style="font-size:0.9rem; color:var(--parchment); margin-bottom:1rem;">لقد سقط الصياد صريعاً، وله الحق في إطلاق رصاصته الأخيرة على أي لاعب!</p>
+      <h3 id="special-modal-title" data-i18n="specialDefaultTitle" style="font-family:var(--font-title); color:var(--gold-light); font-size:1.6rem; margin-bottom:0.5rem;">انتقام الصياد!</h3>
+      <p id="special-modal-desc" data-i18n="specialDefaultDesc" style="font-size:0.9rem; color:var(--parchment); margin-bottom:1rem;">لقد سقط الصياد صريعاً، وله الحق في إطلاق رصاصته الأخيرة على أي لاعب!</p>
       <div class="player-selection-list" id="special-modal-targets"></div>
-      <button class="btn btn-danger" style="margin-top:1rem;" id="btn-special-confirm" onclick="GameApp.confirmSpecialAction()">تنفيذ الانتقام 🏹</button>
+      <button class="btn btn-danger" data-i18n="specialConfirm" style="margin-top:1rem;" id="btn-special-confirm" onclick="GameApp.confirmSpecialAction()">تنفيذ الانتقام 🏹</button>
     </div>
   </div>
 
@@ -1347,13 +1511,13 @@
   <div class="modal-overlay" id="modal-investigation-result">
     <div class="modal-content inspection-modal-content">
       <div class="inspection-icon">🔍</div>
-      <h3 style="font-family:var(--font-title); color:var(--gold-light); font-size:1.7rem;">نتيجة التحقيق الإمبراطوري</h3>
+      <h3 data-i18n="investigationTitle" style="font-family:var(--font-title); color:var(--gold-light); font-size:1.7rem;">نتيجة التحقيق الإمبراطوري</h3>
       <div class="inspection-result">
-        <div style="font-size:0.85rem; color:var(--gold);">هوية الفارس المفحوص</div>
+        <div data-i18n="inspectedIdentity" style="font-size:0.85rem; color:var(--gold);">هوية الفارس المفحوص</div>
         <div id="investigation-target-name" style="font-family:var(--font-title); font-size:1.45rem; color:#fff; margin:0.35rem 0 0.6rem;"></div>
         <div id="investigation-result-text" style="font-size:1.05rem; color:var(--gold-light); line-height:1.5;"></div>
       </div>
-      <button class="btn btn-gold" onclick="GameApp.closeInvestigationModal()">استلام النتيجة وإكمال المهمة ✓</button>
+      <button class="btn btn-gold" data-i18n="investigationContinue" onclick="GameApp.closeInvestigationModal()">استلام النتيجة وإكمال المهمة ✓</button>
     </div>
   </div>
 
@@ -1627,7 +1791,77 @@
     /* ==========================================================================
        3. محرك اللعبة الأساسي (Game State & Logic Controller)
        ========================================================================== */
+    const translations = {
+      ar: {
+        gameTitle: 'مافيا الفرسان', kingdomTitle: 'مملكة أبو الجعافير العظيمة',
+        homeDescription: 'تجربة لعبة المافيا الكلاسيكية بحلة فروسية العصور الوسطى. مرر الهاتف سراً بين اللاعبين لتقوم المملكة بحساب القتل، التحقيقات، والتصويت تلقائياً بدون الحاجة لحَكَم!',
+        newGame: 'بدء مغامرة جديدة', encyclopedia: '📖 موسوعة الأدوار والقوانين', statistics: '📊 جدول النقاط والأحصائيات', presets: '⚙️ إعدادات التشكيلات السريعة',
+        back: 'رجوع', seatingNext: 'ترتيب الجلسة ثم توزيع الأدوار 🎴', seatingTitle: 'ترتيب الجلسة', seatingSubtitle: 'اجلسوا بشكل دائري بهالترتيب عشان يسهل تمرير الجوال', start: 'ابدأ',
+        passTo: 'مرر الجوال في سرية تامة إلى', secretDoc: '⚜️ وثيقة سرية ⚜️', clickToReveal: 'اضغط للكشف عن هويتك', tapToHide: 'المس الكرت لإخفائه مجدداً', passPhone: 'حفظ وإخفاء الدور وتمرير الجوال 🔒',
+        exitConfirmTitle: '⚠️ هل أنت متأكد من الخروج من اللعبة؟', exitConfirmNote: '⚠️ ملاحظة: لن يتم إحتساب هذه الجولة (لن تظهر في الأحصائيات).', btnExit: '🚪 خروج', btnContinue: '▶️ إكمال اللعب',
+        hiddenDocument: 'تم إخفاء الوثيقة السرية', passToPlayer: 'أعطي الجوال للاعب {name}', confirmPlayer: 'أنا اللاعب {name}', playerRole: 'الفارس: {name}',
+        passNight: 'حل الليل على المملكة... مرر الجوال سراً إلى:', openMission: 'فتح المهمة السرية 🗝️', discussion: 'بدء جلسة النقاش والمحاكمة ⚖️',
+        vote: 'الانتقال إلى منصة التصويت 🗳️', confirmVote: 'تأكيد التصويت ⚔️', close: 'إغلاق', skip: 'تخطي / امتناع', statsTitle: '📊 سجل النقاط والإحصائيات', player: 'اللاعب', points: 'النقاط', wins: 'الفوز', losses: 'الخسائر', rolesWon: 'الأدوار الفائز بها', resetStats: '🗑️ تصفير جميع النقاط والبيانات', setupPlayers: '1. أسماء الفرسان', setupRoles: '2. اختيار الأدوار', setupRules: '3. القواعد الملكية', playerHeading: '👥 تسجيل اللاعبين', add: 'إضافة', roleSetup: '🎭 تخصيص الأدوار', rulesHeading: '⚖️ خيارات وقواعد المملكة',
+        epicSubtitle: 'النسخة الملحمية • بدون مدير (أوفلاين بالكامل)', kingdomWord: 'في المملكة', knightsTeam: 'فريق الفرسان', mafiaTeam: 'فريق المافيا', neutralTeam: 'محايد منفرد',
+        revealRoleRule: 'كشف دور المطرود', revealRoleNote: 'إعلان هوية اللاعب فور إقصائه نهاراً', showVotesRule: 'إظهار تفاصيل الأصوات', showVotesNote: 'كشف من صوت ضد من بعد انتهاء النهار', discussionTimerRule: 'مدة مؤقت النقاش النهاري', minutes: 'دقائق',
+        confirmAction: 'تأكيد وإنهاء الدور 🌙', skipActionNote: '(لا تختار أحداً لتخطي دورك)', mafiaPrompt: 'أيها المافيا، اختر الهدف المراد اغتياله وتصفيته الليلة:', partner: '🕵️ شريكك في المافيا:',
+        setupRolePrompt: 'اختر الأدوار لتطابق تماماً عدد اللاعبين المسجلين.', roleUnit: 'دور', maxPlayers: 'الحد الأقصى للمملكة 16 فارساً!', duplicatePlayer: 'هذا الاسم مسجل بالفعل!', quickFillSuccess: 'تمت إضافة 5 لاعبين افتراضيين وتشكيل متوازن!', minPlayers: 'يجب تسجيل 5 لاعبين على الأقل لبدء اللعبة!', roleMismatch: 'مجموع الأدوار ({roles}) لا يطابق عدد اللاعبين ({players})!',
+        scoringGuide: '📜 شرح آلية النقاط', scoringTitle: '📜 دليل توزيع النقاط والفوزات', baseWinTitle: '🏆 الفوز الأساسي', baseWinDesc: 'كل فوز بالجولة يعطي +10 نقاط +1 لسجل الفوز.', knightsTitle: '🛡️ فريق الفرسان (الصالحين)', knightsKills: '• قتل مافيا عادي: +5 نقاط\n• قتل زعيم المافيا (العرّاب): +15 نقطة\n• التصويت لإقصاء القاتل المتسلسل (السفاح): +10 نقاط لكل من صوت عليه\n• تضحية الحارس الشخصي: +15 نقطة\n• حماية ناجحة لطبيب الطاعون: +5 نقاط\n• طلقة صياد الوحوش الأخيرة: +10 نقاط عند إصابة مافيا أو سفاح\n• قيادة التصويت الناجحة للعقيد الحاكم: +15 نقطة', mafiaTitle: '🗡️ فريق المافيا', mafiaKills: '• قتل القناص أو الساحرة: +10 نقاط\n• قتل المحقق الإمبراطوري: +10 نقاط\n• قتل طبيب الطاعون: +10 نقاط\n• قتل القاتل المتسلسل (السفاح): +10 نقاط\n• قتل الجاسوس: +15 نقطة\n• قتل مواطن عادي / كيوبيد / حارس: +5 نقاط', neutralTitle: '🎭 الأدوار المحايدة', neutralRules: '• إعدام المهرج (الجوكر): فوز فوري +15 نقطة\n• تفجير الانتحاري المتمرد وأخذ مصوت معه: +10 نقاط\n• بقاء عشاق كيوبيد حتى النهاية: +10 نقاط\n• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط', penaltiesTitle: '⚠️ خصومات وعقوبات (مسموح النقاط بالسالب)', penaltiesDesc: '• التصويت على الجوكر: -5 نقاط (سواء فاز أو لا)\n• التصويت على المجنون: -5 نقاط\n• النيران الصديقة: -10 نقاط\n• التصويت على الانتحاري: -5 نقاط\n• التصويت لإعدام بريء من الفرسان: -5 نقاط',
+        scoring_bodyguard_sacrifice: '• تضحية الحارس الشخصي: +15 نقطة (عند الموت لحماية هدفه)', scoring_cupid_failure: '• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط', scoring_friendly_fire: '• النيران الصديقة (قتل صديق بالخطأ): -10 نقاط', scoring_doctor_heal: '• حماية ناجحة لطبيب الطاعون: +5 نقاط', scoring_hunter_shot: '• طلقة صياد الوحوش الأخيرة (إصابة مافيا/سفاح): +10 نقاط', scoring_colonel_lead: '• قيادة التصويت الناجحة للعقيد الحاكم: +15 نقطة', scoring_mafia_standard_kill: '• قتل مواطن عادي / كيوبيد / حارس: +5 نقاط', scoring_joker_win: '• إعدام المهرج (الجوكر): فوز فوري +15 نقطة', scoring_bomber_detonate: '• تفجير الانتحاري المتمرد: +10 نقاط', scoring_cupid_survival: '• بقاء عشاق كيوبيد حتى النهاية: +10 نقاط', scoring_bomber_penalty: '• التصويت على الانتحاري: -5 نقاط', scoring_innocent_penalty: '• التصويت لإعدام بريء من الفرسان: -5 نقاط',
+        playerRange: '🛡️ 6 إلى 16 لاعب', offlineMode: '⚡ 100% أوفلاين', roleCount: '🎭 16 دوراً ملكياً', nextNight: 'متابعة حلول الليل التالي 🌙',
+        sampleNames: 'أسماء تجريبية', playerPlaceholder: 'اسم الفارس / اللاعب...', roleSetupNote: 'اختر الأدوار لتطابق تماماً عدد اللاعبين المسجلين.', presetTitle: '⚡ التشكيلات المتوازنة الجاهزة', preset6: '🛡️ تشكيلة 6 لاعبين (مبتدئ)', preset8: '⚔️ تشكيلة 8 لاعبين (كلاسيكية متوازنة)', preset10: '👑 تشكيلة 10 لاعبين (ملحمية)', preset12: '🔥 تشكيلة 12 لاعباً (فوضى وظلال)', cancel: 'إلغاء', encyclopediaTitle: '📖 موسوعة أدوار العصور الوسطى', conflictEnd: 'انتهاء الصراع الملكي', rolesRecord: 'سجل هويات جميع اللاعبين:', restartSame: 'إعادة اللعب بنفس التشكيلة ⚔️', home: 'العودة للقائمة الرئيسية 🏰', specialConfirm: 'تنفيذ الانتقام 🏹', specialDefaultTitle: 'انتقام الصياد!', specialDefaultDesc: 'لقد سقط الصياد صريعاً، وله الحق في إطلاق رصاصته الأخيرة على أي لاعب!', investigationTitle: 'نتيجة التحقيق الإمبراطوري', inspectedIdentity: 'هوية الفارس المفحوص', investigationContinue: 'استلام النتيجة وإكمال المهمة ✓',
+        playerRole: 'الفارس: {name}', votePrompt: 'أيها الفارس {name}، اختر من تتهمه بالخيانة:', targetPrefix: '⚔️ استهداف: ', protectPrefix: '🛡️ حماية: ', investigatePrefix: '🔍 اختبار: ', slasherPrompt: 'أيها السفاح، اختر ضحيتك المستقلة لهذه الليلة:', bodyguardPrompt: 'اختر فارساً لحراسته بحياتك (إذا استُهدف ستموت بدلاً عنه):',
+        doctorPrompt: 'اختر فارساً لحمايته وإنقاذه الليلة من الموت (يمكنك حماية نفسك):', investigatorPrompt: 'اختر فارساً للتحقيق السري في هويته واكتشاف ولائه:', spyReveal: 'قدرتك الاستخباراتية تكشف:', mafiaMove: 'المافيا تتحرك لاغتيال: [{name}]', noMafiaMove: 'لم يتم رصد أي تحرك للمافيا بعد.', cupidPrompt: 'الليلة الأولى فقط: اختر قلبين لربطهما كعاشقين (إذا مات أحدهما مات الآخر):', chooseTwo: 'اختر لاعبين اثنين:', cupidDone: 'لقد قمت بربط العاشقين في الليلة الأولى ولا توجد إجراءات إضافية الليلة.',
+        witchPrompt: 'أيتها الساحرة، يمكنك استخدام جرعاتك الخاصة:', mafiaVictim: 'ضحية المافيا الليلة:', noVictim: 'لا يوجد', healVictim: 'إنقاذ الضحية بجرعة الشفاء ({status})', available: 'متاحة', used: 'مستهلكة', poisonPrompt: 'جرعة السم القاتلة ({status}):', poisonPrefix: '🧪 تسميم: ', sniperPrompt: 'لديك رصاصة واحدة طوال المعركة. هل ترغب في قنص أحد الليلة؟', sniperSpent: 'لقد استهلكت رصاصتك الملكية بالفعل.', sniperPrefix: '🎯 قنص: ', citizenPrompt: 'أيها المواطن الصالح، تمويه الذئاب يتطلب بقاءك هنا ثوانٍ معدودة. اضغط على أي اسم لتشويش من يراقبك:', camouflagePrefix: '🛡️ تمويه: ',
+        mafiaInvestigation: 'عضو مافيا خائن! 🗡️', townInvestigation: 'فارس شريف وبريء 🛡️', abstainPrompt: 'اختر هدفاً أو اضغط تخطي / امتناع.', voteAgainst: 'صوت ضد', doubleWeight: '(وزن مضاعف)', skipVoteTitle: '📜 قرر المجلس التخطي وعدم إعدام أي فارس اليوم.', skipVoteDesc: 'كانت أصوات التخطي مساوية أو أعلى من أصوات أكثر مشتبه به حصولاً على الأصوات. ستبدأ الليلة التالية الآن.', skipVoteContinue: 'الانتقال إلى الليل 🌙',
+        tieTitle: 'تعادل في أصوات المجلس ⚖️', tieDesc: 'انقسم الفرسان في آرائهم بالتساوي، ولم يحصل أي مشتبه به على أغلبية حاسمة؛ رُفعت الجلسة دون إعدام أحد اليوم.', jesterWin: 'انتصر المهرج [{name}]! لقد نجح في خداعكم جميعاً وجعل المجلس يصوت على إعدامه.', idiotTitle: 'عفو ملكي عن المجنون! 🥴', idiotDesc: 'صوت المجلس لإعدام [{name}]، لكنه أظهر بلاهته وجنونه! تم العفو عنه مع تجريده من حق التصويت مستقبلاً.', executionTitle: 'تم تنفيذ حكم الإعدام بحق: {name} ⚔️', executionDesc: 'سقط [{name}] على يد الجلاد بعد نيله أعلى نسبة أصوات من مجلس الفرسان.', loverDeath: '💔 مات عشيقه [{name}] فوراً كمداً وحسرة!',
+        hunterTitle: '🦅 رصاصة الصياد الأخيرة!', hunterDesc: 'أيها الصياد [{name}]، قبل أن تلفظ أنفاسك الأخيرة، اختر فارساً لتصفيته معك:', hunterToast: 'أطلق الصياد سهمه وأردى [{name}] قتيلاً!', kamikazeTitle: '💣 انفجار الانتحاري المتمرد!', kamikazeDesc: 'لقد أعدمتم الانتحاري [{name}]! اختر أحد الفرسان ليصطحبه معه إلى القبر:', kamikazeToast: 'فجر الانتحاري نفسه وقضى على [{name}]!', targetRequired: 'يرجى اختيار هدف للانتقام!',
+        loverMorning: '💔 لم يتحمل [{survivor}] فراق عشيقه [{dead}] فمات حسرة وحزناً.', timerEnded: 'انتهى وقت المشاورة! حان وقت التصويت.', executionRole: 'الهوية الحقيقية للمقصى:', voteDetails: 'تفاصيل سجل الأصوات:', noStats: 'لا توجد إحصائيات محفوظة حتى الآن.', resetConfirm: 'هل أنت متأكد من تصفير جميع النقاط والبيانات؟', resetSuccess: 'تم تصفير جميع النقاط والبيانات بنجاح.', alive: 'حي', dead: 'ميت', loverLabel: '(عاشق)',
+        bodyguardDeath: '⚔️ استُشهد الحارس الشخصي [{name}] بشجاعة مفتدياً الشخص الذي كان يحرسه.', mafiaDeath: '🗡️ عُثر على الفارس [{name}] مقتولاً في غرفته بعد غارة غادرة من المافيا.', savedByProtection: '✨ بفضل العناية والطب، نجا أحد الفرسان الليلة من موت محقق بإعجوبة!', slasherDeath: '🪓 سقط الفارس [{name}] ضحية لجريمة بشعة نفذها السفاح المتسلسل.', sniperDeath: '🏹 اخترق سهم القناص الملكي صدر الفارس [{name}] وأرداه قتيلاً.', witchDeath: '🧪 فارق الفارس [{name}] الحياة بعد تجرعه سماً مجهول المصدر.',
+        townVictoryTitle: '⚔️ انتصار فرسان المملكة الشرفاء! 🛡️', mafiaVictoryTitle: '🗡️ انتصار فرسان المافيا الخونة! 💀', jesterVictoryTitle: '🃏 انتصار المهرج العبقري!', slasherVictoryTitle: '🪓 انتصار السفاح المنفرد!', loversVictoryTitle: '💘 انتصار الحب والعشاق!',
+        loversVictoryDesc: 'انتصار العشاق! صمد الحبيبان حتى النهاية وتغلبا على مؤامرات المملكة.', slasherVictoryDesc: 'انتصار السفاح المنفرد! تمكن من تصفية الجميع والوقوف بمفرده فوق الركام.', mafiaVictoryDesc: 'انتصار المافيا وفرسان الظلام! سيطرت المافيا بالكامل على المملكة وأخضعت الجميع.', townVictoryDesc: 'انتصار الفرسان والشرفاء! تم تطهير المملكة من كل الخونة والمجرمين وعاد الأمان.', roleStatus: '{name} {lover}{icon} {role} ({status})',
+        livingKnights: '🛡️ الفرسان الأحياء في المجلس', royalBulletin: '📜 وثيقة الصباح الملكية 📜', dayInKingdom: 'اليوم رقم', quietNight: '🕊️ ليلة هادئة ومباركة! استيقظت المملكة دون أي وفيات بين الفرسان.',
+        publicDiscussion: '⏳ جلسة المشاورة العلنية', daylightActive: 'النهار مفتوح', pause: 'إيقاف مؤقت ⏸️', resume: 'استئناف ▶️', reset: 'إعادة ضبط 🔄', addThirty: '+30 ثانية ⏱️', discussionNote: 'تناقشوا واتهموا المشتبه بهم قبل بدء التصويت على الإقصاء بالمقصلة!',
+        royalVote: '🗳️ تصويت الإقصاء الملكي', knightVote: 'صوت الفارس', accuseExecute: '⚖️ اتهام وإعدام:', skip: 'تخطي / امتناع', tieMessage: '⚖️ تعادل في الأصوات! سيتم إعادة جولة التصويت بين المشتبه بهم فقط.',
+        roles: { mafia: ['المافيا (الفرسان الخونة)', 'يستيقظ أفراد المافيا كل ليلة لاختيار ضحية واحدة وتصفيتها بصمت.'], citizen: ['المواطن الشريف', 'لا يملك قدرات ليلية خاصة. سلاحه هو النقاش، قوة الملاحظة، والتصويت النهاري.'], doctor: ['طبيب الطاعون', 'يختار لاعباً كل ليلة ليحميه ويشفيه من محاولة اغتيال المافيا أو السفاح.'], investigator: ['المحقق الإمبراطوري', 'يتحقق من هوية لاعب واحد كل ليلة ليكتشف إن كان ينتمي للمافيا أم بريء.'], sniper: ['القناص الملكي', 'يمتلك سهماً واحداً طوال اللعبة يمكنه إطلاقه ليلاً على أي مشتبه به.'], godfather: ['العراب (سيد الظلال)', 'زعيم المافيا. إذا فحصه المحقق ليلاً، تظهر نتيجته كبريء للتمويه.'], slasher: ['السفاح المنفرد', 'قاتل متسلسل مستقل يقتل لاعباً كل ليلة ويسعى للبقاء وحيداً.'], spy: ['الجاسوس الملكي', 'يتجسس ليلاً لمعرفة من استهدفته المافيا دون كشف أسمائهم.'], jester: ['المهرج (الجوكر)', 'هدفه استفزاز الجميع وخداعهم للتصويت على إعدامه ليفوز فوراً!'], colonel: ['العقيد الحاكم', 'فارس نبيل صوته يعادل صوتين أثناء التصويت النهاري.'], kamikaze: ['الانتحاري المتمرد', 'إذا أُعدم نهاراً يفجر نفسه ويأخذ أحد المصوتين معه!'], witch: ['الساحرة الكيميائية', 'تمتلك جرعة إحياء وجرعة سم، مرة واحدة لكل جرعة.'], bodyguard: ['الحارس الشخصي', 'يحرس لاعباً كل ليلة ويضحي بنفسه إذا استُهدف ذلك اللاعب.'], idiot: ['المجنون الأبله', 'إذا صوّت المجلس لإعدامه يُعفى عنه ويفقد حق التصويت.'], hunter: ['صياد الوحوش', 'عند موته يطلق طلقته الأخيرة على لاعب يختاره.'], cupid: ['كيوبيد (رسول العشاق)', 'في الليلة الأولى يربط قلبين؛ إذا مات أحدهما مات الآخر.'] }
+      },
+      en: {
+        gameTitle: 'Mafia - Knights Edition', kingdomTitle: 'The Great Kingdom of Abu Al-Jaafair',
+        homeDescription: 'A classic Mafia game in a medieval knightly setting. Pass the phone secretly while the kingdom manages kills, investigations, and voting without a moderator!',
+        newGame: 'Start New Adventure', encyclopedia: '📖 Roles & Rules Encyclopedia', statistics: '📊 Points & Statistics', presets: '⚙️ Quick Presets',
+        back: 'Back', seatingNext: 'Arrange Seating & Deal Roles 🎴', seatingTitle: 'Seating Arrangement', seatingSubtitle: 'Sit in a circle in this order to make passing the phone easier', start: 'Start',
+        passTo: 'Secretly pass the phone to', secretDoc: '⚜️ Classified Document ⚜️', clickToReveal: 'Tap to reveal your identity', tapToHide: 'Tap the card to hide it again', passPhone: 'Save & Hide Role (Pass Phone) 🔒',
+        exitConfirmTitle: '⚠️ Are you sure you want to exit the game?', exitConfirmNote: '⚠️ Note: This round will not be counted or appear in statistics.', btnExit: '🚪 Exit Game', btnContinue: '▶️ Continue Playing',
+        hiddenDocument: 'Secret Document Hidden', passToPlayer: 'Pass the device to {name}', confirmPlayer: 'I am {name}', playerRole: 'Player: {name}',
+        passNight: 'Night falls upon the Kingdom... Pass the phone secretly to:', openMission: 'Open Secret Mission 🗝️', discussion: 'Start Discussion & Trial ⚖️',
+        vote: 'Proceed to Voting Platform 🗳️', confirmVote: 'Confirm Vote ⚔️', close: 'Close', skip: 'Skip / Abstain', statsTitle: '📊 Points & Leaderboard Record', player: 'Player', points: 'Points', wins: 'Wins', losses: 'Losses', rolesWon: 'Roles Won', resetStats: '🗑️ Reset All Statistics', setupPlayers: '1. Knight Names', setupRoles: '2. Choose Roles', setupRules: '3. Kingdom Rules', playerHeading: '👥 Register Players', add: 'Add', roleSetup: '🎭 Customize Roles', rulesHeading: '⚖️ Kingdom Rules',
+        epicSubtitle: 'Epic Edition • Moderator-Free (Fully Offline)', kingdomWord: 'in the Kingdom', knightsTeam: 'Knights Team', mafiaTeam: 'Mafia Team', neutralTeam: 'Independent Neutral',
+        revealRoleRule: 'Reveal Eliminated Role', revealRoleNote: "Announce player's identity immediately upon daytime elimination", showVotesRule: 'Show Vote Breakdown', showVotesNote: 'Reveal who voted against whom after daytime voting', discussionTimerRule: 'Daytime Discussion Timer', minutes: 'Minutes',
+        confirmAction: 'Confirm Action 🌙', skipActionNote: '(Select no one to skip your turn)', mafiaPrompt: 'Mafia, choose the player to eliminate tonight:', partner: '🕵️ Your Mafia Teammate:',
+        setupRolePrompt: 'Select roles to match the exact number of registered players.', roleUnit: 'Roles', maxPlayers: 'The kingdom can have at most 16 knights!', duplicatePlayer: 'That name is already registered!', quickFillSuccess: 'Added 5 sample players with a balanced setup!', minPlayers: 'At least 5 players are required to start!', roleMismatch: 'The role total ({roles}) does not match the player count ({players})!',
+        scoringGuide: '📜 Scoring Guide', scoringTitle: '📜 Scoring & Wins Guide', baseWinTitle: '🏆 Base Victory', baseWinDesc: 'Each match victory awards +10 Points +1 to total Wins.', knightsTitle: '🛡️ Knights Team (Good Roles)', knightsKills: '• Kill Regular Mafia: +5 Pts\n• Kill Godfather (Mafia Leader): +15 Pts\n• Vote Out Serial Killer: +10 Pts for each player who voted for them\n• Bodyguard Sacrifice: +15 Pts\n• Successful Doctor Heal: +5 Pts\n• Monster Hunter Dying Shot: +10 Pts when hitting Mafia or the Serial Killer\n• Colonel Successful Vote Leadership: +15 Pts', mafiaTitle: '🗡️ Mafia Team', mafiaKills: '• Kill Sniper or Witch: +10 Pts\n• Kill Investigator: +10 Pts\n• Kill Doctor: +10 Pts\n• Kill Serial Killer: +10 Pts\n• Kill Spy: +15 Pts\n• Kill Standard Citizen / Cupid / Guard: +5 Pts', neutralTitle: '🎭 Neutral Roles', neutralRules: '• Joker Executed: Instant Victory +15 Pts\n• Rebel Bomber Detonation taking a voter: +10 Pts\n• Cupid Lovers Surviving: +10 Pts\n• Cupid Failure (both lovers die): -5 Pts', penaltiesTitle: '⚠️ Deductions & Penalties (Negative Scores Allowed)', penaltiesDesc: '• Voting for Joker: -5 Pts (whether revealed/eliminated or not)\n• Voting for Madman: -5 Pts\n• Friendly Fire: -10 Pts\n• Vote Against Rebel Bomber: -5 Pts\n• Vote to Execute Innocent Knight: -5 Pts',
+        scoring_bodyguard_sacrifice: '• Bodyguard Sacrifice: +15 Pts (when dying to protect target)', scoring_cupid_failure: '• Cupid Failure (both lovers die): -5 Pts', scoring_friendly_fire: '• Friendly Fire (Accidentally killing an ally): -10 Pts', scoring_doctor_heal: '• Successful Doctor Heal: +5 Pts', scoring_hunter_shot: '• Monster Hunter Dying Shot (hitting Mafia/Killer): +10 Pts', scoring_colonel_lead: '• Colonel Successful Vote Leadership: +15 Pts', scoring_mafia_standard_kill: '• Kill Standard Citizen / Cupid / Guard: +5 Pts', scoring_joker_win: '• Joker Executed: Instant Win +15 Pts', scoring_bomber_detonate: '• Rebel Bomber Detonation: +10 Pts', scoring_cupid_survival: '• Cupid Lovers Surviving: +10 Pts', scoring_bomber_penalty: '• Vote Against Rebel Bomber: -5 Pts', scoring_innocent_penalty: '• Vote to Execute Innocent Knight: -5 Pts',
+        playerRange: '🛡️ 6 to 16 players', offlineMode: '⚡ 100% Offline', roleCount: '🎭 16 Royal Roles', nextNight: 'Continue to the next night 🌙',
+        sampleNames: 'Sample names', playerPlaceholder: 'Knight / player name...', roleSetupNote: 'Select roles to match the exact number of registered players.', presetTitle: '⚡ Balanced Presets', preset6: '🛡️ 6-player setup (Beginner)', preset8: '⚔️ 8-player setup (Classic)', preset10: '👑 10-player setup (Epic)', preset12: '🔥 12-player setup (Chaos)', cancel: 'Cancel', encyclopediaTitle: '📖 Medieval Roles Encyclopedia', conflictEnd: 'The Royal Conflict Ends', rolesRecord: 'All players\' identities:', restartSame: 'Play again with the same setup ⚔️', home: 'Return to Main Menu 🏰', specialConfirm: 'Carry Out Revenge 🏹', specialDefaultTitle: "The Hunter's Revenge!", specialDefaultDesc: 'The Hunter has fallen and may fire one final shot at any player!', investigationTitle: 'Imperial Investigation Result', inspectedIdentity: 'Inspected knight\'s identity', investigationContinue: 'Receive result and continue ✓',
+        playerRole: 'Player: {name}', votePrompt: 'Knight {name}, choose who you accuse of treason:', targetPrefix: '⚔️ Target: ', protectPrefix: '🛡️ Protect: ', investigatePrefix: '🔍 Investigate: ', slasherPrompt: 'Slasher, choose your independent victim tonight:', bodyguardPrompt: 'Choose a knight to guard with your life (you die instead if they are attacked):',
+        doctorPrompt: 'Choose a knight to protect tonight (you may protect yourself):', investigatorPrompt: 'Choose a knight to investigate their identity and allegiance:', spyReveal: 'Your intelligence reveals:', mafiaMove: 'The Mafia is moving to assassinate: [{name}]', noMafiaMove: 'No Mafia movement has been detected yet.', cupidPrompt: 'First night only: choose two hearts to bind as lovers (if one dies, the other dies too):', chooseTwo: 'Choose two players:', cupidDone: 'You bound the lovers on the first night; there is no further action tonight.',
+        witchPrompt: 'Witch, you may use your special potions:', mafiaVictim: 'Mafia victim tonight:', noVictim: 'None', healVictim: 'Save the victim with the healing potion ({status})', available: 'available', used: 'used', poisonPrompt: 'Deadly poison potion ({status}):', poisonPrefix: '🧪 Poison: ', sniperPrompt: 'You have one bullet for the entire game. Do you want to snipe someone tonight?', sniperSpent: 'You have already used your royal bullet.', sniperPrefix: '🎯 Snipe: ', citizenPrompt: 'Honest Citizen, camouflage requires your presence here for a few seconds. Tap a name to confuse anyone watching:', camouflagePrefix: '🛡️ Camouflage: ',
+        mafiaInvestigation: 'A traitorous Mafia member! 🗡️', townInvestigation: 'An honest and innocent knight 🛡️', abstainPrompt: 'Choose a target or press Skip / Abstain.', voteAgainst: 'voted against', doubleWeight: '(double weight)', skipVoteTitle: '📜 The Council decided to skip and execute no one today.', skipVoteDesc: 'Skip votes matched or exceeded the top suspect\'s votes. The next night will begin now.', skipVoteContinue: 'Continue to night 🌙',
+        tieTitle: 'Council vote tie ⚖️', tieDesc: 'The knights were evenly divided, so no suspect received a decisive majority; the session ends without an execution today.', jesterWin: 'The Jester [{name}] wins! They fooled everyone into voting for their execution.', idiotTitle: 'Royal pardon for the Idiot! 🥴', idiotDesc: 'The council voted to execute [{name}], but their foolishness earned a pardon and removed their right to vote.', executionTitle: 'Execution carried out: {name} ⚔️', executionDesc: '[{name}] fell to the executioner after receiving the most votes from the knights council.', loverDeath: '💔 [{name}] died of grief immediately after losing their lover!',
+        hunterTitle: '🦅 The Hunter\'s final shot!', hunterDesc: 'Hunter [{name}], before your final breath, choose a knight to take down with you:', hunterToast: 'The Hunter fired and killed [{name}]!', kamikazeTitle: '💣 Rebel Kamikaze explosion!', kamikazeDesc: 'You executed the Kamikaze [{name}]! Choose a knight to take with them:', kamikazeToast: 'The Kamikaze exploded and killed [{name}]!', targetRequired: 'Please choose a revenge target!',
+        loverMorning: '💔 [{survivor}] could not survive the loss of their lover [{dead}] and died of grief.', timerEnded: 'Discussion time is over! It is time to vote.', executionRole: "Executed player's true role:", voteDetails: 'Vote breakdown:', noStats: 'No saved statistics yet.', resetConfirm: 'Are you sure you want to reset all points and data?', resetSuccess: 'All points and data were reset successfully.', alive: 'Alive', dead: 'Dead', loverLabel: '(Lover)',
+        bodyguardDeath: '⚔️ Bodyguard [{name}] died bravely while sacrificing themselves for their guard target.', mafiaDeath: '🗡️ Knight [{name}] was found dead in their room after a treacherous Mafia raid.', savedByProtection: '✨ Thanks to protection and medicine, a knight miraculously survived certain death tonight!', slasherDeath: '🪓 Knight [{name}] fell victim to a brutal crime by the serial killer.', sniperDeath: '🏹 The Royal Sniper\'s arrow pierced Knight [{name}] and killed them.', witchDeath: '🧪 Knight [{name}] died after drinking an unidentified poison.',
+        townVictoryTitle: '⚔️ Honorable Knights victory! 🛡️', mafiaVictoryTitle: '🗡️ Traitor Mafia Knights victory! 💀', jesterVictoryTitle: '🃏 Brilliant Jester victory!', slasherVictoryTitle: '🪓 Lone Slasher victory!', loversVictoryTitle: '💘 Lovers victory!',
+        loversVictoryDesc: 'Lovers victory! The couple survived to the end and overcame the kingdom\'s conspiracies.', slasherVictoryDesc: 'Lone Slasher victory! The killer eliminated almost everyone and stood alone above the ruins.', mafiaVictoryDesc: 'Mafia and Shadow Knights victory! The Mafia seized control of the kingdom.', townVictoryDesc: 'Knights and citizens victory! The kingdom was cleansed of traitors and killers.', roleStatus: '{name} {lover}{icon} {role} ({status})',
+        livingKnights: '🛡️ Living Knights in Council', royalBulletin: '📜 Royal Morning Bulletin 📜', dayInKingdom: 'Day', quietNight: '🕊️ A quiet and blessed night! The Kingdom woke up with no casualties among the Knights.',
+        publicDiscussion: '⏳ Public Discussion Session', daylightActive: 'Daylight Active', pause: 'Pause ⏸️', resume: 'Resume ▶️', reset: 'Reset 🔄', addThirty: '+30s ⏱️', discussionNote: 'Discuss and examine suspects before voting for execution at the gallows.',
+        royalVote: '🗳️ Royal Elimination Vote', knightVote: "Knight's Vote", accuseExecute: '⚖️ Accuse & Execute:', skip: 'Skip / Abstain', tieMessage: '⚖️ Vote Tie! A re-vote round will be held among the tied suspects.',
+        roles: { mafia: ['Mafia (Traitor Knights)', 'Mafia members wake each night to silently choose one victim.'], citizen: ['Honest Citizen', 'No special night powers. Their weapons are discussion, observation, and voting.'], doctor: ['Plague Doctor', 'Protects one player each night from a Mafia or killer attack.'], investigator: ['Imperial Investigator', 'Checks one player each night to discover their allegiance.'], sniper: ['Royal Sniper', 'Has one arrow for the entire game to shoot a suspect at night.'], godfather: ['Godfather (Shadow Lord)', 'Mafia leader who appears innocent to the investigator.'], slasher: ['Lone Slasher', 'An independent serial killer who seeks to stand alone at the end.'], spy: ['Royal Spy', 'Learns who the Mafia targeted without revealing their names.'], jester: ['Jester (Joker)', 'Tricks the town into executing them to win immediately!'], colonel: ['Ruling Colonel', 'A noble knight whose vote counts twice during the day.'], kamikaze: ['Rebel Kamikaze', 'When executed, detonates and takes one voter with them!'], witch: ['Chemical Witch', 'Has one healing potion and one poison potion.'], bodyguard: ['Bodyguard', 'Guards a player and sacrifices themselves if that player is attacked.'], idiot: ['Village Idiot', 'If executed, is pardoned but loses the right to vote.'], hunter: ['Monster Hunter', 'When killed, fires one final shot at a chosen player.'], cupid: ['Cupid (Messenger of Lovers)', 'On the first night, binds two hearts whose lives become linked.'] }
+      }
+    };
+
     const GameApp = {
+      language: localStorage.getItem('mafia_language') === 'en' ? 'en' : 'ar',
       players: [],
       selectedRolesCounts: {},
       assignedPlayers: [], // { id, name, roleKey, isAlive, cannotVote, isLover }
@@ -1679,11 +1913,21 @@
       nightActionVisible: false,
       dayVotingVisible: false,
       currentSetupTab: 'players',
+      revoteCandidates: null,
+      isRevote: false,
 
       pendingSpecialAction: null, // { type: 'hunter'|'kamikaze', actorId, callback }
+      executionState: null,
+      voteHistory: [],
+      specialMafiaKills: {},
+      killHistory: [],
+      mafiaActorId: null,
+      votedOutByDay: [],
+      scoreEvents: [],
 
       /* =================== التهيئة والتنقل =================== */
       init() {
+        this.applyLanguage();
         this.loadSavedData();
         this.loadSavedPresets();
         this.renderRolesSetup();
@@ -1696,10 +1940,68 @@
         this.restoreSessionState();
       },
 
+      t(key, params = {}) {
+        let text = translations[this.language]?.[key] || translations.ar?.[key] || key;
+        Object.keys(params).forEach(param => {
+          text = text.replace(new RegExp(`{\\s*${param}\\s*}`, 'g'), String(params[param]));
+        });
+        return text;
+      },
+
+      localizedRole(roleKey) {
+        const role = ROLES_DATA[roleKey];
+        const translated = translations[this.language].roles[roleKey];
+        return { name: translated ? translated[0] : role.name, desc: translated ? translated[1] : role.desc };
+      },
+
+      localizedTeam(team) {
+        return team === 'mafia' ? this.t('mafiaTeam') : team === 'town' ? this.t('knightsTeam') : this.t('neutralTeam');
+      },
+
+      applyLanguage() {
+        document.documentElement.lang = this.language;
+        document.documentElement.dir = this.language === 'ar' ? 'rtl' : 'ltr';
+        document.title = `${this.t('gameTitle')} | The Crimson Mafia`;
+        document.querySelectorAll('[data-i18n]').forEach(element => {
+          const value = this.t(element.dataset.i18n);
+          if (value) element.textContent = value;
+        });
+        document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+          element.placeholder = this.t(element.dataset.i18nPlaceholder);
+        });
+        const timerOptions = document.querySelectorAll('#rule-discussion-time option');
+        const timerLabels = this.language === 'en' ? ['90 Seconds', '3 Minutes', '5 Minutes'] : ['90 ثانية', '3 دقائق', '5 دقائق'];
+        timerOptions.forEach((option, index) => { if (timerLabels[index]) option.textContent = timerLabels[index]; });
+        const toggle = document.getElementById('btn-lang-toggle');
+        if (toggle) toggle.textContent = this.language === 'ar' ? '🌐 EN' : '🌐 AR';
+        document.body.classList.toggle('game-active', document.querySelector('.screen.active')?.id !== 'screen-home');
+        this.renderRolesSetup();
+        this.renderEncyclopedia();
+      },
+
+      toggleLanguage() {
+        this.language = this.language === 'ar' ? 'en' : 'ar';
+        localStorage.setItem('mafia_language', this.language);
+        this.applyLanguage();
+        const activeScreen = document.querySelector('.screen.active')?.id;
+        if (activeScreen === 'screen-reveal' && this.assignedPlayers.length) {
+          this.showRoleReveal(this.distributionIndex);
+          const nextPlayer = this.assignedPlayers[this.distributionIndex];
+          if (document.getElementById('distribution-handover').classList.contains('active')) this.renderDistributionHandover(nextPlayer);
+        }
+        if (activeScreen === 'screen-night' && this.nightQueue.length) {
+          this.displayNightHandover();
+          if (this.nightActionVisible) this.showPlayerNightAction();
+        }
+        if (activeScreen === 'screen-day' && this.dayVotingVisible) this.renderVotingTurn();
+        if (activeScreen === 'screen-execution' && this.executionState) this.renderExecutionState();
+      },
+
       showScreen(screenId) {
         document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
         const target = document.getElementById(screenId);
         if (target) target.classList.add('active');
+        document.body.classList.toggle('game-active', screenId !== 'screen-home');
         window.scrollTo({ top: 0, behavior: 'smooth' });
         this.saveSessionState();
       },
@@ -1714,12 +2016,29 @@
       goToHome() {
         this.clearIntervals();
         localStorage.removeItem('mafia_active_session');
+        document.body.classList.remove('game-active');
         this.showScreen('screen-home');
       },
 
       goToSetup() {
         localStorage.removeItem('mafia_active_session');
         this.showScreen('screen-setup');
+      },
+
+      openExitModal() {
+        document.getElementById('modal-exit-confirm').classList.add('active');
+      },
+
+      closeExitModal() {
+        document.getElementById('modal-exit-confirm').classList.remove('active');
+      },
+
+      confirmExit() {
+        this.clearIntervals();
+        localStorage.removeItem('mafia_active_session');
+        this.closeExitModal();
+        this.showScreen('screen-home');
+        document.body.classList.remove('game-active');
       },
 
       saveSessionState() {
@@ -1746,6 +2065,15 @@
           dayVotingVisible: this.dayVotingVisible,
           votes: this.votes,
           currentVoterIndex: this.currentVoterIndex,
+          revoteCandidates: this.revoteCandidates,
+          isRevote: this.isRevote,
+          voteHistory: this.voteHistory,
+          specialMafiaKills: this.specialMafiaKills,
+          killHistory: this.killHistory,
+          mafiaActorId: this.mafiaActorId,
+          votedOutByDay: this.votedOutByDay,
+          scoreEvents: this.scoreEvents,
+          executionState: this.executionState,
           discussionSecondsLeft: this.discussionSecondsLeft,
           timerRunning: this.timerRunning,
           dayCount: this.dayCount,
@@ -1787,6 +2115,15 @@
         this.dayVotingVisible = Boolean(state.dayVotingVisible);
         this.votes = state.votes || {};
         this.currentVoterIndex = Number.isInteger(state.currentVoterIndex) ? state.currentVoterIndex : 0;
+        this.revoteCandidates = Array.isArray(state.revoteCandidates) ? state.revoteCandidates : null;
+        this.isRevote = Boolean(state.isRevote);
+        this.voteHistory = Array.isArray(state.voteHistory) ? state.voteHistory : [];
+        this.specialMafiaKills = state.specialMafiaKills && typeof state.specialMafiaKills === 'object' ? state.specialMafiaKills : {};
+        this.killHistory = Array.isArray(state.killHistory) ? state.killHistory : [];
+        this.mafiaActorId = state.mafiaActorId || null;
+        this.votedOutByDay = Array.isArray(state.votedOutByDay) ? state.votedOutByDay : [];
+        this.scoreEvents = Array.isArray(state.scoreEvents) ? state.scoreEvents : [];
+        this.executionState = state.executionState || null;
         this.discussionSecondsLeft = Number(state.discussionSecondsLeft) || 180;
         this.timerRunning = Boolean(state.timerRunning);
         this.dayCount = Number(state.dayCount) || 1;
@@ -1823,6 +2160,8 @@
           this.renderMorningScreen();
         } else if (state.currentScreen === 'screen-day') {
           this.restoreDayScreen();
+        } else if (state.currentScreen === 'screen-execution' && this.executionState) {
+          this.renderExecutionState();
         }
         this.restoringSession = false;
       },
@@ -1893,11 +2232,11 @@
         const name = input.value.trim();
         if (!name) return;
         if (this.players.length >= 16) {
-          this.toast('الحد الأقصى للمملكة 16 فارساً!');
+          this.toast(this.t('maxPlayers'));
           return;
         }
         if (this.players.includes(name)) {
-          this.toast('هذا الاسم مسجل بالفعل!');
+          this.toast(this.t('duplicatePlayer'));
           return;
         }
         this.players.push(name);
@@ -1925,7 +2264,7 @@
         this.renderPlayerChips();
         this.updatePlayerCountDisplay();
         this.applyPreset(5);
-        this.toast('تمت إضافة 5 لاعبين افتراضيين وتشكيل متوازن!');
+        this.toast(this.t('quickFillSuccess'));
       },
 
       renderPlayerChips() {
@@ -1934,7 +2273,7 @@
         this.players.forEach((p, idx) => {
           const chip = document.createElement('div');
           chip.style.cssText = 'background: #1d1d2b; border: 1px solid #3c3c52; color: #fff; padding: 0.4rem 0.8rem; border-radius: 20px; display: inline-flex; align-items: center; gap: 0.5rem; font-size: 0.9rem;';
-          chip.innerHTML = `<span>⚔️ ${p}</span> <span style="cursor:pointer; color:#ff6b6b; font-weight:bold;" onclick="GameApp.removePlayer(${idx})">✕</span>`;
+          chip.innerHTML = `<span>⚔️ ${this.escapeHtml(p)}</span> <span style="cursor:pointer; color:#ff6b6b; font-weight:bold;" onclick="GameApp.removePlayer(${idx})">✕</span>`;
           container.appendChild(chip);
         });
       },
@@ -1951,6 +2290,7 @@
 
         Object.keys(ROLES_DATA).forEach(key => {
           const role = ROLES_DATA[key];
+          const localized = this.localizedRole(key);
           if (this.selectedRolesCounts[key] === undefined) {
             this.selectedRolesCounts[key] = role.defaultCount;
           }
@@ -1959,9 +2299,9 @@
           card.className = `role-toggle-card ${this.selectedRolesCounts[key] > 0 ? 'active' : ''}`;
           card.id = `role-card-${key}`;
           card.innerHTML = `
-            <img class="role-card-image" src="${role.image}" alt="${role.name}" />
-            <div class="role-name">${role.name.split(' ')[0]}</div>
-            <span class="role-type-badge team-${role.team}">${role.teamName}</span>
+            <img class="role-card-image" src="${role.image}" alt="${localized.name}" />
+            <div class="role-name">${localized.name.split(' ')[0]}</div>
+            <span class="role-type-badge team-${role.team}">${this.localizedTeam(role.team)}</span>
             <div class="role-counter" onclick="event.stopPropagation()">
               <button class="counter-btn" onclick="GameApp.changeRoleCount('${key}', -1)">-</button>
               <span id="role-count-val-${key}" style="font-weight:bold; min-width:18px; text-align:center;">${this.selectedRolesCounts[key]}</span>
@@ -1992,7 +2332,7 @@
         const totalRoles = Object.values(this.selectedRolesCounts).reduce((a, b) => a + b, 0);
         const playerCount = this.players.length;
         const badge = document.getElementById('role-balance-badge');
-        badge.innerText = `${totalRoles} / ${playerCount} دور`;
+        badge.innerText = `${totalRoles} / ${playerCount} ${this.t('roleUnit')}`;
         if (totalRoles === playerCount && playerCount >= 6) {
           badge.style.color = '#69db7c';
         } else {
@@ -2048,11 +2388,11 @@
       showSeatingArrangement() {
         const totalRoles = Object.values(this.selectedRolesCounts).reduce((a, b) => a + b, 0);
         if (this.players.length < 5) {
-          this.toast('يجب تسجيل 5 لاعبين على الأقل لبدء اللعبة!');
+          this.toast(this.t('minPlayers'));
           return;
         }
         if (this.players.length !== totalRoles) {
-          this.toast(`مجموع الأدوار (${totalRoles}) لا يطابق عدد اللاعبين (${this.players.length})!`);
+          this.toast(this.t('roleMismatch', { roles: totalRoles, players: this.players.length }));
           return;
         }
 
@@ -2089,11 +2429,11 @@
       startRoleDistribution() {
         const totalRoles = Object.values(this.selectedRolesCounts).reduce((a, b) => a + b, 0);
         if (this.players.length < 5) {
-          this.toast('يجب تسجيل 5 لاعبين على الأقل لبدء اللعبة!');
+          this.toast(this.t('minPlayers'));
           return;
         }
         if (this.players.length !== totalRoles) {
-          this.toast(`مجموع الأدوار (${totalRoles}) لا يطابق عدد اللاعبين (${this.players.length})!`);
+          this.toast(this.t('roleMismatch', { roles: totalRoles, players: this.players.length }));
           return;
         }
 
@@ -2128,6 +2468,12 @@
         this.dayCount = 1;
         this.distributionIndex = 0;
         this.resultsRecorded = false;
+        this.voteHistory = [];
+        this.specialMafiaKills = {};
+        this.killHistory = [];
+        this.mafiaActorId = null;
+        this.votedOutByDay = [];
+        this.scoreEvents = [];
         this.witchHealAvailable = true;
         this.witchPoisonAvailable = true;
         this.sniperBulletAvailable = true;
@@ -2149,13 +2495,14 @@
         document.getElementById('dist-player-name').innerText = player.name;
         
         document.getElementById('dist-role-team').className = `role-type-badge team-${role.team}`;
-        document.getElementById('dist-role-team').innerText = role.teamName;
+        document.getElementById('dist-role-team').innerText = this.localizedTeam(role.team);
         const roleArt = document.getElementById('dist-role-art');
         roleArt.innerHTML = role.image
           ? `<img class="role-reveal-image" id="dist-role-image" src="${role.image}" alt="${role.title || role.name}" />`
           : `<span style="font-size:3rem;">${role.icon}</span>`;
-        document.getElementById('dist-role-name').innerText = role.title || role.name;
-        document.getElementById('dist-role-desc').innerText = role.description || role.desc;
+        const localized = this.localizedRole(player.roleKey);
+        document.getElementById('dist-role-name').innerText = localized.name;
+        document.getElementById('dist-role-desc').innerText = localized.desc;
 
         this.saveSessionState();
         SoundEngine.gong();
@@ -2178,8 +2525,7 @@
         this.distributionIndex++;
         if (this.distributionIndex < this.assignedPlayers.length) {
           const nextPlayer = this.assignedPlayers[this.distributionIndex];
-          document.getElementById('distribution-next-player-name').innerText = nextPlayer.name;
-          document.getElementById('distribution-confirm-player-name').innerText = nextPlayer.name;
+          this.renderDistributionHandover(nextPlayer);
           document.getElementById('distribution-view').classList.add('hidden');
           document.getElementById('distribution-handover').classList.add('active');
           SoundEngine.playTone(330, 'sine', 0.15);
@@ -2188,6 +2534,12 @@
           this.startNightPhase();
         }
         this.saveSessionState();
+      },
+
+      renderDistributionHandover(player) {
+        document.getElementById('distribution-hidden-document').innerText = this.t('hiddenDocument');
+        document.getElementById('distribution-pass-prompt').innerText = this.t('passToPlayer', { name: player.name });
+        document.getElementById('distribution-confirm-prompt').innerText = this.t('confirmPlayer', { name: player.name });
       },
 
       confirmDistributionHandover() {
@@ -2210,6 +2562,7 @@
           bodyguardTarget: null,
           witchHeal: false,
           witchKillTarget: null,
+          mafiaActorId: null,
           cupidLovers: []
         };
 
@@ -2229,7 +2582,8 @@
         document.getElementById('night-action-box').style.display = 'none';
 
         document.getElementById('night-current-player-name').innerText = current.name;
-        document.getElementById('night-btn-player-name').innerText = current.name;
+        const nightPrompt = document.querySelector('#night-handover-box p');
+        if (nightPrompt) nightPrompt.innerText = this.t('passNight');
         SoundEngine.playTone(330, 'sine', 0.2);
       },
 
@@ -2241,10 +2595,10 @@
         document.getElementById('night-action-box').style.display = 'block';
         this.nightActionVisible = true;
 
-        document.getElementById('night-action-role-title').innerText = `${role.icon} ${role.name}`;
-        document.getElementById('night-action-player-sub').innerText = `الفارس: ${player.name}`;
+        document.getElementById('night-action-role-title').innerText = `${role.icon} ${this.localizedRole(player.roleKey).name}`;
+        document.getElementById('night-action-player-sub').innerText = this.t('playerRole', { name: player.name });
         document.getElementById('night-action-badge').className = `role-type-badge team-${role.team}`;
-        document.getElementById('night-action-badge').innerText = role.teamName;
+        document.getElementById('night-action-badge').innerText = this.localizedTeam(role.team);
 
         const instruction = document.getElementById('night-action-instruction');
         const listContainer = document.getElementById('night-targets-list');
@@ -2257,83 +2611,95 @@
 
         // بناء الشاشات حسب الدور
         if (player.roleKey === 'mafia' || player.roleKey === 'godfather') {
-          instruction.innerText = 'أيها المافيا، اختر الهدف المراد اغتياله وتصفيته الليلة:';
-          alivePlayers.forEach(target => {
+          instruction.innerText = this.t('mafiaPrompt');
+          const mafiaPartners = alivePlayers.filter(target =>
+            target.id !== player.id && (target.roleKey === 'mafia' || target.roleKey === 'godfather')
+          );
+          if (mafiaPartners.length) {
+            instruction.innerHTML += `<br><strong style="color:var(--gold);">${this.t('partner')} ${mafiaPartners.map(partner => this.escapeHtml(partner.name)).join(this.language === 'ar' ? '، ' : ', ')}</strong>`;
+          }
+          alivePlayers.filter(target => target.id !== player.id && target.roleKey !== 'mafia' && target.roleKey !== 'godfather').forEach(target => {
             const btn = document.createElement('button');
             btn.className = `player-btn ${this.nightActions.mafiaTarget === target.id ? 'selected' : ''}`;
-            btn.innerHTML = `<span>⚔️ ${target.name}</span> <span>${target.id === player.id ? '(أنت)' : ''}</span>`;
+            btn.innerHTML = `<span>${this.t('targetPrefix')}${this.escapeHtml(target.name)}</span>`;
             btn.onclick = () => {
-              this.nightActions.mafiaTarget = target.id;
-              this.refreshSelection(listContainer, btn);
+              const wasSelected = this.nightActions.mafiaTarget === target.id;
+              this.nightActions.mafiaActorId = wasSelected ? null : player.id;
+              this.nightActions.mafiaTarget = wasSelected ? null : target.id;
+              this.refreshSelection(listContainer, wasSelected ? null : btn);
             };
             listContainer.appendChild(btn);
           });
         } 
         else if (player.roleKey === 'doctor') {
-          instruction.innerText = 'اختر فارساً لحمايته وإنقاذه الليلة من الموت (يمكنك حماية نفسك):';
+          instruction.innerText = this.t('doctorPrompt');
           alivePlayers.forEach(target => {
             const btn = document.createElement('button');
             btn.className = `player-btn ${this.nightActions.doctorTarget === target.id ? 'selected' : ''}`;
-            btn.innerHTML = `<span>🛡️ ${target.name}</span> <span>${target.id === player.id ? '(حماية نفسك)' : ''}</span>`;
+            btn.innerHTML = `<span>${this.t('protectPrefix')}${this.escapeHtml(target.name)}</span>`;
             btn.onclick = () => {
-              this.nightActions.doctorTarget = target.id;
-              this.refreshSelection(listContainer, btn);
+              const wasSelected = this.nightActions.doctorTarget === target.id;
+              this.nightActions.doctorTarget = wasSelected ? null : target.id;
+              this.refreshSelection(listContainer, wasSelected ? null : btn);
             };
             listContainer.appendChild(btn);
           });
         }
         else if (player.roleKey === 'investigator') {
-          instruction.innerText = 'اختر فارساً للتحقيق السري في هويته واكتشاف ولائه:';
+          instruction.innerText = this.t('investigatorPrompt');
           alivePlayers.filter(p => p.id !== player.id).forEach(target => {
             const btn = document.createElement('button');
             btn.className = `player-btn ${this.nightActions.investigatorTarget === target.id ? 'selected' : ''}`;
-            btn.innerHTML = `<span>🔍 ${target.name}</span>`;
+            btn.innerHTML = `<span>${this.t('investigatePrefix')}${this.escapeHtml(target.name)}</span>`;
             btn.onclick = () => {
-              this.nightActions.investigatorTarget = target.id;
+              const wasSelected = this.nightActions.investigatorTarget === target.id;
+              this.nightActions.investigatorTarget = wasSelected ? null : target.id;
               // تحديد نتيجة التحقيق فوراً
               const targetRole = target.roleKey;
               const isMafia = (targetRole === 'mafia'); // العراب يظهر كبريء!
-              this.nightActions.investigatorResult = isMafia ? 'عضو مافيا خائن! 🗡️' : 'فارس شريف وبريء 🛡️';
-              this.refreshSelection(listContainer, btn);
+              this.nightActions.investigatorResult = wasSelected ? null : (isMafia ? this.t('mafiaInvestigation') : this.t('townInvestigation'));
+              this.refreshSelection(listContainer, wasSelected ? null : btn);
             };
             listContainer.appendChild(btn);
           });
         }
         else if (player.roleKey === 'slasher') {
-          instruction.innerText = 'أيها السفاح، اختر ضحيتك المستقلة لهذه الليلة:';
+          instruction.innerText = this.t('slasherPrompt');
           alivePlayers.filter(p => p.id !== player.id).forEach(target => {
             const btn = document.createElement('button');
             btn.className = `player-btn ${this.nightActions.slasherTarget === target.id ? 'selected' : ''}`;
             btn.innerHTML = `<span>🪓 ${target.name}</span>`;
             btn.onclick = () => {
-              this.nightActions.slasherTarget = target.id;
-              this.refreshSelection(listContainer, btn);
+              const wasSelected = this.nightActions.slasherTarget === target.id;
+              this.nightActions.slasherTarget = wasSelected ? null : target.id;
+              this.refreshSelection(listContainer, wasSelected ? null : btn);
             };
             listContainer.appendChild(btn);
           });
         }
         else if (player.roleKey === 'bodyguard') {
-          instruction.innerText = 'اختر فارساً لحراسته بحياتك (إذا استُهدف ستموت بدلاً عنه):';
+          instruction.innerText = this.t('bodyguardPrompt');
           alivePlayers.filter(p => p.id !== player.id).forEach(target => {
             const btn = document.createElement('button');
             btn.className = `player-btn ${this.nightActions.bodyguardTarget === target.id ? 'selected' : ''}`;
             btn.innerHTML = `<span>🤺 ${target.name}</span>`;
             btn.onclick = () => {
-              this.nightActions.bodyguardTarget = target.id;
-              this.refreshSelection(listContainer, btn);
+              const wasSelected = this.nightActions.bodyguardTarget === target.id;
+              this.nightActions.bodyguardTarget = wasSelected ? null : target.id;
+              this.refreshSelection(listContainer, wasSelected ? null : btn);
             };
             listContainer.appendChild(btn);
           });
         }
         else if (player.roleKey === 'spy') {
           const mafiaVictim = this.assignedPlayers.find(p => p.id === this.nightActions.mafiaTarget);
-          instruction.innerHTML = `قدرتك الاستخباراتية تكشف:<br><strong style="color:var(--gold);">${mafiaVictim ? `المافيا تتحرك لاغتيال: [${mafiaVictim.name}]` : 'لم يتم رصد أي تحرك للمافيا بعد.'}</strong>`;
+          instruction.innerHTML = `${this.t('spyReveal')}<br><strong style="color:var(--gold);">${mafiaVictim ? this.t('mafiaMove', { name: this.escapeHtml(mafiaVictim.name) }) : this.t('noMafiaMove')}</strong>`;
         }
         else if (player.roleKey === 'cupid') {
           if (this.dayCount === 1) {
-            instruction.innerText = 'الليلة الأولى فقط: اختر قلبين لربطهما كعاشقين (إذا مات أحدهما مات الآخر):';
+            instruction.innerText = this.t('cupidPrompt');
             extraContainer.style.display = 'block';
-            extraContainer.innerHTML = '<div style="color:var(--gold); font-size:0.85rem; margin-bottom:0.5rem;">اختر لاعبين اثنين:</div>';
+            extraContainer.innerHTML = `<div style="color:var(--gold); font-size:0.85rem; margin-bottom:0.5rem;">${this.t('chooseTwo')}</div>`;
             this.nightActions.cupidLovers = [];
             alivePlayers.forEach(target => {
               const btn = document.createElement('button');
@@ -2351,30 +2717,31 @@
               listContainer.appendChild(btn);
             });
           } else {
-            instruction.innerText = 'لقد قمت بربط العاشقين في الليلة الأولى ولا توجد إجراءات إضافية الليلة.';
+            instruction.innerText = this.t('cupidDone');
           }
         }
         else if (player.roleKey === 'witch') {
-          instruction.innerText = 'أيتها الساحرة، يمكنك استخدام جرعاتك الخاصة:';
+          instruction.innerText = this.t('witchPrompt');
           extraContainer.style.display = 'block';
           const mafiaVictim = this.assignedPlayers.find(p => p.id === this.nightActions.mafiaTarget);
           extraContainer.innerHTML = `
             <div style="background:#0c0c14; padding:0.75rem; border-radius:8px; margin-bottom:0.75rem; font-size:0.85rem;">
-              ضحية المافيا الليلة: <strong style="color:#ff6b6b;">${mafiaVictim ? mafiaVictim.name : 'لا يوجد'}</strong>
+              ${this.t('mafiaVictim')} <strong style="color:#ff6b6b;">${mafiaVictim ? this.escapeHtml(mafiaVictim.name) : this.t('noVictim')}</strong>
               <div style="margin-top:0.4rem;">
-                <label><input type="checkbox" id="witch-heal-chk" ${!this.witchHealAvailable ? 'disabled' : ''}> إنقاذ الضحية بجرعة الشفاء (${this.witchHealAvailable ? 'متاحة' : 'مستهلكة'})</label>
+                <label><input type="checkbox" id="witch-heal-chk" ${!this.witchHealAvailable ? 'disabled' : ''}> ${this.t('healVictim', { status: this.witchHealAvailable ? this.t('available') : this.t('used') })}</label>
               </div>
             </div>
-            <div style="font-size:0.85rem; color:var(--gold); margin-bottom:0.4rem;">جرعة السم القاتلة (${this.witchPoisonAvailable ? 'متاحة' : 'مستهلكة'}):</div>
+            <div style="font-size:0.85rem; color:var(--gold); margin-bottom:0.4rem;">${this.t('poisonPrompt', { status: this.witchPoisonAvailable ? this.t('available') : this.t('used') })}</div>
           `;
           if (this.witchPoisonAvailable) {
             alivePlayers.filter(p => p.id !== player.id).forEach(target => {
               const btn = document.createElement('button');
               btn.className = `player-btn ${this.nightActions.witchKillTarget === target.id ? 'selected' : ''}`;
-              btn.innerHTML = `<span>🧪 تسميم: ${target.name}</span>`;
+              btn.innerHTML = `<span>${this.t('poisonPrefix')}${this.escapeHtml(target.name)}</span>`;
               btn.onclick = () => {
-                this.nightActions.witchKillTarget = (this.nightActions.witchKillTarget === target.id) ? null : target.id;
-                this.refreshSelection(listContainer, btn);
+                const wasSelected = this.nightActions.witchKillTarget === target.id;
+                this.nightActions.witchKillTarget = wasSelected ? null : target.id;
+                this.refreshSelection(listContainer, wasSelected ? null : btn);
               };
               listContainer.appendChild(btn);
             });
@@ -2382,28 +2749,29 @@
         }
         else if (player.roleKey === 'sniper') {
           if (this.sniperBulletAvailable) {
-            instruction.innerText = 'لديك رصاصة واحدة طوال المعركة. هل ترغب في قنص أحد الليلة؟';
+            instruction.innerText = this.t('sniperPrompt');
             alivePlayers.filter(p => p.id !== player.id).forEach(target => {
               const btn = document.createElement('button');
               btn.className = `player-btn ${this.nightActions.sniperTarget === target.id ? 'selected' : ''}`;
-              btn.innerHTML = `<span>🎯 قنص: ${target.name}</span>`;
+              btn.innerHTML = `<span>${this.t('sniperPrefix')}${this.escapeHtml(target.name)}</span>`;
               btn.onclick = () => {
-                this.nightActions.sniperTarget = (this.nightActions.sniperTarget === target.id) ? null : target.id;
-                this.refreshSelection(listContainer, btn);
+                const wasSelected = this.nightActions.sniperTarget === target.id;
+                this.nightActions.sniperTarget = wasSelected ? null : target.id;
+                this.refreshSelection(listContainer, wasSelected ? null : btn);
               };
               listContainer.appendChild(btn);
             });
           } else {
-            instruction.innerText = 'لقد استهلكت رصاصتك الملكية بالفعل.';
+            instruction.innerText = this.t('sniperSpent');
           }
         }
         else {
           // شاشة التمويه الذكية لجميع المواطنين والأدوار السلبية (Decoy Screen)
-          instruction.innerText = 'أيها المواطن الصالح، تمويه الذئاب يتطلب بقاءك هنا ثوانٍ معدودة. اضغط على أي اسم لتشويش من يراقبك:';
+          instruction.innerText = this.t('citizenPrompt');
           alivePlayers.forEach(target => {
             const btn = document.createElement('button');
             btn.className = 'player-btn';
-            btn.innerHTML = `<span>🛡️ تمويه: ${target.name}</span>`;
+            btn.innerHTML = `<span>${this.t('camouflagePrefix')}${this.escapeHtml(target.name)}</span>`;
             btn.onclick = () => {
               this.refreshSelection(listContainer, btn);
             };
@@ -2485,6 +2853,28 @@
       },
 
       /* =================== معالجة أحداث الليل وتقرير الصباح =================== */
+      recordKill(actorId, targetId, source) {
+        const target = this.assignedPlayers.find(player => player.id === targetId);
+        const actor = this.assignedPlayers.find(player => player.id === actorId);
+        if (!target || !actor) return;
+        this.killHistory.push({ actorId, targetId, source });
+      },
+
+      recordScoreEvent(type, playerId, targetId = null) {
+        if (!playerId) return;
+        this.scoreEvents.push({ type, playerId, targetId, day: this.dayCount });
+      },
+
+      recordSpecialMafiaKill(actorId, targetId, source) {
+        const target = this.assignedPlayers.find(player => player.id === targetId);
+        const actor = this.assignedPlayers.find(player => player.id === actorId);
+        if (!target || !actor) return;
+        this.recordKill(actorId, targetId, source);
+        if (!['mafia', 'godfather'].includes(target.roleKey)) return;
+        if (!this.specialMafiaKills[actorId]) this.specialMafiaKills[actorId] = [];
+        this.specialMafiaKills[actorId].push({ targetId, source });
+      },
+
       resolveNightAndStartMorning() {
         const deadIds = new Set();
         this.morningReports = [];
@@ -2501,17 +2891,23 @@
             const bg = this.assignedPlayers.find(p => p.roleKey === 'bodyguard' && p.isAlive);
             if (bg) {
               deadIds.add(bg.id);
-              this.morningReports.push(`⚔️ استُشهد الحارس الشخصي [${bg.name}] بشجاعة مفتدياً الشخص الذي كان يحرسه.`);
+              this.recordScoreEvent('bodyguardSacrifice', bg.id, mafiaTarget);
+              this.morningReports.push(this.t('bodyguardDeath', { name: bg.name }));
               saved = true;
             }
           }
 
           if (!saved) {
             deadIds.add(mafiaTarget);
+            if (this.nightActions.mafiaActorId) this.recordKill(this.nightActions.mafiaActorId, mafiaTarget, 'mafia');
             const victim = this.assignedPlayers.find(p => p.id === mafiaTarget);
-            this.morningReports.push(`🗡️ عُثر على الفارس [${victim.name}] مقتولاً في غرفته بعد غارة غادرة من المافيا.`);
+            this.morningReports.push(this.t('mafiaDeath', { name: victim.name }));
           } else if (doctorTarget === mafiaTarget || witchHeal) {
-            this.morningReports.push(`✨ بفضل العناية والطب، نجا أحد الفرسان الليلة من موت محقق بإعجوبة!`);
+            if (doctorTarget === mafiaTarget) {
+              const doctor = this.assignedPlayers.find(p => p.roleKey === 'doctor' && p.isAlive);
+              if (doctor) this.recordScoreEvent('doctorHeal', doctor.id, mafiaTarget);
+            }
+            this.morningReports.push(this.t('savedByProtection'));
           }
         }
 
@@ -2519,26 +2915,36 @@
         if (slasherTarget && slasherTarget !== doctorTarget) {
           deadIds.add(slasherTarget);
           const victim = this.assignedPlayers.find(p => p.id === slasherTarget);
-          this.morningReports.push(`🪓 سقط الفارس [${victim.name}] ضحية لجريمة بشعة نفذها السفاح المتسلسل.`);
+          this.morningReports.push(this.t('slasherDeath', { name: victim.name }));
         }
 
         // 3. هجوم القناص
-        if (sniperTarget && sniperTarget !== doctorTarget) {
+        if (sniperTarget && sniperTarget !== doctorTarget && !deadIds.has(sniperTarget)) {
           deadIds.add(sniperTarget);
           const victim = this.assignedPlayers.find(p => p.id === sniperTarget);
-          this.morningReports.push(`🏹 اخترق سهم القناص الملكي صدر الفارس [${victim.name}] وأرداه قتيلاً.`);
+          const sniper = this.assignedPlayers.find(p => p.roleKey === 'sniper' && p.isAlive);
+          if (sniper) {
+            this.recordSpecialMafiaKill(sniper.id, sniperTarget, 'sniper');
+            if (ROLES_DATA[victim.roleKey].team === 'town') this.recordScoreEvent('friendlyFire', sniper.id, sniperTarget);
+          }
+          this.morningReports.push(this.t('sniperDeath', { name: victim.name }));
         }
 
         // 4. سم الساحرة
-        if (witchKillTarget) {
+        if (witchKillTarget && !deadIds.has(witchKillTarget)) {
           deadIds.add(witchKillTarget);
           const victim = this.assignedPlayers.find(p => p.id === witchKillTarget);
-          this.morningReports.push(`🧪 فارق الفارس [${victim.name}] الحياة بعد تجرعه سماً مجهول المصدر.`);
+          const witch = this.assignedPlayers.find(p => p.roleKey === 'witch' && p.isAlive);
+          if (witch) {
+            this.recordSpecialMafiaKill(witch.id, witchKillTarget, 'witch');
+            if (ROLES_DATA[victim.roleKey].team === 'town') this.recordScoreEvent('friendlyFire', witch.id, witchKillTarget);
+          }
+          this.morningReports.push(this.t('witchDeath', { name: victim.name }));
         }
 
         // إذا لم يمت أحد
         if (deadIds.size === 0) {
-          this.morningReports.push(`🕊️ ليلة هادئة ومباركة! استيقظت المملكة دون أي وفيات بين الفرسان.`);
+          this.morningReports.push(this.t('quietNight'));
         }
 
         // تطبيق الوفيات
@@ -2554,10 +2960,10 @@
           if (lover1 && lover2) {
             if (!lover1.isAlive && lover2.isAlive) {
               lover2.isAlive = false;
-              this.morningReports.push(`💔 لم يتحمل [${lover2.name}] فراق عشيقه [${lover1.name}] فمات حسرة وحزناً.`);
+              this.morningReports.push(this.t('loverMorning', { survivor: lover2.name, dead: lover1.name }));
             } else if (!lover2.isAlive && lover1.isAlive) {
               lover1.isAlive = false;
-              this.morningReports.push(`💔 لم يتحمل [${lover1.name}] فراق عشيقه [${lover2.name}] فمات حسرة وحزناً.`);
+              this.morningReports.push(this.t('loverMorning', { survivor: lover1.name, dead: lover2.name }));
             }
           }
         }
@@ -2612,7 +3018,7 @@
       startTimer() {
         this.clearIntervals();
         this.timerRunning = true;
-        document.getElementById('btn-timer-toggle').innerText = 'إيقاف مؤقت ⏸️';
+        document.getElementById('btn-timer-toggle').innerText = this.t('pause');
         this.discussionTimerInterval = setInterval(() => {
           if (this.discussionSecondsLeft > 0) {
             this.discussionSecondsLeft--;
@@ -2621,7 +3027,7 @@
           } else {
             this.clearIntervals();
             SoundEngine.gong();
-            this.toast('انتهى وقت المشاورة! حان وقت التصويت.');
+            this.toast(this.t('timerEnded'));
           }
         }, 1000);
       },
@@ -2630,7 +3036,7 @@
         if (this.timerRunning) {
           this.clearIntervals();
           this.timerRunning = false;
-          document.getElementById('btn-timer-toggle').innerText = 'استئناف ▶️';
+          document.getElementById('btn-timer-toggle').innerText = this.t('resume');
         } else {
           this.startTimer();
         }
@@ -2660,7 +3066,7 @@
       },
 
       /* =================== مرحلة التصويت والإقصاء =================== */
-      startVotingPhase() {
+      startVotingPhase(candidates = null, isRevote = false) {
         this.clearIntervals();
         document.getElementById('day-discussion-box').style.display = 'none';
         document.getElementById('day-voting-box').style.display = 'block';
@@ -2668,6 +3074,8 @@
         this.votes = {};
         this.currentVoterIndex = 0;
         this.dayVotingVisible = true;
+        this.revoteCandidates = candidates;
+        this.isRevote = isRevote;
         this.renderVotingTurn();
         this.saveSessionState();
       },
@@ -2682,21 +3090,27 @@
         }
 
         const voter = eligibleVoters[this.currentVoterIndex];
-        document.getElementById('voting-turn-indicator').innerText = `صوت الفارس: ${this.currentVoterIndex + 1} / ${eligibleVoters.length}`;
-        document.getElementById('current-voter-name').innerText = `${voter.name} ${voter.roleKey === 'colonel' ? '(صوت مضاعف 🎖️)' : ''}`;
+        document.getElementById('voting-turn-indicator').innerText = `${this.t('knightVote')}: ${this.currentVoterIndex + 1}/${eligibleVoters.length}`;
+        const voterLabel = `${this.escapeHtml(voter.name)}${voter.roleKey === 'colonel' ? ' (2x 🎖️)' : ''}`;
+        document.getElementById('voting-voter-prompt').innerHTML = this.t('votePrompt', {
+          name: `<strong style="color:var(--gold);">${voterLabel}</strong>`
+        });
 
         const candidatesList = document.getElementById('voting-candidates-list');
         candidatesList.innerHTML = '';
 
-        const aliveCandidates = this.assignedPlayers.filter(p => p.isAlive);
+        const aliveCandidates = this.assignedPlayers.filter(p =>
+          p.isAlive && p.id !== voter.id && (!this.revoteCandidates || this.revoteCandidates.includes(p.id))
+        );
 
         aliveCandidates.forEach(cand => {
           const btn = document.createElement('button');
           btn.className = 'player-btn';
-          btn.innerHTML = `<span>⚖️ اتهام وإعدام: ${cand.name}</span> <span>${cand.id === voter.id ? '(تخطي / امتناع)' : ''}</span>`;
+          btn.innerHTML = `<span>${this.t('accuseExecute')} ${this.escapeHtml(cand.name)}</span>`;
           btn.onclick = () => {
-            this.votes[voter.id] = cand.id;
-            this.refreshSelection(candidatesList, btn);
+            const wasSelected = this.votes[voter.id] === cand.id;
+            this.votes[voter.id] = wasSelected ? null : cand.id;
+            this.refreshSelection(candidatesList, wasSelected ? null : btn);
           };
           candidatesList.appendChild(btn);
         });
@@ -2708,11 +3122,23 @@
         const eligibleVoters = this.assignedPlayers.filter(p => p.isAlive && !p.cannotVote);
         const voter = eligibleVoters[this.currentVoterIndex];
 
-        if (!this.votes[voter.id]) {
-          this.toast('يرجى اختيار فارس للتصويت ضده!');
+        if (!(voter.id in this.votes)) {
+          this.toast(this.t('abstainPrompt'));
           return;
         }
 
+        this.voteHistory.push({ voterId: voter.id, targetId: this.votes[voter.id], day: this.dayCount, isRevote: this.isRevote });
+        this.currentVoterIndex++;
+        this.renderVotingTurn();
+        this.saveSessionState();
+      },
+
+      skipVote() {
+        const eligibleVoters = this.assignedPlayers.filter(p => p.isAlive && !p.cannotVote);
+        const voter = eligibleVoters[this.currentVoterIndex];
+        if (!voter) return;
+        this.votes[voter.id] = null;
+        this.voteHistory.push({ voterId: voter.id, targetId: null, day: this.dayCount, isRevote: this.isRevote });
         this.currentVoterIndex++;
         this.renderVotingTurn();
         this.saveSessionState();
@@ -2721,34 +3147,38 @@
       tallyVotesAndExecute() {
         const counts = {}; // targetId -> count
         const votersDetails = [];
+        let skipVotes = 0;
 
         Object.keys(this.votes).forEach(voterId => {
           const targetId = this.votes[voterId];
           const voter = this.assignedPlayers.find(p => p.id == voterId);
-          const target = this.assignedPlayers.find(p => p.id == targetId);
-          
           const weight = (voter && voter.roleKey === 'colonel') ? 2 : 1;
+          if (targetId === null || targetId === undefined) {
+            skipVotes += weight;
+            return;
+          }
+          const target = this.assignedPlayers.find(p => p.id == targetId);
           counts[targetId] = (counts[targetId] || 0) + weight;
 
           if (voter && target) {
-            votersDetails.push(`• [${voter.name}] صوت ضد [${target.name}] ${weight > 1 ? '(وزن مضاعف)' : ''}`);
+            votersDetails.push(`• [${this.escapeHtml(voter.name)}] ${this.t('voteAgainst')} [${this.escapeHtml(target.name)}] ${weight > 1 ? this.t('doubleWeight') : ''}`);
           }
         });
 
         // إيجاد أعلى تصويت
-        let maxVotes = 0;
-        let executedId = null;
-        let isTie = false;
+        const maxVotes = Math.max(0, ...Object.values(counts));
+        if (skipVotes >= maxVotes) {
+          this.showSkipVoteModal();
+          return;
+        }
+        const tiedIds = Object.keys(counts).filter(targetId => counts[targetId] === maxVotes).map(Number);
+        const executedId = tiedIds.length === 1 && maxVotes > 0 ? tiedIds[0] : null;
 
-        Object.keys(counts).forEach(targetId => {
-          if (counts[targetId] > maxVotes) {
-            maxVotes = counts[targetId];
-            executedId = parseInt(targetId);
-            isTie = false;
-          } else if (counts[targetId] === maxVotes) {
-            isTie = true;
-          }
-        });
+        if (tiedIds.length > 1) {
+          alert(this.t('tieMessage'));
+          this.startVotingPhase(tiedIds, true);
+          return;
+        }
 
         this.showScreen('screen-execution');
         const titleEl = document.getElementById('exec-title');
@@ -2765,9 +3195,10 @@
           tallyBox.style.display = 'none';
         }
 
-        if (isTie || !executedId || maxVotes === 0) {
-          titleEl.innerText = 'تعادل في أصوات المجلس ⚖️';
-          descEl.innerText = 'انقسم الفرسان في آرائهم بالتساوي، ولم يحصل أي مشتبه به على أغلبية حاسمة؛ رُفعت الجلسة دون إعدام أحد اليوم.';
+        if (!executedId || maxVotes === 0) {
+          this.executionState = { type: 'tie' };
+          titleEl.innerText = this.t('tieTitle');
+          descEl.innerText = this.t('tieDesc');
           revealBox.style.display = 'none';
           SoundEngine.gong();
           return;
@@ -2777,33 +3208,45 @@
 
         // قاعدة المهرج (Jester)
         if (executedPlayer.roleKey === 'jester') {
+          this.recordScoreEvent('jokerVictory', executedPlayer.id);
           executedPlayer.isAlive = false;
-          this.endGame('jester', `انتصر المهرج [${executedPlayer.name}]! لقد نجح في خداعكم جميعاً وجعل المجلس يصوت على إعدامه.`);
+          this.endGame('jester', this.t('jesterWin', { name: executedPlayer.name }));
           return;
         }
 
         // قاعدة المجنون (Idiot)
         if (executedPlayer.roleKey === 'idiot') {
+          this.executionState = { type: 'idiot', name: executedPlayer.name };
           executedPlayer.cannotVote = true;
-          titleEl.innerText = 'عفو ملكي عن المجنون! 🥴';
-          descEl.innerText = `صوت المجلس لإعدام [${executedPlayer.name}]، لكنه أظهر بلاهته وجنونه! تم العفو عنه مع تجريده من حق التصويت مستقبلاً.`;
+          titleEl.innerText = this.t('idiotTitle');
+          descEl.innerText = this.t('idiotDesc', { name: executedPlayer.name });
           revealBox.style.display = 'none';
           SoundEngine.playTone(300, 'sawtooth', 0.4);
           return;
         }
 
         // الإعدام الفعلي
+        this.executionState = { type: 'execution', name: executedPlayer.name, roleKey: executedPlayer.roleKey, loverName: null };
+        this.votedOutByDay.push(executedPlayer.id);
+        if (['mafia', 'godfather'].includes(executedPlayer.roleKey)) {
+          Object.keys(this.votes).forEach(voterId => {
+            const voter = this.assignedPlayers.find(player => player.id === Number(voterId));
+            if (voter?.roleKey === 'colonel' && this.votes[voterId] === executedPlayer.id) {
+              this.recordScoreEvent('colonelLead', voter.id, executedPlayer.id);
+            }
+          });
+        }
         executedPlayer.isAlive = false;
         SoundEngine.swordSlash();
 
-        titleEl.innerText = `تم تنفيذ حكم الإعدام بحق: ${executedPlayer.name} ⚔️`;
-        descEl.innerText = `سقط [${executedPlayer.name}] على يد الجلاد بعد نيله أعلى نسبة أصوات من مجلس الفرسان.`;
+        titleEl.innerText = this.t('executionTitle', { name: executedPlayer.name });
+        descEl.innerText = this.t('executionDesc', { name: executedPlayer.name });
 
         // كشف الدور
         if (this.rules.revealRoleOnDeath) {
           revealBox.style.display = 'block';
           const r = ROLES_DATA[executedPlayer.roleKey];
-          document.getElementById('exec-revealed-role').innerText = `${r.icon} ${r.name} (${r.teamName})`;
+          document.getElementById('exec-revealed-role').innerText = `${r.icon} ${this.localizedRole(executedPlayer.roleKey).name} (${this.localizedTeam(r.team)})`;
         } else {
           revealBox.style.display = 'none';
         }
@@ -2814,7 +3257,8 @@
           const otherLover = this.assignedPlayers.find(p => p.id === otherLoverId);
           if (otherLover && otherLover.isAlive) {
             otherLover.isAlive = false;
-            descEl.innerHTML += `<br><span style="color:#ff6b6b;">💔 مات عشيقه [${otherLover.name}] فوراً كمداً وحسرة!</span>`;
+            this.executionState.loverName = otherLover.name;
+            descEl.innerHTML += `<br><span style="color:#ff6b6b;">${this.t('loverDeath', { name: otherLover.name })}</span>`;
           }
         }
 
@@ -2826,16 +3270,53 @@
         }
       },
 
+      renderExecutionState() {
+        const state = this.executionState;
+        if (!state) return;
+        const titleEl = document.getElementById('exec-title');
+        const descEl = document.getElementById('exec-description');
+        const revealBox = document.getElementById('exec-role-reveal-box');
+
+        if (state.type === 'tie') {
+          titleEl.innerText = this.t('tieTitle');
+          descEl.innerText = this.t('tieDesc');
+          revealBox.style.display = 'none';
+          return;
+        }
+        if (state.type === 'idiot') {
+          titleEl.innerText = this.t('idiotTitle');
+          descEl.innerText = this.t('idiotDesc', { name: state.name });
+          revealBox.style.display = 'none';
+          return;
+        }
+
+        titleEl.innerText = this.t('executionTitle', { name: state.name });
+        descEl.innerText = this.t('executionDesc', { name: state.name });
+        if (state.loverName) descEl.innerHTML += `<br><span style="color:#ff6b6b;">${this.t('loverDeath', { name: state.loverName })}</span>`;
+
+        if (this.rules.revealRoleOnDeath) {
+          revealBox.style.display = 'block';
+          const role = ROLES_DATA[state.roleKey];
+          document.getElementById('exec-revealed-role').innerText = `${role.icon} ${this.localizedRole(state.roleKey).name} (${this.localizedTeam(role.team)})`;
+        } else {
+          revealBox.style.display = 'none';
+        }
+      },
+
       triggerHunterRevenge(hunterPlayer) {
         setTimeout(() => {
           this.openSpecialModal(
-            '🦅 رصاصة الصياد الأخيرة!',
-            `أيها الصياد [${hunterPlayer.name}]، قبل أن تلفظ أنفاسك الأخيرة، اختر فارساً لتصفيته معك:`,
+            this.t('hunterTitle'),
+            this.t('hunterDesc', { name: hunterPlayer.name }),
             (targetId) => {
               const target = this.assignedPlayers.find(p => p.id === targetId);
               if (target) {
                 target.isAlive = false;
-                this.toast(`أطلق الصياد سهمه وأردى [${target.name}] قتيلاً!`);
+                this.recordSpecialMafiaKill(hunterPlayer.id, targetId, 'avenger');
+                if (['mafia', 'godfather', 'slasher'].includes(target.roleKey)) {
+                  this.recordScoreEvent('hunterDyingShot', hunterPlayer.id, targetId);
+                }
+                this.toast(this.t('hunterToast', { name: target.name }));
                 SoundEngine.swordSlash();
                 this.checkWinCondition();
               }
@@ -2847,13 +3328,15 @@
       triggerKamikazeRetaliation(kamikazePlayer) {
         setTimeout(() => {
           this.openSpecialModal(
-            '💣 انفجار الانتحاري المتمرد!',
-            `لقد أعدمتم الانتحاري [${kamikazePlayer.name}]! اختر أحد الفرسان ليصطحبه معه إلى القبر:`,
+            this.t('kamikazeTitle'),
+            this.t('kamikazeDesc', { name: kamikazePlayer.name }),
             (targetId) => {
               const target = this.assignedPlayers.find(p => p.id === targetId);
               if (target) {
                 target.isAlive = false;
-                this.toast(`فجر الانتحاري نفسه وقضى على [${target.name}]!`);
+                const wasVoter = this.voteHistory.some(vote => vote.voterId === targetId && vote.targetId === kamikazePlayer.id);
+                if (wasVoter) this.recordScoreEvent('bomberDetonation', kamikazePlayer.id, targetId);
+                this.toast(this.t('kamikazeToast', { name: target.name }));
                 SoundEngine.swordSlash();
                 this.checkWinCondition();
               }
@@ -2885,7 +3368,7 @@
         document.getElementById('modal-special-action').classList.add('active');
         this.pendingSpecialAction = () => {
           if (!chosenTargetId) {
-            this.toast('يرجى اختيار هدف للانتقام!');
+            this.toast(this.t('targetRequired'));
             return;
           }
           callback(chosenTargetId);
@@ -2895,6 +3378,18 @@
 
       confirmSpecialAction() {
         if (this.pendingSpecialAction) this.pendingSpecialAction();
+      },
+
+      showSkipVoteModal() {
+        this.clearIntervals();
+        document.getElementById('modal-skip-vote').classList.add('active');
+        this.saveSessionState();
+      },
+
+      continueAfterSkipVote() {
+        document.getElementById('modal-skip-vote').classList.remove('active');
+        this.dayCount++;
+        this.startNightPhase();
       },
 
       proceedAfterExecution() {
@@ -2916,26 +3411,26 @@
         // 1. انتصار العشاق
         if (this.lovers.length === 2 && alive.length === 2) {
           if (alive.every(p => this.lovers.includes(p.id))) {
-            this.endGame('lovers', 'انتصار العشاق! صمد الحبيبان حتى النهاية وتغلبا على مؤامرات المملكة.');
+            this.endGame('lovers', this.t('loversVictoryDesc'));
             return true;
           }
         }
 
         // 2. انتصار السفاح
         if (aliveSlasher.length === 1 && alive.length <= 2 && aliveMafia.length === 0) {
-          this.endGame('slasher', 'انتصار السفاح المنفرد! تمكن من تصفية الجميع والوقوف بمفرده فوق الركام.');
+          this.endGame('slasher', this.t('slasherVictoryDesc'));
           return true;
         }
 
         // 3. انتصار المافيا
         if (aliveMafia.length >= (alive.length - aliveMafia.length) && aliveSlasher.length === 0) {
-          this.endGame('mafia', 'انتصار المافيا وفرسان الظلام! سيطرت المافيا بالكامل على المملكة وأخضعت الجميع.');
+          this.endGame('mafia', this.t('mafiaVictoryDesc'));
           return true;
         }
 
         // 4. انتصار الفرسان والمواطنين
         if (aliveMafia.length === 0 && aliveSlasher.length === 0) {
-          this.endGame('town', 'انتصار الفرسان والشرفاء! تم تطهير المملكة من كل الخونة والمجرمين وعاد الأمان.');
+          this.endGame('town', this.t('townVictoryDesc'));
           return true;
         }
 
@@ -2955,23 +3450,23 @@
         descEl.innerText = message;
 
         if (winningTeam === 'town') {
-          titleEl.innerText = '⚔️ انتصار فرسان المملكة الشرفاء! 🛡️';
+          titleEl.innerText = this.t('townVictoryTitle');
           iconEl.innerText = '👑';
           titleEl.style.color = '#69db7c';
         } else if (winningTeam === 'mafia') {
-          titleEl.innerText = '🗡️ انتصار فرسان المافيا الخونة! 💀';
+          titleEl.innerText = this.t('mafiaVictoryTitle');
           iconEl.innerText = '☠️';
           titleEl.style.color = '#ff6b6b';
         } else if (winningTeam === 'jester') {
-          titleEl.innerText = '🃏 انتصار المهرج العبقري!';
+          titleEl.innerText = this.t('jesterVictoryTitle');
           iconEl.innerText = '🎭';
           titleEl.style.color = '#ffd43b';
         } else if (winningTeam === 'slasher') {
-          titleEl.innerText = '🪓 انتصار السفاح المنفرد!';
+          titleEl.innerText = this.t('slasherVictoryTitle');
           iconEl.innerText = '🩸';
           titleEl.style.color = '#ff4d4d';
         } else if (winningTeam === 'lovers') {
-          titleEl.innerText = '💘 انتصار الحب والعشاق!';
+          titleEl.innerText = this.t('loversVictoryTitle');
           iconEl.innerText = '💖';
           titleEl.style.color = '#ff85a2';
         }
@@ -2983,8 +3478,8 @@
           const item = document.createElement('div');
           item.style.cssText = 'padding:0.4rem 0.6rem; background:#11111a; border-radius:6px; display:flex; justify-content:space-between; align-items:center; font-size:0.85rem;';
           item.innerHTML = `
-            <span><strong>${p.name}</strong> ${p.isLover ? '💘 (عاشق)' : ''}</span>
-            <span class="role-type-badge team-${role.team}">${role.icon} ${role.name} (${p.isAlive ? 'حي' : 'ميت'})</span>
+            <span><strong>${this.escapeHtml(p.name)}</strong> ${p.isLover ? `💘 ${this.t('loverLabel')}` : ''}</span>
+            <span class="role-type-badge team-${role.team}">${role.icon} ${this.escapeHtml(this.localizedRole(p.roleKey).name)} (${p.isAlive ? this.t('alive') : this.t('dead')})</span>
           `;
           rolesList.appendChild(item);
         });
@@ -2997,10 +3492,16 @@
 
         this.assignedPlayers.forEach(player => {
           const stats = this.ensurePlayerStats(player.name);
+          const role = ROLES_DATA[player.roleKey];
           let isWinner = false;
+          const votedCorrectly = this.voteHistory.some(vote =>
+            vote.voterId === player.id &&
+            vote.targetId !== null &&
+            ['mafia', 'godfather'].includes(this.assignedPlayers.find(target => target.id === vote.targetId)?.roleKey)
+          );
 
           if (winningTeam === 'town') {
-            isWinner = ROLES_DATA[player.roleKey].team === 'town';
+            isWinner = role.team === 'town' && (['sniper', 'witch'].includes(player.roleKey) || votedCorrectly);
           } else if (winningTeam === 'mafia') {
             isWinner = player.roleKey === 'mafia' || player.roleKey === 'godfather';
           } else if (winningTeam === 'slasher') {
@@ -3011,15 +3512,65 @@
             isWinner = this.lovers.includes(player.id);
           }
 
+          let points = isWinner ? 10 : 0;
+          if (winningTeam === 'jester' && player.roleKey === 'jester') points = 15;
+
+          this.killHistory
+            .filter(kill => kill.actorId === player.id)
+            .forEach(kill => {
+              const target = this.assignedPlayers.find(targetPlayer => targetPlayer.id === kill.targetId);
+              if (!target) return;
+              if (role.team === 'town' && ['mafia', 'godfather'].includes(target.roleKey)) {
+                points += target.roleKey === 'godfather' ? 15 : 5;
+              }
+              if (role.team === 'mafia') {
+                const mafiaKillPoints = { sniper: 10, witch: 10, investigator: 10, doctor: 10, slasher: 10, spy: 15, citizen: 5, bodyguard: 5, cupid: 5 };
+                points += mafiaKillPoints[target.roleKey] || 0;
+              }
+            });
+
+          this.scoreEvents
+            .filter(event => event.playerId === player.id)
+            .forEach(event => {
+              const eventPoints = {
+                bodyguardSacrifice: 15,
+                doctorHeal: 5,
+                friendlyFire: -10,
+                hunterDyingShot: 10,
+                colonelLead: 15,
+                bomberDetonation: 10
+              };
+              points += eventPoints[event.type] || 0;
+            });
+
+          if (player.roleKey === 'cupid' && this.lovers.length === 2) {
+            const loversAlive = this.lovers.every(loverId => this.assignedPlayers.find(target => target.id === loverId)?.isAlive);
+            const loversDead = this.lovers.every(loverId => !this.assignedPlayers.find(target => target.id === loverId)?.isAlive);
+            if (loversAlive) points += 10;
+            if (loversDead) points -= 5;
+          }
+
+          this.voteHistory
+            .filter(vote => vote.voterId === player.id && vote.targetId !== null)
+            .forEach(vote => {
+              const target = this.assignedPlayers.find(targetPlayer => targetPlayer.id === vote.targetId);
+              if (!target) return;
+              if (target.roleKey === 'jester') points -= 5;
+              if (target.roleKey === 'idiot') points -= 5;
+              if (target.roleKey === 'kamikaze') points -= 5;
+              if (target.roleKey === 'slasher' && this.votedOutByDay.includes(target.id) && role.team === 'town') points += 10;
+              const targetRole = ROLES_DATA[target.roleKey];
+              if (targetRole?.team === 'town' && this.votedOutByDay.includes(target.id)) points -= 5;
+            });
+
           if (isWinner) {
             stats.wins += 1;
-            stats.points += 10;
             if (!stats.winningRoles.includes(player.roleKey)) {
               stats.winningRoles.push(player.roleKey);
             }
-          } else {
-            stats.losses += 1;
           }
+          stats.points += points;
+          if (!isWinner) stats.losses += 1;
         });
 
         this.resultsRecorded = true;
@@ -3049,6 +3600,10 @@
         document.getElementById('modal-stats').classList.add('active');
       },
 
+      openScoringGuide() {
+        document.getElementById('modal-scoring-guide').classList.add('active');
+      },
+
       escapeHtml(value) {
         return String(value).replace(/[&<>'"]/g, character => ({
           '&': '&amp;',
@@ -3072,7 +3627,7 @@
           .sort((first, second) => second.points - first.points || second.wins - first.wins);
 
         if (!entries.length) {
-          container.innerHTML = '<div class="stats-empty">لا توجد إحصائيات محفوظة حتى الآن.</div>';
+          container.innerHTML = `<div class="stats-empty">${this.t('noStats')}</div>`;
           return;
         }
 
@@ -3081,11 +3636,11 @@
             <table class="stats-table">
               <thead>
                 <tr>
-                  <th>اللاعب</th>
-                  <th>النقاط</th>
-                  <th>الفوز</th>
-                  <th>الخسائر</th>
-                  <th>الأدوار الفائز بها</th>
+                  <th>${this.t('player')}</th>
+                  <th>${this.t('points')}</th>
+                  <th>${this.t('wins')}</th>
+                  <th>${this.t('losses')}</th>
+                  <th>${this.t('rolesWon')}</th>
                 </tr>
               </thead>
               <tbody>
@@ -3100,7 +3655,7 @@
                         ${entry.winningRoles.length
                           ? entry.winningRoles.map(roleKey => {
                             const role = ROLES_DATA[roleKey];
-                            return `<span class="stats-role-badge">${role ? `${role.icon} ${this.escapeHtml(role.name.split(' ')[0])}` : this.escapeHtml(roleKey)}</span>`;
+                            return `<span class="stats-role-badge">${role ? `${role.icon} ${this.escapeHtml(this.localizedRole(roleKey).name.split(' ')[0])}` : this.escapeHtml(roleKey)}</span>`;
                           }).join('')
                           : '<span style="color:var(--text-muted);">-</span>'}
                       </div>
@@ -3114,7 +3669,7 @@
       },
 
       resetAllStats() {
-        if (!confirm('هل أنت متأكد من تصفير جميع النقاط والبيانات؟')) return;
+        if (!confirm(this.t('resetConfirm'))) return;
 
         localStorage.removeItem('mafia_saved_players');
         localStorage.removeItem('mafia_player_stats');
@@ -3124,7 +3679,7 @@
         this.updatePlayerCountDisplay();
         this.renderStats();
         this.closeModals();
-        this.toast('تم تصفير جميع النقاط والبيانات بنجاح.');
+        this.toast(this.t('resetSuccess'));
       },
 
       closeModals() {
@@ -3135,14 +3690,15 @@
         const container = document.getElementById('encyclopedia-list');
         container.innerHTML = '';
         Object.values(ROLES_DATA).forEach(r => {
+          const localized = this.localizedRole(r.id);
           const item = document.createElement('div');
           item.style.cssText = 'background:#191924; border:1px solid #36364a; padding:0.75rem; border-radius:10px;';
           item.innerHTML = `
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.25rem;">
-              <strong style="color:var(--gold-light); font-size:1rem;">${r.icon} ${r.name}</strong>
-              <span class="role-type-badge team-${r.team}">${r.teamName}</span>
+              <strong style="color:var(--gold-light); font-size:1rem;">${r.icon} ${localized.name}</strong>
+              <span class="role-type-badge team-${r.team}">${this.localizedTeam(r.team)}</span>
             </div>
-            <p style="font-size:0.82rem; color:var(--parchment); line-height:1.4;">${r.desc}</p>
+            <p style="font-size:0.82rem; color:var(--parchment); line-height:1.4;">${localized.desc}</p>
           `;
           container.appendChild(item);
         });

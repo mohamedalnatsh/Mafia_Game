@@ -35,8 +35,8 @@ An offline, browser-based Mafia/Werewolf game for group play without a moderator
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-   cd YOUR_REPOSITORY
+   git clone https://mohamedalnatsh.github.io/Mafia_Game/.git
+   cd Mafia_Game
    ```
 
 2. Open `index.html` in any modern web browser.
@@ -53,9 +53,7 @@ Then visit `http://localhost:8000`.
 
 The GitHub Pages deployment will be available here:
 
-**[Open the live demo](https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/)**
-
-Replace `YOUR_USERNAME` and `YOUR_REPOSITORY` with the actual GitHub Pages address.
+**[Open the live demo](https://mohamedalnatsh.github.io/Mafia_Game/)**
 
 ## Author & Credits
 
@@ -103,8 +101,8 @@ The game interface, medieval theme, role system, seating flow, session recovery,
 1. استنسخ المستودع:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/YOUR_REPOSITORY.git
-   cd YOUR_REPOSITORY
+   git clone https://mohamedalnatsh.github.io/Mafia_Game/.git
+   cd Mafia_game
    ```
 
 2. افتح `index.html` في أي متصفح حديث.
@@ -121,9 +119,8 @@ python -m http.server 8000
 
 رابط نسخة GitHub Pages:
 
-**[فتح العرض الحي](https://YOUR_USERNAME.github.io/YOUR_REPOSITORY/)**
+**[فتح العرض الحي](https://mohamedalnatsh.github.io/Mafia_Game/)**
 
-استبدل `YOUR_USERNAME` و`YOUR_REPOSITORY` بعنوان مستودع GitHub الفعلي.
 
 ## المؤلف والاعتمادات
 
