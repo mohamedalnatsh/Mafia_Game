@@ -1,0 +1,17 @@
+{
+  "name": "مافيا الفرسان | The Crimson Mafia",
+  "short_name": "مافيا الفرسان",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0c0c10",
+  "theme_color": "#7A0016",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "imges/favicon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
