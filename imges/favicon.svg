@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A0A12"/>
+      <stop offset="50%" stop-color="#140408"/>
+      <stop offset="100%" stop-color="#080103"/>
+    </linearGradient>
+    
+    <!-- Gold Gradient -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE885"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#997315"/>
+    </linearGradient>
+
+    <!-- Crimson Shield Gradient -->
+    <linearGradient id="crimsonGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#990011"/>
+      <stop offset="100%" stop-color="#4A0008"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Outer Frame -->
+  <rect width="512" height="512" rx="110" fill="url(#bgGrad)"/>
+  <rect width="488" height="488" x="12" y="12" rx="98" fill="none" stroke="url(#goldGrad)" stroke-width="6" stroke-opacity="0.4"/>
+
+  <!-- Shield Body -->
+  <path d="M256 95 L380 138 C380 285 256 395 256 432 C256 395 132 285 132 138 Z" 
+        fill="url(#crimsonGrad)" 
+        stroke="url(#goldGrad)" 
+        stroke-width="14" 
+        stroke-linejoin="round"/>
+
+  <!-- Inner Shield Border Line -->
+  <path d="M256 118 L360 154 C360 272 256 370 256 400 C256 370 152 272 152 154 Z" 
+        fill="none" 
+        stroke="url(#goldGrad)" 
+        stroke-width="4" 
+        stroke-opacity="0.5"/>
+
+  <!-- Crown Jewels (Positioned clean & elevated above crown peaks) -->
+  <circle cx="198" cy="184" r="9" fill="url(#goldGrad)"/>
+  <circle cx="256" cy="165" r="11" fill="url(#goldGrad)"/>
+  <circle cx="314" cy="184" r="9" fill="url(#goldGrad)"/>
+
+  <!-- Centered Crown Body -->
+  <path d="M 198 270 L 198 200 L 230 228 L 256 185 L 282 228 L 314 200 L 314 270 Z" 
+        fill="url(#goldGrad)"/>
+  
+  <!-- Crown Base Band -->
+  <rect x="190" y="270" width="132" height="16" rx="4" fill="url(#goldGrad)"/>
+</svg>
