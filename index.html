@@ -194,6 +194,12 @@
         transform: scale(0.97);
       }
 
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
+
       .btn-primary {
         background: linear-gradient(
           135deg,
@@ -1823,6 +1829,7 @@
               class="btn btn-danger"
               data-i18n="confirmVote"
               id="btn-submit-vote"
+              disabled
               onclick="GameApp.submitVote()"
             >
               تأكيد التصويت ⚔️
@@ -4915,6 +4922,8 @@
           }
 
           const voter = eligibleVoters[this.currentVoterIndex];
+          const confirmVoteButton = document.getElementById("btn-submit-vote");
+          confirmVoteButton.disabled = true;
           document.getElementById("voting-turn-indicator").innerText =
             `${this.t("knightVote")}: ${this.currentVoterIndex + 1}/${eligibleVoters.length}`;
           const voterLabel = `${this.escapeHtml(voter.name)}${voter.roleKey === "colonel" ? " (2x 🎖️)" : ""}`;
@@ -4944,6 +4953,7 @@
             btn.onclick = () => {
               const wasSelected = this.votes[voter.id] === cand.id;
               this.votes[voter.id] = wasSelected ? null : cand.id;
+              confirmVoteButton.disabled = !this.votes[voter.id];
               this.refreshSelection(candidatesList, wasSelected ? null : btn);
             };
             candidatesList.appendChild(btn);
@@ -4957,15 +4967,16 @@
             (p) => p.isAlive && !p.cannotVote,
           );
           const voter = eligibleVoters[this.currentVoterIndex];
+          const selectedTargetId = voter ? this.votes[voter.id] : null;
 
-          if (!(voter.id in this.votes)) {
+          if (!selectedTargetId) {
             this.toast(this.t("abstainPrompt"));
             return;
           }
 
           this.voteHistory.push({
             voterId: voter.id,
-            targetId: this.votes[voter.id],
+            targetId: selectedTargetId,
             day: this.dayCount,
             isRevote: this.isRevote,
           });
