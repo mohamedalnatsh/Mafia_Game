@@ -682,6 +682,35 @@
         margin: 1rem 0 1.25rem;
       }
 
+      .investigation-result-card {
+        text-align: right;
+      }
+
+      .investigation-result-card small {
+        color: #a0a0a0;
+        display: block;
+        margin-bottom: 4px;
+      }
+
+      .investigation-target-status {
+        margin-top: 15px;
+        padding: 12px;
+        background: rgba(0, 0, 0, 0.4);
+        border-radius: 8px;
+      }
+
+      .text-danger {
+        color: #ff6b6b;
+      }
+
+      .text-warning {
+        color: #f3c969;
+      }
+
+      .text-success {
+        color: #78d69b;
+      }
+
       .distribution-handover {
         display: none;
         text-align: center;
@@ -1645,16 +1674,16 @@
             اختر لاعباً للتحقق من هويته وولائه الحقيقي للمملكة:
           </p>
 
-          <!-- قائمة اختيار الهدف -->
-          <div class="player-selection-list" id="night-targets-list">
-            <!-- أزرار اللاعبين -->
-          </div>
-
           <!-- حقول إضافية لبعض الأدوار (مثل الساحرة أو العشاق) -->
           <div
             id="night-extra-options"
             style="margin-top: 1rem; display: none"
           ></div>
+
+          <!-- قائمة اختيار الهدف -->
+          <div class="player-selection-list" id="night-targets-list">
+            <!-- أزرار اللاعبين -->
+          </div>
 
           <div style="margin-top: 1.25rem">
             <button
@@ -1799,6 +1828,13 @@
 
         <!-- مرحلة التصويت السري / العلني -->
         <div id="day-voting-box" class="card-panel" style="display: none">
+          <div id="voting-handover-box" style="display: none; text-align: center; padding: 1rem 0">
+            <div style="font-size: 3rem; margin-bottom: 0.75rem">🔒 ⚔️ 🔒</div>
+            <h2 style="font-family: var(--font-title); font-size: 2rem; color: #fff; margin-bottom: 0.5rem">تمرير الجوال</h2>
+            <p id="voting-pass-prompt" style="color: var(--gold); font-size: 1rem; line-height: 1.5; margin-bottom: 1.25rem"></p>
+            <button class="btn btn-primary" id="btn-confirm-voting-handover" onclick="GameApp.confirmVotingHandover()"></button>
+          </div>
+          <div id="voting-turn-box">
           <div class="panel-header">
             <span class="panel-title" data-i18n="royalVote"
               >🗳️ تصويت الإقصاء الملكي</span
@@ -1843,6 +1879,7 @@
             >
               تخطي / امتناع
             </button>
+          </div>
           </div>
         </div>
       </section>
@@ -2373,30 +2410,21 @@
         >
           نتيجة التحقيق الإمبراطوري
         </h3>
-        <div class="inspection-result">
-          <div
-            data-i18n="inspectedIdentity"
-            style="font-size: 0.85rem; color: var(--gold)"
-          >
-            هوية الفارس المفحوص
+        <div class="inspection-result investigation-result-card">
+          <div class="target-name">
+            <small data-i18n="inspectedIdentity">الفارس المفحوص</small>
+            <h3
+              id="investigation-target-name"
+              style="margin: 0; font-size: 1.4rem; color: #fff"
+            ></h3>
           </div>
-          <div
-            id="investigation-target-name"
-            style="
-              font-family: var(--font-title);
-              font-size: 1.45rem;
-              color: #fff;
-              margin: 0.35rem 0 0.6rem;
-            "
-          ></div>
-          <div
-            id="investigation-result-text"
-            style="
-              font-size: 1.05rem;
-              color: var(--gold-light);
-              line-height: 1.5;
-            "
-          ></div>
+          <div class="target-status investigation-target-status">
+            <small data-i18n="investigationStatus">نتيجة التقصي</small>
+            <h4
+              id="investigation-result-text"
+              style="margin: 0; font-size: 1.2rem; font-weight: bold"
+            ></h4>
+          </div>
         </div>
         <button
           class="btn btn-gold"
@@ -2714,8 +2742,8 @@
           btnExit: "🚪 خروج",
           btnContinue: "▶️ إكمال اللعب",
           hiddenDocument: "تم إخفاء الوثيقة السرية",
-          passToPlayer: "أعطي الجوال للاعب {name}",
-          confirmPlayer: "أنا اللاعب {name}",
+          passToPlayer: "مرر الجوال في سرية تامة إلى: {name}",
+          confirmPlayer: "أنا {name} - جاهز لكشف دوري",
           playerRole: "الفارس: {name}",
           passNight: "حل الليل على المملكة... مرر الجوال سراً إلى:",
           openMission: "فتح المهمة السرية 🗝️",
@@ -2819,11 +2847,19 @@
             "لقد سقط الصياد صريعاً، وله الحق في إطلاق رصاصته الأخيرة على أي لاعب!",
           investigationTitle: "نتيجة التحقيق الإمبراطوري",
           inspectedIdentity: "هوية الفارس المفحوص",
-          investigationContinue: "استلام النتيجة وإكمال المهمة ✓",
+          investigationStatus: "نتيجة التقصي",
+          investigationContinue: "فهمت / إنهاء الدور ✓",
           playerRole: "الفارس: {name}",
           votePrompt: "أيها الفارس {name}، اختر من تتهمه بالخيانة:",
           targetPrefix: "⚔️ استهداف: ",
           protectPrefix: "🛡️ حماية: ",
+          doctorSelfHealUsed: "تم استنفاد الحماية الذاتية",
+          doctorSelfHealNote: "*(يمكنك علاج نفسك مرة واحدة فقط طوال اللعبة وقد استخدمتها سابقاً)*",
+          mafiaPartners: "شركاؤك في المافيا: {names}",
+          godfatherMafia: "أفراد المافيا تحت إمرتك: {names}",
+          soloMafia: "أنت المافيا الوحيد في هذه اللعبة",
+          passVotingPhone: "مرر الجوال في سرية تامة إلى الفارس: {name}",
+          readyToVote: "أنا {name} - جاهز للتصويت",
           investigatePrefix: "🔍 اختبار: ",
           slasherPrompt: "أيها السفاح، اختر ضحيتك المستقلة لهذه الليلة:",
           bodyguardPrompt:
@@ -2844,6 +2880,10 @@
           mafiaVictim: "ضحية المافيا الليلة:",
           noVictim: "لا يوجد",
           healVictim: "إنقاذ الضحية بجرعة الشفاء ({status})",
+          witchHealSection: "قسم العلاج - جرعة الشفاء ({status})",
+          witchPoisonSection: "قسم التسميم - جرعة السم القاتلة ({status})",
+          witchAvailable: "متاحة",
+          witchUsed: "تم استخدامها",
           available: "متاحة",
           used: "مستهلكة",
           poisonPrompt: "جرعة السم القاتلة ({status}):",
@@ -2857,6 +2897,10 @@
           camouflagePrefix: "🛡️ تمويه: ",
           mafiaInvestigation: "عضو مافيا خائن! 🗡️",
           townInvestigation: "فارس شريف وبريء 🛡️",
+          serialKillerInvestigation: "⚠️ هذا الفارس هو (السفاح) - خطر محايد!",
+          jesterInvestigation: "🃏 هذا الفارس هو (المهرج) - محايد!",
+          mafiaTeamInvestigation: "🗡️ هذا الفارس خائن! ( ينتمي لفريق المافيا )",
+          innocentInvestigation: "🛡️ هذا الفارس بريء! ( ينتمي للفرسان )",
           abstainPrompt: "اختر هدفاً أو اضغط تخطي / امتناع.",
           voteAgainst: "صوت ضد",
           doubleWeight: "(وزن مضاعف)",
@@ -3034,8 +3078,8 @@
           btnExit: "🚪 Exit Game",
           btnContinue: "▶️ Continue Playing",
           hiddenDocument: "Secret Document Hidden",
-          passToPlayer: "Pass the device to {name}",
-          confirmPlayer: "I am {name}",
+          passToPlayer: "Pass the phone discreetly to: {name}",
+          confirmPlayer: "I am {name} - ready to reveal my role",
           playerRole: "Player: {name}",
           passNight:
             "Night falls upon the Kingdom... Pass the phone secretly to:",
@@ -3141,11 +3185,19 @@
             "The Hunter has fallen and may fire one final shot at any player!",
           investigationTitle: "Imperial Investigation Result",
           inspectedIdentity: "Inspected knight's identity",
-          investigationContinue: "Receive result and continue ✓",
+          investigationStatus: "Investigation result",
+          investigationContinue: "Understood / Finish turn ✓",
           playerRole: "Player: {name}",
           votePrompt: "Knight {name}, choose who you accuse of treason:",
           targetPrefix: "⚔️ Target: ",
           protectPrefix: "🛡️ Protect: ",
+          doctorSelfHealUsed: "Self-protection already used",
+          doctorSelfHealNote: "*(You can heal yourself only once during the game, and you have already used it.)*",
+          mafiaPartners: "Your mafia partners: {names}",
+          godfatherMafia: "Mafia members under your command: {names}",
+          soloMafia: "You are the only mafia member in this game",
+          passVotingPhone: "Pass the phone discreetly to knight: {name}",
+          readyToVote: "I am {name} - ready to vote",
           investigatePrefix: "🔍 Investigate: ",
           slasherPrompt: "Slasher, choose your independent victim tonight:",
           bodyguardPrompt:
@@ -3166,6 +3218,10 @@
           mafiaVictim: "Mafia victim tonight:",
           noVictim: "None",
           healVictim: "Save the victim with the healing potion ({status})",
+          witchHealSection: "Healing - Healing potion ({status})",
+          witchPoisonSection: "Poison - Deadly poison ({status})",
+          witchAvailable: "available",
+          witchUsed: "used",
           available: "available",
           used: "used",
           poisonPrompt: "Deadly poison potion ({status}):",
@@ -3179,6 +3235,10 @@
           camouflagePrefix: "🛡️ Camouflage: ",
           mafiaInvestigation: "A traitorous Mafia member! 🗡️",
           townInvestigation: "An honest and innocent knight 🛡️",
+          serialKillerInvestigation: "⚠️ This knight is the (Serial Killer) - dangerous neutral!",
+          jesterInvestigation: "🃏 This knight is the (Jester) - neutral!",
+          mafiaTeamInvestigation: "🗡️ This knight is a traitor! (belongs to the Mafia team)",
+          innocentInvestigation: "🛡️ This knight is innocent! (belongs to the Knights)",
           abstainPrompt: "Choose a target or press Skip / Abstain.",
           voteAgainst: "voted against",
           doubleWeight: "(double weight)",
@@ -3356,13 +3416,15 @@
           slasherTarget: null,
           bodyguardTarget: null,
           witchHeal: false,
+          witchHealTarget: null,
           witchKillTarget: null,
           cupidLovers: [],
         },
+        doctorSelfHealUsed: false,
 
         // الموارد ذات الاستخدام الواحد
-        witchHealAvailable: true,
-        witchPoisonAvailable: true,
+        witchHealUsed: false,
+        witchPoisonUsed: false,
         sniperBulletAvailable: true,
         lovers: [], // [id1, id2]
 
@@ -3576,6 +3638,9 @@
               document
                 .getElementById("dist-card-flipper")
                 ?.classList.contains("is-flipped") || false,
+            distributionHandoverVisible: document
+              .getElementById("distribution-handover")
+              ?.classList.contains("active") || false,
             gamePhase: currentScreen.replace("screen-", ""),
             alivePlayers: this.assignedPlayers
               .filter((player) => player.isAlive)
@@ -3583,10 +3648,16 @@
             nightQueue: this.nightQueue,
             nightQueueIndex: this.nightQueueIndex,
             nightActions: this.nightActions,
+            witchHealUsed: this.witchHealUsed,
+            witchPoisonUsed: this.witchPoisonUsed,
+            doctorSelfHealUsed: this.doctorSelfHealUsed,
             nightActionVisible: this.nightActionVisible,
             dayVotingVisible: this.dayVotingVisible,
             votes: this.votes,
             currentVoterIndex: this.currentVoterIndex,
+            votingHandoverVisible:
+              document.getElementById("voting-handover-box")?.style.display !==
+              "none",
             revoteCandidates: this.revoteCandidates,
             isRevote: this.isRevote,
             voteHistory: this.voteHistory,
@@ -3657,8 +3728,12 @@
             ? state.nightQueueIndex
             : 0;
           this.nightActions = state.nightActions || this.nightActions;
+          this.witchHealUsed = Boolean(state.witchHealUsed);
+          this.witchPoisonUsed = Boolean(state.witchPoisonUsed);
+          this.doctorSelfHealUsed = Boolean(state.doctorSelfHealUsed);
           this.nightActionVisible = Boolean(state.nightActionVisible);
           this.dayVotingVisible = Boolean(state.dayVotingVisible);
+          this.votingHandoverVisible = Boolean(state.votingHandoverVisible);
           this.votes = state.votes || {};
           this.currentVoterIndex = Number.isInteger(state.currentVoterIndex)
             ? state.currentVoterIndex
@@ -3720,10 +3795,16 @@
           if (state.currentScreen === "screen-seating") {
             this.renderSeatingArrangement();
           } else if (state.currentScreen === "screen-reveal") {
-            this.showRoleReveal(this.distributionIndex);
-            document
-              .getElementById("dist-card-flipper")
-              .classList.toggle("is-flipped", Boolean(state.isCardFlipped));
+            if (state.distributionHandoverVisible) {
+              document.getElementById("distribution-view").classList.add("hidden");
+              document.getElementById("distribution-handover").classList.add("active");
+              this.renderDistributionHandover(this.assignedPlayers[this.distributionIndex]);
+            } else {
+              this.showRoleReveal(this.distributionIndex);
+              document
+                .getElementById("dist-card-flipper")
+                .classList.toggle("is-flipped", Boolean(state.isCardFlipped));
+            }
           } else if (state.currentScreen === "screen-night") {
             this.displayNightHandover();
             if (this.nightActionVisible) this.showPlayerNightAction();
@@ -3750,7 +3831,10 @@
             ? "block"
             : "none";
           this.updateTimerDisplay();
-          if (this.dayVotingVisible) this.renderVotingTurn();
+          if (this.dayVotingVisible) {
+            if (this.votingHandoverVisible) this.showVotingHandover();
+            else this.renderVotingTurn();
+          }
           else if (this.timerRunning) this.startTimer();
         },
 
@@ -4114,19 +4198,16 @@
           this.mafiaActorId = null;
           this.votedOutByDay = [];
           this.scoreEvents = [];
-          this.witchHealAvailable = true;
-          this.witchPoisonAvailable = true;
+          this.witchPoisonUsed = false;
+          this.witchHealUsed = false;
           this.sniperBulletAvailable = true;
+          this.doctorSelfHealUsed = false;
           this.lovers = [];
 
           this.showScreen("screen-reveal");
-          document
-            .getElementById("distribution-view")
-            .classList.remove("hidden");
-          document
-            .getElementById("distribution-handover")
-            .classList.remove("active");
-          this.showRoleReveal(this.distributionIndex);
+          document.getElementById("distribution-view").classList.add("hidden");
+          document.getElementById("distribution-handover").classList.add("active");
+          this.renderDistributionHandover(this.assignedPlayers[this.distributionIndex]);
           this.saveSessionState();
         },
 
@@ -4148,7 +4229,27 @@
             : `<span style="font-size:3rem;">${role.icon}</span>`;
           const localized = this.localizedRole(player.roleKey);
           document.getElementById("dist-role-name").innerText = localized.name;
-          document.getElementById("dist-role-desc").innerText = localized.desc;
+          const desc = document.getElementById("dist-role-desc");
+          desc.innerHTML = this.escapeHtml(localized.desc);
+          if (["mafia", "godfather"].includes(player.roleKey)) {
+            const teammates = this.assignedPlayers.filter(
+              (teammate) =>
+                teammate.id !== player.id &&
+                teammate.isAlive &&
+                (player.roleKey === "mafia"
+                  ? ["mafia", "godfather"].includes(teammate.roleKey)
+                  : teammate.roleKey === "mafia"),
+            );
+            const names = teammates.length
+              ? teammates.map((teammate) => this.escapeHtml(teammate.name)).join(this.language === "ar" ? "، " : ", ")
+              : null;
+            const awareness = document.createElement("div");
+            awareness.style.cssText = "margin-top:0.75rem; padding:0.55rem; color:var(--gold-light); background:rgba(122,0,22,0.45); border:1px solid var(--gold-dark); border-radius:8px; font-weight:700;";
+            awareness.innerText = names
+              ? this.t(player.roleKey === "mafia" ? "mafiaPartners" : "godfatherMafia", { names })
+              : this.t("soloMafia");
+            desc.appendChild(awareness);
+          }
 
           this.saveSessionState();
           SoundEngine.gong();
@@ -4221,6 +4322,7 @@
             slasherTarget: null,
             bodyguardTarget: null,
             witchHeal: false,
+            witchHealTarget: null,
             witchKillTarget: null,
             mafiaActorId: null,
             cupidLovers: [],
@@ -4318,11 +4420,18 @@
               });
           } else if (player.roleKey === "doctor") {
             instruction.innerText = this.t("doctorPrompt");
+            if (this.doctorSelfHealUsed) {
+              instruction.innerHTML += `<br><em style="color:var(--gold);">${this.t("doctorSelfHealNote")}</em>`;
+            }
             alivePlayers.forEach((target) => {
               const btn = document.createElement("button");
               btn.className = `player-btn ${this.nightActions.doctorTarget === target.id ? "selected" : ""}`;
-              btn.innerHTML = `<span>${this.t("protectPrefix")}${this.escapeHtml(target.name)}</span>`;
+              const isSelfHealDisabled = target.id === player.id && this.doctorSelfHealUsed;
+              btn.disabled = isSelfHealDisabled;
+              btn.innerHTML = `<span>${this.t("protectPrefix")}${this.escapeHtml(target.name)}${isSelfHealDisabled ? ` (${this.t("doctorSelfHealUsed")})` : ""}</span>`;
+              if (isSelfHealDisabled) btn.style.opacity = "0.5";
               btn.onclick = () => {
+                if (isSelfHealDisabled) return;
                 const wasSelected =
                   this.nightActions.doctorTarget === target.id;
                 this.nightActions.doctorTarget = wasSelected ? null : target.id;
@@ -4344,14 +4453,9 @@
                   this.nightActions.investigatorTarget = wasSelected
                     ? null
                     : target.id;
-                  // تحديد نتيجة التحقيق فوراً
-                  const targetRole = target.roleKey;
-                  const isMafia = targetRole === "mafia"; // العراب يظهر كبريء!
                   this.nightActions.investigatorResult = wasSelected
-                    ? null
-                    : isMafia
-                      ? this.t("mafiaInvestigation")
-                      : this.t("townInvestigation");
+                    ? this.getInvestigationResult(target).text
+                    : null;
                   this.refreshSelection(
                     listContainer,
                     wasSelected ? null : btn,
@@ -4436,39 +4540,47 @@
           } else if (player.roleKey === "witch") {
             instruction.innerText = this.t("witchPrompt");
             extraContainer.style.display = "block";
-            const mafiaVictim = this.assignedPlayers.find(
-              (p) => p.id === this.nightActions.mafiaTarget,
-            );
             extraContainer.innerHTML = `
-            <div style="background:#0c0c14; padding:0.75rem; border-radius:8px; margin-bottom:0.75rem; font-size:0.85rem;">
-              ${this.t("mafiaVictim")} <strong style="color:#ff6b6b;">${mafiaVictim ? this.escapeHtml(mafiaVictim.name) : this.t("noVictim")}</strong>
-              <div style="margin-top:0.4rem;">
-                <label><input type="checkbox" id="witch-heal-chk" ${!this.witchHealAvailable ? "disabled" : ""}> ${this.t("healVictim", { status: this.witchHealAvailable ? this.t("available") : this.t("used") })}</label>
-              </div>
+            <div style="background:#0c0c14; padding:0.75rem; border-radius:8px; margin-bottom:0.75rem;">
+              <div style="font-size:0.9rem; color:var(--gold); margin-bottom:0.5rem;">${this.t("witchHealSection", { status: this.witchHealUsed ? this.t("witchUsed") : this.t("witchAvailable") })}</div>
+              <div class="player-selection-list" id="witch-heal-targets"></div>
             </div>
-            <div style="font-size:0.85rem; color:var(--gold); margin-bottom:0.4rem;">${this.t("poisonPrompt", { status: this.witchPoisonAvailable ? this.t("available") : this.t("used") })}</div>
           `;
-            if (this.witchPoisonAvailable) {
-              alivePlayers
-                .filter((p) => p.id !== player.id)
-                .forEach((target) => {
-                  const btn = document.createElement("button");
-                  btn.className = `player-btn ${this.nightActions.witchKillTarget === target.id ? "selected" : ""}`;
-                  btn.innerHTML = `<span>${this.t("poisonPrefix")}${this.escapeHtml(target.name)}</span>`;
-                  btn.onclick = () => {
-                    const wasSelected =
-                      this.nightActions.witchKillTarget === target.id;
-                    this.nightActions.witchKillTarget = wasSelected
-                      ? null
-                      : target.id;
-                    this.refreshSelection(
-                      listContainer,
-                      wasSelected ? null : btn,
-                    );
-                  };
-                  listContainer.appendChild(btn);
-                });
-            }
+            const healTargets = document.getElementById("witch-heal-targets");
+            alivePlayers.forEach((target) => {
+              const btn = document.createElement("button");
+              const selected = this.nightActions.witchHealTarget === target.id;
+              btn.className = `player-btn ${selected ? "selected" : ""}`;
+              btn.disabled = this.witchHealUsed;
+              btn.style.opacity = this.witchHealUsed ? "0.5" : "1";
+              btn.innerHTML = `<span>${this.t("protectPrefix")}${this.escapeHtml(target.name)}</span>`;
+              btn.onclick = () => {
+                if (this.witchHealUsed) return;
+                const wasSelected = this.nightActions.witchHealTarget === target.id;
+                this.nightActions.witchHealTarget = wasSelected ? null : target.id;
+                this.refreshSelection(healTargets, wasSelected ? null : btn);
+              };
+              healTargets.appendChild(btn);
+            });
+
+            listContainer.innerHTML = `<div style="font-size:0.9rem; color:var(--gold); margin-bottom:0.5rem;">${this.t("witchPoisonSection", { status: this.witchPoisonUsed ? this.t("witchUsed") : this.t("witchAvailable") })}</div>`;
+            alivePlayers
+              .filter((p) => p.id !== player.id)
+              .forEach((target) => {
+                const btn = document.createElement("button");
+                const selected = this.nightActions.witchKillTarget === target.id;
+                btn.className = `player-btn ${selected ? "selected" : ""}`;
+                btn.disabled = this.witchPoisonUsed;
+                btn.style.opacity = this.witchPoisonUsed ? "0.5" : "1";
+                btn.innerHTML = `<span>${this.t("poisonPrefix")}${this.escapeHtml(target.name)}</span>`;
+                btn.onclick = () => {
+                  if (this.witchPoisonUsed) return;
+                  const wasSelected = this.nightActions.witchKillTarget === target.id;
+                  this.nightActions.witchKillTarget = wasSelected ? null : target.id;
+                  this.refreshSelection(listContainer, wasSelected ? null : btn);
+                };
+                listContainer.appendChild(btn);
+              });
           } else if (player.roleKey === "sniper") {
             if (this.sniperBulletAvailable) {
               instruction.innerText = this.t("sniperPrompt");
@@ -4539,11 +4651,39 @@
           this.finishNightAction(player);
         },
 
+        getInvestigationResult(targetPlayer) {
+          switch (targetPlayer.roleKey) {
+            case "slasher":
+              return {
+                text: this.t("serialKillerInvestigation"),
+                badgeClass: "text-danger",
+              };
+            case "jester":
+              return {
+                text: this.t("jesterInvestigation"),
+                badgeClass: "text-warning",
+              };
+            case "mafia":
+            case "godfather":
+              return {
+                text: this.t("mafiaTeamInvestigation"),
+                badgeClass: "text-danger",
+              };
+            default:
+              return {
+                text: this.t("innocentInvestigation"),
+                badgeClass: "text-success",
+              };
+          }
+        },
+
         openInvestigationModal(target, onClose) {
+          const result = this.getInvestigationResult(target);
           document.getElementById("investigation-target-name").innerText =
             target.name;
-          document.getElementById("investigation-result-text").innerText =
-            this.nightActions.investigatorResult;
+          const resultText = document.getElementById("investigation-result-text");
+          resultText.innerText = result.text;
+          resultText.className = result.badgeClass;
           document
             .getElementById("modal-investigation-result")
             .classList.add("active");
@@ -4560,15 +4700,17 @@
         },
 
         finishNightAction(player) {
+          if (player.roleKey === "doctor" && this.nightActions.doctorTarget === player.id) {
+            this.doctorSelfHealUsed = true;
+          }
           // معالجة الساحرة
           if (player.roleKey === "witch") {
-            const healChk = document.getElementById("witch-heal-chk");
-            if (healChk && healChk.checked && this.witchHealAvailable) {
+            if (this.nightActions.witchHealTarget && !this.witchHealUsed) {
               this.nightActions.witchHeal = true;
-              this.witchHealAvailable = false;
+              this.witchHealUsed = true;
             }
-            if (this.nightActions.witchKillTarget) {
-              this.witchPoisonAvailable = false;
+            if (this.nightActions.witchKillTarget && !this.witchPoisonUsed) {
+              this.witchPoisonUsed = true;
             }
           }
 
@@ -4646,13 +4788,14 @@
             bodyguardTarget,
             sniperTarget,
             witchHeal,
+            witchHealTarget,
             witchKillTarget,
           } = this.nightActions;
 
           // 1. هجوم المافيا
           if (mafiaTarget) {
             let saved = false;
-            if (doctorTarget === mafiaTarget || witchHeal) {
+            if (doctorTarget === mafiaTarget || witchHealTarget === mafiaTarget) {
               saved = true;
             } else if (bodyguardTarget === mafiaTarget) {
               // الحارس الشخصي يموت بدلاً منه
@@ -4683,7 +4826,7 @@
               this.morningReports.push(
                 this.t("mafiaDeath", { name: victim.name }),
               );
-            } else if (doctorTarget === mafiaTarget || witchHeal) {
+            } else if (doctorTarget === mafiaTarget || witchHealTarget === mafiaTarget) {
               if (doctorTarget === mafiaTarget) {
                 const doctor = this.assignedPlayers.find(
                   (p) => p.roleKey === "doctor" && p.isAlive,
@@ -4906,6 +5049,37 @@
           this.dayVotingVisible = true;
           this.revoteCandidates = candidates;
           this.isRevote = isRevote;
+          this.votingHandoverVisible = true;
+          this.showVotingHandover();
+          this.saveSessionState();
+        },
+
+        showVotingHandover() {
+          const eligibleVoters = this.assignedPlayers.filter(
+            (p) => p.isAlive && !p.cannotVote,
+          );
+          if (this.currentVoterIndex >= eligibleVoters.length) {
+            this.votingHandoverVisible = false;
+            this.tallyVotesAndExecute();
+            return;
+          }
+
+          const nextVoter = eligibleVoters[this.currentVoterIndex];
+          document.getElementById("voting-turn-box").style.display = "none";
+          document.getElementById("voting-handover-box").style.display = "block";
+          document.getElementById("voting-pass-prompt").innerText = this.t(
+            "passVotingPhone",
+            { name: nextVoter.name },
+          );
+          document.getElementById("btn-confirm-voting-handover").innerText =
+            this.t("readyToVote", { name: nextVoter.name });
+          this.saveSessionState();
+        },
+
+        confirmVotingHandover() {
+          this.votingHandoverVisible = false;
+          document.getElementById("voting-handover-box").style.display = "none";
+          document.getElementById("voting-turn-box").style.display = "block";
           this.renderVotingTurn();
           this.saveSessionState();
         },
@@ -4981,7 +5155,7 @@
             isRevote: this.isRevote,
           });
           this.currentVoterIndex++;
-          this.renderVotingTurn();
+          this.showVotingHandover();
           this.saveSessionState();
         },
 
@@ -4999,7 +5173,7 @@
             isRevote: this.isRevote,
           });
           this.currentVoterIndex++;
-          this.renderVotingTurn();
+          this.showVotingHandover();
           this.saveSessionState();
         },
 
