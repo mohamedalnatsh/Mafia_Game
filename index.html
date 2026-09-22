@@ -913,6 +913,18 @@
         font: 700 0.8rem var(--font-body);
       }
 
+      .install-app-button {
+        display: none;
+        margin-top: 0.75rem;
+        background: linear-gradient(135deg, #d4af37, #997d1e);
+        color: #1a1200;
+        border-color: #ffe699;
+      }
+
+      .install-app-button.visible {
+        display: inline-flex;
+      }
+
       body.game-active .notepad-trigger {
         display: block;
       }
@@ -1415,6 +1427,14 @@
               onclick="GameApp.openChangelog()"
             >
               📰 أخبار المملكة
+            </button>
+            <button
+              id="btn-install-app"
+              class="btn install-app-button"
+              type="button"
+              onclick="GameApp.installApp()"
+            >
+              📱 تحميل اللعبة كتطبيق
             </button>
             <button
               class="btn btn-secondary"
@@ -6865,6 +6885,23 @@
           document.getElementById("modal-changelog")?.classList.add("active");
         },
 
+        async installApp() {
+          if (!deferredPrompt) {
+            this.toast("التثبيت غير متاح حالياً. افتح القائمة من متصفح يدعم تثبيت التطبيقات.");
+            return;
+          }
+
+          deferredPrompt.prompt();
+          const choice = await deferredPrompt.userChoice;
+          if (choice.outcome === "accepted") {
+            this.toast("جاري تنزيل كافة أصول اللعبة والصوتيات في الخلفية للعمل بدون إنترنت...");
+            const registration = await navigator.serviceWorker.getRegistration();
+            registration?.active?.postMessage({ action: "precache-assets" });
+          }
+          deferredPrompt = null;
+          document.getElementById("btn-install-app")?.classList.remove("visible");
+        },
+
         toggleNotepad() {
           const panel = document.getElementById("notepad-panel");
           const activePlayer = this.nightQueue[this.nightQueueIndex] ||
@@ -7050,6 +7087,27 @@
       });
     </script>
     <script>
+      let deferredPrompt = null;
+
+      window.addEventListener("beforeinstallprompt", (event) => {
+        event.preventDefault();
+        deferredPrompt = event;
+        document.getElementById("btn-install-app")?.classList.add("visible");
+      });
+
+      window.addEventListener("appinstalled", () => {
+        deferredPrompt = null;
+        document.getElementById("btn-install-app")?.classList.remove("visible");
+        document.getElementById("app-toast").innerText =
+          "تم تثبيت اللعبة بنجاح! يمكنك الآن تشغيلها أوفلاين من الشاشة الرئيسية 🚀";
+        document.getElementById("app-toast").classList.add("show");
+        setTimeout(() => document.getElementById("app-toast").classList.remove("show"), 4200);
+      });
+
+      if (window.matchMedia("(display-mode: standalone)").matches || window.navigator.standalone === true) {
+        document.getElementById("btn-install-app")?.classList.remove("visible");
+      }
+
       function showUpdateNotification() {
         if (document.querySelector(".update-toast")) return;
 

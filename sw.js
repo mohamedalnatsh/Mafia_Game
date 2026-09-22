@@ -1,9 +1,12 @@
-const CACHE_NAME = 'mafia-pwa-v4';
+const CACHE_NAME = 'mafia-knights-v2.0';
 
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './sw.js',
+  './generate-icons.html',
+  './imges/favicon.ico',
   './imges/favicon.svg',
   './imges/icon-192.png',
   './imges/icon-512.png',
@@ -23,12 +26,14 @@ const ASSETS_TO_CACHE = [
   './imges/card_slasher_v3.png',
   './imges/card_sniper_v3.png',
   './imges/card_spy_v3.png',
-  './imges/card_witch_v3.png'
+  './imges/card_witch_v3.png',
 ];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE))
+    caches.open(CACHE_NAME)
+      .then((cache) => cache.addAll(ASSETS_TO_CACHE))
+      .then(() => self.skipWaiting())
   );
 });
 
@@ -48,6 +53,11 @@ self.addEventListener('message', (event) => {
   if (event.data && event.data.action === 'skipWaiting') {
     self.skipWaiting();
   }
+  if (event.data && event.data.action === 'precache-assets') {
+    event.waitUntil(
+      caches.open(CACHE_NAME).then((cache) => cache.addAll(ASSETS_TO_CACHE)),
+    );
+  }
 });
 
 self.addEventListener('fetch', (event) => {
@@ -65,13 +75,12 @@ self.addEventListener('fetch', (event) => {
         return response;
       });
 
-      if (cachedResponse) {
-        event.waitUntil(networkResponse.catch(() => undefined));
-        return cachedResponse;
-      }
+      if (cachedResponse) return cachedResponse;
 
       return networkResponse.catch(() =>
-        event.request.mode === 'navigate' ? caches.match('./index.html') : undefined
+        event.request.mode === 'navigate'
+          ? caches.match('./index.html')
+          : undefined,
       );
     })
   );
