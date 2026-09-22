@@ -845,6 +845,218 @@
         opacity: 1;
       }
 
+      .update-toast {
+        position: fixed;
+        bottom: 1rem;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1000;
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        width: min(calc(100% - 2rem), 420px);
+        padding: 0.75rem 1rem;
+        background: #171722;
+        border: 1px solid var(--gold);
+        border-radius: 12px;
+        color: var(--gold-light);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
+      }
+
+      .update-toast span {
+        flex: 1;
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .update-toast button {
+        flex-shrink: 0;
+        padding: 0.45rem 0.75rem;
+        border: 1px solid var(--gold);
+        border-radius: 7px;
+        background: var(--gold);
+        color: #1a1200;
+        font: 700 0.82rem var(--font-body);
+        cursor: pointer;
+      }
+
+      .v2-badge,
+      .notepad-trigger {
+        position: fixed;
+        z-index: 90;
+        border: 1px solid var(--border-gold);
+        border-radius: 8px;
+        background: #181822;
+        color: var(--gold-light);
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      }
+
+      .v2-badge {
+        display: none;
+        bottom: 1rem;
+        left: 1rem;
+        width: 42px;
+        height: 42px;
+        font-size: 1.25rem;
+      }
+
+      body.home-active .v2-badge {
+        display: block;
+      }
+
+      .notepad-trigger {
+        display: none;
+        top: 0.75rem;
+        right: 5.5rem;
+        padding: 0.45rem 0.7rem;
+        font: 700 0.8rem var(--font-body);
+      }
+
+      body.game-active .notepad-trigger {
+        display: block;
+      }
+
+      .notepad-panel {
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 110;
+        width: min(88vw, 340px);
+        height: 100vh;
+        padding: 1.25rem;
+        background: #151520;
+        border-left: 2px solid var(--gold-dark);
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.65);
+        transform: translateX(105%);
+        transition: transform 0.25s ease;
+      }
+
+      .notepad-panel.active {
+        transform: translateX(0);
+      }
+
+      .notepad-panel textarea {
+        width: 100%;
+        min-height: 180px;
+        margin: 1rem 0;
+        padding: 0.75rem;
+        resize: vertical;
+        background: #0c0c12;
+        border: 1px solid #3d3d52;
+        border-radius: 8px;
+        color: #fff;
+        font: 0.95rem var(--font-body);
+      }
+
+      .event-setting {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.55rem 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      }
+
+      .event-setting > div:first-child {
+        flex: 1;
+      }
+
+      .event-setting input[type="number"] {
+        width: 64px;
+        padding: 0.35rem;
+        background: #0c0c12;
+        border: 1px solid #3d3d52;
+        border-radius: 6px;
+        color: #fff;
+      }
+
+      .rule-help {
+        display: none;
+        margin-top: 0.3rem;
+        color: var(--gold-light);
+        font-size: 0.78rem;
+        line-height: 1.4;
+      }
+
+      .rule-help.visible {
+        display: block;
+      }
+
+      .turn-timer {
+        margin-top: 0.65rem;
+        color: var(--gold-light);
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .achievement-list {
+        display: grid;
+        gap: 0.6rem;
+        margin-top: 1rem;
+      }
+
+      .achievement-item {
+        padding: 0.75rem;
+        background: #191924;
+        border: 1px solid var(--border-gold);
+        border-radius: 10px;
+      }
+
+      .news-modal-content {
+        border-color: var(--gold);
+        background:
+          radial-gradient(circle at top, rgba(122, 0, 22, 0.28), transparent 42%),
+          #111118;
+        animation: newsSlideIn 0.35s ease both;
+      }
+
+      @keyframes newsSlideIn {
+        from { opacity: 0; transform: translateY(18px) scale(0.98); }
+        to { opacity: 1; transform: translateY(0) scale(1); }
+      }
+
+      .news-title {
+        text-shadow: 0 0 14px rgba(212, 175, 55, 0.55);
+        animation: newsGlow 2.8s ease-in-out infinite;
+      }
+
+      @keyframes newsGlow {
+        0%, 100% { text-shadow: 0 0 8px rgba(212, 175, 55, 0.35); }
+        50% { text-shadow: 0 0 20px rgba(212, 175, 55, 0.9); }
+      }
+
+      .news-section {
+        margin: 0.85rem 0;
+        padding: 0.9rem;
+        border: 1px solid rgba(212, 175, 55, 0.28);
+        border-radius: 10px;
+        background: rgba(25, 25, 36, 0.9);
+        animation: newsSectionIn 0.45s ease both;
+      }
+
+      .news-section:nth-of-type(2) { animation-delay: 0.06s; }
+      .news-section:nth-of-type(3) { animation-delay: 0.12s; }
+      .news-section:nth-of-type(4) { animation-delay: 0.18s; }
+
+      @keyframes newsSectionIn {
+        from { opacity: 0; transform: translateX(12px); }
+        to { opacity: 1; transform: translateX(0); }
+      }
+
+      .news-section h3 {
+        margin-bottom: 0.45rem;
+        color: var(--gold-light);
+        font-family: var(--font-title);
+        font-size: 1.2rem;
+      }
+
+      .news-section ul {
+        padding-right: 1.1rem;
+        color: var(--parchment);
+        line-height: 1.75;
+        font-size: 0.86rem;
+      }
+
       .stats-table-wrapper {
         overflow-x: auto;
         margin: 1rem 0;
@@ -1127,6 +1339,8 @@
         🌐 EN
       </button>
     </div>
+    <button class="notepad-trigger" onclick="GameApp.toggleNotepad()">📝 مذكراتي</button>
+    <button class="v2-badge" onclick="GameApp.openChangelog()" title="آخر التحديثات">📰</button>
 
     <div class="app-container">
       <!-- الترويسة الرئيسية -->
@@ -1195,6 +1409,12 @@
               onclick="GameApp.openEncyclopedia()"
             >
               📖 موسوعة الأدوار والقوانين
+            </button>
+            <button
+              class="btn btn-outline"
+              onclick="GameApp.openChangelog()"
+            >
+              📰 أخبار المملكة
             </button>
             <button
               class="btn btn-secondary"
@@ -1429,6 +1649,67 @@
               <option value="300">5 دقائق</option>
             </select>
           </div>
+
+          <div class="switch-row">
+            <div>
+              <div style="font-weight: 700">انتقام المهرج</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted)">يأخذ المهرج لاعباً ممن صوتوا ضده</div>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="rule-jester-curse" checked />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="switch-row">
+            <div><div style="font-weight: 700">رصاصتان ملكيتان</div><div class="rule-help" data-rule-help="sniper-bullets">• رصاصتان ملكيتان: يمنح القناص الملكي رصاصتين، في حال إصابة المافيا أو السفاح بالرصاصة الأولى تبقى معه الثانية، أما إذا أصاب بريئاً فيموت البريء ويفقد الرصاصة الثانية ندمًا.</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="rule-double-sniper" /><span class="slider"></span></label>
+          </div>
+          <div class="switch-row">
+            <div><div style="font-weight: 700">الحارس الشرس</div><div class="rule-help" data-rule-help="fierce-bodyguard">إذا أنقذ الحارس هدفاً، يقضي أيضاً على المهاجم.</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="rule-fierce-bodyguard" /><span class="slider"></span></label>
+          </div>
+          <div class="switch-row">
+            <div><div style="font-weight: 700">التصويت السريع / المهل الزوجية</div><div class="rule-help" data-rule-help="speed-voting">تُمنح 15 ثانية لكل تسليم ودور، ثم يتم التمرير أو الامتناع تلقائياً.</div></div>
+            <label class="toggle-switch"><input type="checkbox" id="rule-speed-voting" /><span class="slider"></span></label>
+          </div>
+
+          <div style="margin-top: 0.75rem; color: var(--gold-light); font-weight: 700">الأحداث العشوائية</div>
+          <div class="event-setting">
+            <div>🌑 كسوف الشمس</div>
+            <input type="number" id="event-eclipse-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-eclipse-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div>🌫️ ضباب الليل</div>
+            <input type="number" id="event-fog-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-fog-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div>📜 مرسوم الملك</div>
+            <input type="number" id="event-decree-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-decree-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div><div>🌪️ عاصفة الرمل</div><div class="rule-help" data-rule-help="sandstorm">تعطل علاج الطبيب خلال هذه الليلة.</div></div>
+            <input type="number" id="event-sandstorm-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-sandstorm-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div><div>👑 عيد الفرسان</div><div class="rule-help" data-rule-help="festival">تمنع هجمات المافيا والسفاح خلال هذه الليلة.</div></div>
+            <input type="number" id="event-festival-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-festival-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div><div>📣 شائعات السوق</div><div class="rule-help" data-rule-help="rumors">تعلن المملكة شائعة عن فريق لاعب حي دون كشف دوره.</div></div>
+            <input type="number" id="event-rumors-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-rumors-enabled" checked /><span class="slider"></span></label>
+          </div>
+          <div class="event-setting">
+            <div><div>⛓️ حظر التجول</div><div class="rule-help" data-rule-help="curfew">يمنع لاعباً حياً من التصويت ويعطل قدرته في الليل التالي.</div></div>
+            <input type="number" id="event-curfew-rate" min="20" max="100" step="5" value="30" />
+            <label class="toggle-switch"><input type="checkbox" id="event-curfew-enabled" checked /><span class="slider"></span></label>
+          </div>
         </div>
 
         <div style="margin-top: 1rem; display: flex; gap: 0.5rem">
@@ -1588,6 +1869,7 @@
           >
             تم إخفاء الوثيقة السرية
           </p>
+          <div id="distribution-turn-timer" class="turn-timer" aria-live="polite"></div>
           <h2
             style="
               font-family: var(--font-title);
@@ -1634,6 +1916,7 @@
           >
             اسم الفارس
           </h2>
+          <div id="night-turn-timer" class="turn-timer" aria-live="polite"></div>
           <button
             class="btn btn-primary"
             data-i18n="openMission"
@@ -1673,6 +1956,7 @@
           >
             اختر لاعباً للتحقق من هويته وولائه الحقيقي للمملكة:
           </p>
+          <div id="night-action-timer" class="turn-timer" aria-live="polite"></div>
 
           <!-- حقول إضافية لبعض الأدوار (مثل الساحرة أو المربوطين) -->
           <div
@@ -1832,6 +2116,7 @@
             <div style="font-size: 3rem; margin-bottom: 0.75rem">🔒 ⚔️ 🔒</div>
             <h2 style="font-family: var(--font-title); font-size: 2rem; color: #fff; margin-bottom: 0.5rem">تمرير الجوال</h2>
             <p id="voting-pass-prompt" style="color: var(--gold); font-size: 1rem; line-height: 1.5; margin-bottom: 1.25rem"></p>
+            <div id="voting-turn-timer" class="turn-timer" aria-live="polite"></div>
             <button class="btn btn-primary" id="btn-confirm-voting-handover" onclick="GameApp.confirmVotingHandover()"></button>
           </div>
           <div id="voting-turn-box">
@@ -1845,6 +2130,7 @@
               >صوت الفارس: 1/6</span
             >
           </div>
+          <div id="voting-action-timer" class="turn-timer" aria-live="polite"></div>
 
           <p
             id="voting-voter-prompt"
@@ -2243,20 +2529,20 @@
         <section class="scoring-guide-section">
           <h3 data-i18n="baseWinTitle">🏆 الفوز الأساسي</h3>
           <p data-i18n="baseWinDesc">
-            كل فوز بالجولة يعطي +10 نقاط +1 لسجل الفوز.
+            تُضاف نقاط الفوز حسب الفريق والدور الفائز، مع +1 لسجل الفوز.
           </p>
         </section>
         <section class="scoring-guide-section">
           <h3 data-i18n="knightsTitle">🛡️ فريق الفرسان (الصالحين)</h3>
           <p class="scoring-guide-lines" data-i18n="knightsKills">
-            • قتل مافيا عادي: +5 نقاط • قتل زعيم المافيا (العرّاب): +15 نقطة •
-            التصويت لإقصاء القاتل المتسلسل (السفاح): +10 نقاط لكل من صوت عليه
+            • فوز الجولة: +10 نقاط لكل لاعب حي من الفرسان • حماية ناجحة للطبيب: +25 نقطة • تحقيق ناجح للمحقق: +15 نقطة عن كل عضو مافيا يتم كشفه •
+            قتل مافيا عادي: +5 نقاط • قتل زعيم المافيا (العرّاب): +15 نقطة
           </p>
         </section>
         <section class="scoring-guide-section">
           <h3 data-i18n="mafiaTitle">🗡️ فريق المافيا</h3>
           <p class="scoring-guide-lines" data-i18n="mafiaKills">
-            • قتل القناص أو الساحرة: +10 نقاط • قتل المحقق الإمبراطوري: +10 نقاط
+            • فوز الجولة: +20 نقطة لكل عضو مافيا مشارك • قتل القناص أو الساحرة: +10 نقاط • قتل المحقق الإمبراطوري: +10 نقاط
             • قتل طبيب الطاعون: +10 نقاط • قتل القاتل المتسلسل (السفاح): +10
             نقاط • قتل الجاسوس: +15 نقطة
           </p>
@@ -2264,7 +2550,7 @@
         <section class="scoring-guide-section">
           <h3 data-i18n="neutralTitle">🎭 الأدوار المحايدة</h3>
           <p class="scoring-guide-lines" data-i18n="neutralRules">
-            • إعدام المهرج (الجوكر): فوز فوري +15 نقطة • تفجير الانتحاري المتمرد
+            • فوز المهرج (إعدامه بالتصويت): +50 نقطة • فوز السفاح (البقاء حياً وتصفية الجميع): +70 نقطة • تفجير الانتحاري المتمرد
             وأخذ مصوت معه: +10 نقاط • بقاء مربوطين كيوبيد حتى النهاية: +10 نقاط •
             فشل كيوبيد (موت الثنائي المربوط): -5 نقاط
           </p>
@@ -2435,6 +2721,55 @@
         </button>
       </div>
     </div>
+
+    <div class="modal-overlay" id="modal-changelog">
+      <div class="modal-content news-modal-content">
+        <div class="panel-header"><span class="panel-title news-title">🏰 أخبار المملكة - إصدار 2.0</span><button onclick="GameApp.closeModals()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer">✕</button></div>
+        <section class="news-section"><h3>🎭 الأدوار الجديدة</h3><ul>
+          <li><strong>العمدة:</strong> يمتلك زر "كشف الهوية" نهاراً ليصبح صوته بـ 2 أو 3 أصوات.</li>
+          <li><strong>الجلاد:</strong> دور محايد يهدف لإعدام لاعب محدد نهاراً ليفوز.</li>
+          <li><strong>المشعوذ:</strong> من المافيا، يورط الأبرياء ليظهروا كخونة أمام المحقق.</li>
+          <li><strong>النسّاخ:</strong> دور محايد يرث دور ومهارات أول لاعب يموت في اللعبة.</li>
+        </ul></section>
+        <section class="news-section"><h3>⚙️ التعديلات والخصائص الاختيارية</h3><ul>
+          <li><strong>انتقام المهرج:</strong> عند إعدامه، يمكنه سحب أحد المصوتين ضده للقبر.</li>
+          <li><strong>رصاصتان ملكيتان:</strong> يمنح القناص الملكي رصاصتين، في حال إصابة المافيا أو السفاح بالرصاصة الأولى تبقى معه الثانية، أما إذا أصاب بريئاً فيموت البريء ويفقد الرصاصة الثانية ندمًا.</li>
+          <li><strong>الحارس الشرس:</strong> الحارس الشخصي لا يموت فداءً فقط، بل يقتل المهاجم أيضاً!</li>
+          <li><strong>التصويت السريع:</strong> تفعيل مؤقت زمني 15 ثانية للقرارات السريعة.</li>
+          <li><strong>رسائل المافيا:</strong> مذكرة سرية يتواصل بها أعضاء المافيا ليلاً.</li>
+        </ul></section>
+        <section class="news-section"><h3>🎲 الأحداث العشوائية للمملكة</h3><ul>
+          <li><strong>كسوف الشمس 🌑:</strong> يمنع التصويت والإعدام.</li>
+          <li><strong>ضباب الليل 🌫️:</strong> يفشل عمل المحقق.</li>
+          <li><strong>مرسوم الملك 📜:</strong> التصويت يصبح سرياً بالكامل.</li>
+          <li><strong>عاصفة الرمل 🌪️:</strong> تعطل عمل الطبيب ليلاً.</li>
+          <li><strong>عيد الفرسان 👑:</strong> يمنع القتل ليلاً للحراسة المشددة.</li>
+          <li><strong>شائعات السوق 📣:</strong> تكشف فصيل/فريق لاعب عشوائي نهاراً.</li>
+          <li><strong>حظر التجول ⛓️:</strong> يُحرم لاعب من التصويت واستخدام خاصيته.</li>
+        </ul></section>
+        <section class="news-section"><h3>📊 التحسينات العامة</h3><ul>
+          <li>إضافة <strong>نظام المفكرة السرية</strong> لكل لاعب لتدوين ملاحظاته.</li>
+          <li>تحديث <strong>شاشة النقاط والإحصائيات</strong> لإضافة الألقاب وحساب عدد القتلات.</li>
+          <li>إضافة <strong>مؤثرات صوتية</strong> ليلية وتأثيرات دقات الساعة أثناء التصويت.</li>
+        </ul></section>
+        <button class="btn btn-secondary" style="margin-top:1rem" onclick="GameApp.closeModals()">إغلاق</button>
+      </div>
+    </div>
+
+    <div class="modal-overlay" id="modal-achievements">
+      <div class="modal-content">
+        <div class="panel-header"><span class="panel-title">🏅 لوحة الألقاب والإنجازات</span></div>
+        <div id="achievements-list" class="achievement-list"></div>
+        <button class="btn btn-secondary" style="margin-top:1rem" onclick="GameApp.closeModals()">إغلاق</button>
+      </div>
+    </div>
+
+    <aside id="notepad-panel" class="notepad-panel">
+      <div class="panel-header"><span class="panel-title">📝 مذكراتي</span><button onclick="GameApp.toggleNotepad()" style="background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer">✕</button></div>
+      <p style="color:var(--text-muted);font-size:0.85rem">ملاحظاتك الخاصة في هذه الجولة</p>
+      <textarea id="player-notepad" placeholder="رياض يكذب..."></textarea>
+      <button class="btn btn-primary" onclick="GameApp.saveNotepad()">حفظ المذكرة</button>
+    </aside>
 
     <!-- رسالة التنبيه السريع (Toast) -->
     <div class="toast-msg" id="app-toast">تنبيه</div>
@@ -2637,6 +2972,54 @@
           isUnique: true,
           defaultCount: 0,
         },
+        mayor: {
+          id: "mayor",
+          name: "العمدة / قاضي القصر",
+          team: "town",
+          teamName: "فريق الفرسان",
+          icon: "⚖️",
+          image: "",
+          desc: "فارس بلا مهمة ليلية. يكشف هويته نهاراً ليصبح صوته بثلاثة أصوات.",
+          nightOrder: 99,
+          isUnique: true,
+          defaultCount: 0,
+        },
+        executioner: {
+          id: "executioner",
+          name: "الجلاد / صاحب الثأر",
+          team: "neutral",
+          teamName: "محايد منفرد",
+          icon: "🪓",
+          image: "",
+          desc: "يفوز إذا أُقصي هدفه المحدد نهاراً، ويتحول إلى مهرج إذا مات الهدف ليلاً.",
+          nightOrder: 99,
+          isUnique: true,
+          defaultCount: 0,
+        },
+        framer: {
+          id: "framer",
+          name: "المشعوذ / المحرّف",
+          team: "mafia",
+          teamName: "فريق المافيا",
+          icon: "🧙",
+          image: "",
+          desc: "يختار فارساً بريئاً ليظهر للمحقق كعضو في المافيا تلك الليلة.",
+          nightOrder: 2,
+          isUnique: true,
+          defaultCount: 0,
+        },
+        copycat: {
+          id: "copycat",
+          name: "النسّاخ / المقلّد",
+          team: "neutral",
+          teamName: "محايد",
+          icon: "🪞",
+          image: "",
+          desc: "يبدأ بلا قدرة، ثم يرث دور أول لاعب يموت وقدراته المتبقية.",
+          nightOrder: 99,
+          isUnique: true,
+          defaultCount: 0,
+        },
       };
 
       /* ==========================================================================
@@ -2755,6 +3138,8 @@
           statsTitle: "📊 سجل النقاط والإحصائيات",
           player: "اللاعب",
           points: "النقاط",
+          kills: "عدد القتلات",
+          badges: "الألقاب",
           wins: "الفوز",
           losses: "الخسائر",
           rolesWon: "الأدوار الفائز بها",
@@ -2793,16 +3178,16 @@
           scoringGuide: "📜 شرح آلية النقاط",
           scoringTitle: "📜 دليل توزيع النقاط والفوزات",
           baseWinTitle: "🏆 الفوز الأساسي",
-          baseWinDesc: "كل فوز بالجولة يعطي +10 نقاط +1 لسجل الفوز.",
+          baseWinDesc: "تُضاف نقاط الفوز حسب الفريق والدور الفائز، مع +1 لسجل الفوز.",
           knightsTitle: "🛡️ فريق الفرسان (الصالحين)",
           knightsKills:
-            "• قتل مافيا عادي: +5 نقاط\n• قتل زعيم المافيا (العرّاب): +15 نقطة\n• التصويت لإقصاء القاتل المتسلسل (السفاح): +10 نقاط لكل من صوت عليه\n• تضحية الحارس الشخصي: +15 نقطة\n• حماية ناجحة لطبيب الطاعون: +5 نقاط\n• طلقة صياد الوحوش الأخيرة: +10 نقاط عند إصابة مافيا أو سفاح\n• قيادة التصويت الناجحة للعقيد الحاكم: +15 نقطة",
+            "• فوز الجولة: +10 نقاط لكل لاعب حي من الفرسان\n• قتل مافيا عادي: +5 نقاط\n• قتل زعيم المافيا (العرّاب): +15 نقطة\n• التصويت لإقصاء القاتل المتسلسل (السفاح): +10 نقاط لكل من صوت عليه\n• تضحية الحارس الشخصي: +15 نقطة\n• حماية ناجحة للطبيب: +25 نقطة عند إنقاذ شخص تعرض للهجوم فعلياً\n• تحقيق ناجح للمحقق: +15 نقطة عن كل عضو مافيا يتم كشفه\n• طلقة صياد الوحوش الأخيرة: +10 نقاط عند إصابة مافيا أو سفاح\n• قيادة التصويت الناجحة للعقيد الحاكم: +15 نقطة",
           mafiaTitle: "🗡️ فريق المافيا",
           mafiaKills:
-            "• قتل القناص أو الساحرة: +10 نقاط\n• قتل المحقق الإمبراطوري: +10 نقاط\n• قتل طبيب الطاعون: +10 نقاط\n• قتل القاتل المتسلسل (السفاح): +10 نقاط\n• قتل الجاسوس: +15 نقطة\n• قتل مواطن عادي / كيوبيد / حارس: +5 نقاط",
+            "• فوز الجولة: +20 نقطة لكل عضو مافيا مشارك\n• قتل القناص أو الساحرة: +10 نقاط\n• قتل المحقق الإمبراطوري: +10 نقاط\n• قتل طبيب الطاعون: +10 نقاط\n• قتل القاتل المتسلسل (السفاح): +10 نقاط\n• قتل الجاسوس: +15 نقطة\n• قتل مواطن عادي / كيوبيد / حارس: +5 نقاط",
           neutralTitle: "🎭 الأدوار المحايدة",
           neutralRules:
-            "• إعدام المهرج (الجوكر): فوز فوري +15 نقطة\n• تفجير الانتحاري المتمرد وأخذ مصوت معه: +10 نقاط\n• بقاء مربوطين كيوبيد حتى النهاية: +10 نقاط\n• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط",
+            "• فوز المهرج (إعدامه بالتصويت): +50 نقطة\n• فوز السفاح (البقاء حياً وتصفية الجميع): +70 نقطة\n• تفجير الانتحاري المتمرد وأخذ مصوت معه: +10 نقاط\n• بقاء مربوطين كيوبيد حتى النهاية: +10 نقاط\n• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط",
           penaltiesTitle: "⚠️ خصومات وعقوبات (مسموح النقاط بالسالب)",
           penaltiesDesc:
             "• التصويت على الجوكر: -5 نقاط (سواء فاز أو لا)\n• التصويت على المجنون: -5 نقاط\n• النيران الصديقة: -10 نقاط\n• التصويت على الانتحاري: -5 نقاط\n• التصويت لإعدام بريء من الفرسان: -5 نقاط",
@@ -2811,14 +3196,14 @@
           scoring_cupid_failure: "• فشل كيوبيد (موت الثنائي المربوط): -5 نقاط",
           scoring_friendly_fire:
             "• النيران الصديقة (قتل صديق بالخطأ): -10 نقاط",
-          scoring_doctor_heal: "• حماية ناجحة لطبيب الطاعون: +5 نقاط",
+          scoring_doctor_heal: "• حماية ناجحة للطبيب: +25 نقطة عند إنقاذ شخص تعرض للهجوم فعلياً",
           scoring_hunter_shot:
             "• طلقة صياد الوحوش الأخيرة (إصابة مافيا/سفاح): +10 نقاط",
           scoring_colonel_lead:
             "• قيادة التصويت الناجحة للعقيد الحاكم: +15 نقطة",
           scoring_mafia_standard_kill:
             "• قتل مواطن عادي / كيوبيد / حارس: +5 نقاط",
-          scoring_joker_win: "• إعدام المهرج (الجوكر): فوز فوري +15 نقطة",
+          scoring_joker_win: "• فوز المهرج (إعدامه بالتصويت): +50 نقطة",
           scoring_bomber_detonate: "• تفجير الانتحاري المتمرد: +10 نقاط",
           scoring_cupid_survival: "• بقاء مربوطين كيوبيد حتى النهاية: +10 نقاط",
           scoring_bomber_penalty: "• التصويت على الانتحاري: -5 نقاط",
@@ -3092,6 +3477,8 @@
           statsTitle: "📊 Points & Leaderboard Record",
           player: "Player",
           points: "Points",
+          kills: "Kills",
+          badges: "Badges",
           wins: "Wins",
           losses: "Losses",
           rolesWon: "Roles Won",
@@ -3131,16 +3518,16 @@
           scoringGuide: "📜 Scoring Guide",
           scoringTitle: "📜 Scoring & Wins Guide",
           baseWinTitle: "🏆 Base Victory",
-          baseWinDesc: "Each match victory awards +10 Points +1 to total Wins.",
+          baseWinDesc: "Victory points depend on the winning team and role, plus +1 to total Wins.",
           knightsTitle: "🛡️ Knights Team (Good Roles)",
           knightsKills:
-            "• Kill Regular Mafia: +5 Pts\n• Kill Godfather (Mafia Leader): +15 Pts\n• Vote Out Serial Killer: +10 Pts for each player who voted for them\n• Bodyguard Sacrifice: +15 Pts\n• Successful Doctor Heal: +5 Pts\n• Monster Hunter Dying Shot: +10 Pts when hitting Mafia or the Serial Killer\n• Colonel Successful Vote Leadership: +15 Pts",
+            "• Round victory: +10 Pts for each living Knights player\n• Kill Regular Mafia: +5 Pts\n• Kill Godfather (Mafia Leader): +15 Pts\n• Vote Out Serial Killer: +10 Pts for each player who voted for them\n• Bodyguard Sacrifice: +15 Pts\n• Successful Doctor Protection: +25 Pts when saving an actually attacked player\n• Successful Investigator Reveal: +15 Pts for each Mafia member exposed\n• Monster Hunter Dying Shot: +10 Pts when hitting Mafia or the Serial Killer\n• Colonel Successful Vote Leadership: +15 Pts",
           mafiaTitle: "🗡️ Mafia Team",
           mafiaKills:
-            "• Kill Sniper or Witch: +10 Pts\n• Kill Investigator: +10 Pts\n• Kill Doctor: +10 Pts\n• Kill Serial Killer: +10 Pts\n• Kill Spy: +15 Pts\n• Kill Standard Citizen / Cupid / Guard: +5 Pts",
+            "• Round victory: +20 Pts for each participating Mafia member\n• Kill Sniper or Witch: +10 Pts\n• Kill Investigator: +10 Pts\n• Kill Doctor: +10 Pts\n• Kill Serial Killer: +10 Pts\n• Kill Spy: +15 Pts\n• Kill Standard Citizen / Cupid / Guard: +5 Pts",
           neutralTitle: "🎭 Neutral Roles",
           neutralRules:
-            "• Joker Executed: Instant Victory +15 Pts\n• Rebel Bomber Detonation taking a voter: +10 Pts\n• Cupid Lovers Surviving: +10 Pts\n• Cupid Failure (both lovers die): -5 Pts",
+            "• Jester victory (executed by vote): +50 Pts\n• Slasher victory (surviving after eliminating everyone): +70 Pts\n• Rebel Bomber Detonation taking a voter: +10 Pts\n• Cupid Lovers Surviving: +10 Pts\n• Cupid Failure (both lovers die): -5 Pts",
           penaltiesTitle: "⚠️ Deductions & Penalties (Negative Scores Allowed)",
           penaltiesDesc:
             "• Voting for Joker: -5 Pts (whether revealed/eliminated or not)\n• Voting for Madman: -5 Pts\n• Friendly Fire: -10 Pts\n• Vote Against Rebel Bomber: -5 Pts\n• Vote to Execute Innocent Knight: -5 Pts",
@@ -3149,13 +3536,13 @@
           scoring_cupid_failure: "• Cupid Failure (both lovers die): -5 Pts",
           scoring_friendly_fire:
             "• Friendly Fire (Accidentally killing an ally): -10 Pts",
-          scoring_doctor_heal: "• Successful Doctor Heal: +5 Pts",
+          scoring_doctor_heal: "• Successful Doctor Protection: +25 Pts when saving an actually attacked player",
           scoring_hunter_shot:
             "• Monster Hunter Dying Shot (hitting Mafia/Killer): +10 Pts",
           scoring_colonel_lead: "• Colonel Successful Vote Leadership: +15 Pts",
           scoring_mafia_standard_kill:
             "• Kill Standard Citizen / Cupid / Guard: +5 Pts",
-          scoring_joker_win: "• Joker Executed: Instant Win +15 Pts",
+          scoring_joker_win: "• Jester victory (executed by vote): +50 Pts",
           scoring_bomber_detonate: "• Rebel Bomber Detonation: +10 Pts",
           scoring_cupid_survival: "• Cupid Lovers Surviving: +10 Pts",
           scoring_bomber_penalty: "• Vote Against Rebel Bomber: -5 Pts",
@@ -3419,6 +3806,8 @@
           witchHealTarget: null,
           witchKillTarget: null,
           cupidLovers: [],
+          framedPlayer: null,
+          investigatorTarget: null,
         },
         doctorSelfHealUsed: false,
 
@@ -3426,6 +3815,7 @@
         witchHealUsed: false,
         witchPoisonUsed: false,
         sniperBulletAvailable: true,
+        sniperBullets: 1,
         lovers: [], // [id1, id2]
 
         // سجلات الصباح والتصويت
@@ -3441,6 +3831,19 @@
           revealRoleOnDeath: true,
           showVoteBreakdown: true,
           discussionTime: 180,
+          jesterCurse: true,
+          events: {
+            eclipse: { enabled: true, rate: 30 },
+            fog: { enabled: true, rate: 30 },
+            decree: { enabled: true, rate: 30 },
+            sandstorm: { enabled: true, rate: 30 },
+            festival: { enabled: true, rate: 30 },
+            rumors: { enabled: true, rate: 30 },
+            curfew: { enabled: true, rate: 30 },
+          },
+          doubleSniper: false,
+          fierceBodyguard: false,
+          speedVoting: false,
         },
 
         playerStats: {},
@@ -3460,6 +3863,36 @@
         mafiaActorId: null,
         votedOutByDay: [],
         scoreEvents: [],
+        mafiaNote: "",
+        playerNotes: {},
+        currentEvents: {
+          eclipse: false,
+          fog: false,
+          decree: false,
+          sandstorm: false,
+          festival: false,
+          rumors: false,
+          curfew: false,
+          doctorDisabled: false,
+          mafiaKillsDisabled: false,
+          serialKillerKillsDisabled: false,
+        },
+        curfewPlayerId: null,
+        copycatClaimed: false,
+        turnTimerInterval: null,
+        turnTimerKind: null,
+        turnSecondsLeft: 15,
+        executionerTarget: null,
+        mayorRevealed: {},
+        lastNightAttacks: [],
+        lastEventDay: 0,
+        badges: [],
+        firstDeathPlayerId: null,
+        deathOrder: [],
+        jesterCurseTarget: null,
+        ambientAudio: null,
+        versionChangelogShown: false,
+        lastWinningTeam: null,
 
         /* =================== التهيئة والتنقل =================== */
         init() {
@@ -3472,7 +3905,17 @@
           this.renderEncyclopedia();
           this.bindRoleRevealCard();
           this.bindPersistenceControls();
+          this.bindRuleDescriptions();
           this.restoreSessionState();
+          this.syncHomeState();
+          if (
+            !localStorage.getItem("mafia_v2_changelog_seen") ||
+            sessionStorage.getItem("mafia_show_v2_changelog") === "1"
+          ) {
+            this.openChangelog();
+            localStorage.setItem("mafia_v2_changelog_seen", "1");
+            sessionStorage.removeItem("mafia_show_v2_changelog");
+          }
         },
 
         t(key, params = {}) {
@@ -3573,6 +4016,9 @@
             "game-active",
             screenId !== "screen-home",
           );
+          document.body.classList.toggle("home-active", screenId === "screen-home");
+          if (screenId === "screen-night") this.startAmbientAudio();
+          else this.stopAmbientAudio();
           window.scrollTo({ top: 0, behavior: "smooth" });
           this.saveSessionState();
         },
@@ -3672,6 +4118,21 @@
             dayCount: this.dayCount,
             rules: this.rules,
             lovers: this.lovers,
+            mafiaNote: this.mafiaNote,
+            playerNotes: this.playerNotes,
+            currentEvents: this.currentEvents,
+            executionerTarget: this.executionerTarget,
+            mayorRevealed: this.mayorRevealed,
+            lastNightAttacks: this.lastNightAttacks,
+            badges: this.badges,
+            firstDeathPlayerId: this.firstDeathPlayerId,
+            deathOrder: this.deathOrder,
+            lastEventDay: this.lastEventDay,
+            jesterCurseTarget: this.jesterCurseTarget,
+            curfewPlayerId: this.curfewPlayerId,
+            copycatClaimed: this.copycatClaimed,
+            sniperBullets: this.sniperBullets,
+            sniperBulletAvailable: this.sniperBulletAvailable,
             timestamp: Date.now(),
           };
           localStorage.setItem("mafia_active_session", JSON.stringify(state));
@@ -3682,11 +4143,132 @@
             "rule-reveal-role",
             "rule-show-votes",
             "rule-discussion-time",
+            "rule-jester-curse",
+            "event-eclipse-enabled",
+            "event-fog-enabled",
+            "event-decree-enabled",
+            "event-eclipse-rate",
+            "event-fog-rate",
+            "event-decree-rate",
+            "event-sandstorm-enabled",
+            "event-festival-enabled",
+            "event-rumors-enabled",
+            "event-curfew-enabled",
+            "event-sandstorm-rate",
+            "event-festival-rate",
+            "event-rumors-rate",
+            "event-curfew-rate",
+            "rule-double-sniper",
+            "rule-fierce-bodyguard",
+            "rule-speed-voting",
           ].forEach((id) => {
             const control = document.getElementById(id);
             if (control)
-              control.addEventListener("change", () => this.saveSessionState());
+              control.addEventListener("change", () => {
+                this.readRuleControls();
+                this.saveSessionState();
+              });
           });
+        },
+
+        bindRuleDescriptions() {
+          const descriptions = {
+            "rule-reveal-role": "يعلن دور اللاعب فور إقصائه نهاراً.",
+            "rule-show-votes": "يعرض تفاصيل من صوّت ضد من بعد التصويت.",
+            "rule-jester-curse": "يأخذ المهرج لاعباً ممن صوتوا ضده.",
+            "event-eclipse-enabled": "يمنع التصويت والإقصاء في هذا اليوم.",
+            "event-fog-enabled": "يعطل نتائج تحقيق المحقق في هذه الليلة.",
+            "event-decree-enabled": "يخفي أسماء المصوتين في سجل الأصوات.",
+            "event-sandstorm-enabled": "يعطل علاج الطبيب في هذه الليلة.",
+            "event-festival-enabled": "يمنع هجمات المافيا والسفاح في هذه الليلة.",
+            "event-rumors-enabled": "ينشر شائعة عن فريق لاعب حي دون كشف دوره.",
+            "event-curfew-enabled": "يعطل تصويت لاعب وقدرته في الليل التالي.",
+            "rule-double-sniper": "• رصاصتان ملكيتان: يمنح القناص الملكي رصاصتين، في حال إصابة المافيا أو السفاح بالرصاصة الأولى تبقى معه الثانية، أما إذا أصاب بريئاً فيموت البريء ويفقد الرصاصة الثانية ندمًا.",
+            "rule-fierce-bodyguard": "يجعل الحارس يقتل المهاجم بعد التضحية.",
+            "rule-speed-voting": "يفرض مهلة 15 ثانية على التسليم والأدوار.",
+          };
+          Object.entries(descriptions).forEach(([id, text]) => {
+            const input = document.getElementById(id);
+            if (!input) return;
+            const container = input.closest(".switch-row, .event-setting");
+            if (!container) return;
+            let help = container.querySelector(".rule-help");
+            if (!help) {
+              help = document.createElement("div");
+              help.className = "rule-help";
+              container.querySelector("div")?.appendChild(help);
+            }
+            help.textContent = text;
+            const update = () => help.classList.toggle("visible", input.checked);
+            input.addEventListener("change", update);
+            update();
+          });
+        },
+
+        readRuleControls() {
+          const readRate = (id, fallback) => {
+            const value = Number(document.getElementById(id)?.value);
+            return Math.min(100, Math.max(20, Number.isFinite(value) ? value : fallback));
+          };
+          this.rules.revealRoleOnDeath = document.getElementById("rule-reveal-role")?.checked ?? true;
+          this.rules.showVoteBreakdown = document.getElementById("rule-show-votes")?.checked ?? true;
+          this.rules.discussionTime = Number(document.getElementById("rule-discussion-time")?.value) || 180;
+          this.rules.jesterCurse = document.getElementById("rule-jester-curse")?.checked ?? true;
+          this.rules.doubleSniper = document.getElementById("rule-double-sniper")?.checked ?? false;
+          this.rules.fierceBodyguard = document.getElementById("rule-fierce-bodyguard")?.checked ?? false;
+          this.rules.speedVoting = document.getElementById("rule-speed-voting")?.checked ?? false;
+          this.rules.events = {
+            eclipse: { enabled: document.getElementById("event-eclipse-enabled")?.checked ?? true, rate: readRate("event-eclipse-rate", 30) },
+            fog: { enabled: document.getElementById("event-fog-enabled")?.checked ?? true, rate: readRate("event-fog-rate", 30) },
+            decree: { enabled: document.getElementById("event-decree-enabled")?.checked ?? true, rate: readRate("event-decree-rate", 30) },
+            sandstorm: { enabled: document.getElementById("event-sandstorm-enabled")?.checked ?? true, rate: readRate("event-sandstorm-rate", 30) },
+            festival: { enabled: document.getElementById("event-festival-enabled")?.checked ?? true, rate: readRate("event-festival-rate", 30) },
+            rumors: { enabled: document.getElementById("event-rumors-enabled")?.checked ?? true, rate: readRate("event-rumors-rate", 30) },
+            curfew: { enabled: document.getElementById("event-curfew-enabled")?.checked ?? true, rate: readRate("event-curfew-rate", 30) },
+          };
+        },
+
+        syncRuleControls() {
+          const events = this.rules.events || {};
+          const set = (id, value) => {
+            const element = document.getElementById(id);
+            if (element && value !== undefined) element.value = value;
+          };
+          const check = (id, value) => {
+            const element = document.getElementById(id);
+            if (element && value !== undefined) element.checked = Boolean(value);
+          };
+          check("rule-reveal-role", this.rules.revealRoleOnDeath);
+          check("rule-show-votes", this.rules.showVoteBreakdown);
+          check("rule-jester-curse", this.rules.jesterCurse);
+          check("rule-double-sniper", this.rules.doubleSniper);
+          check("rule-fierce-bodyguard", this.rules.fierceBodyguard);
+          check("rule-speed-voting", this.rules.speedVoting);
+          check("event-eclipse-enabled", events.eclipse?.enabled);
+          check("event-fog-enabled", events.fog?.enabled);
+          check("event-decree-enabled", events.decree?.enabled);
+          check("event-sandstorm-enabled", events.sandstorm?.enabled);
+          check("event-festival-enabled", events.festival?.enabled);
+          check("event-rumors-enabled", events.rumors?.enabled);
+          check("event-curfew-enabled", events.curfew?.enabled);
+          set("event-eclipse-rate", events.eclipse?.rate || 30);
+          set("event-fog-rate", events.fog?.rate || 30);
+          set("event-decree-rate", events.decree?.rate || 30);
+          set("event-sandstorm-rate", events.sandstorm?.rate || 30);
+          set("event-festival-rate", events.festival?.rate || 30);
+          set("event-rumors-rate", events.rumors?.rate || 30);
+          set("event-curfew-rate", events.curfew?.rate || 30);
+          document.querySelectorAll(".toggle-switch input").forEach((input) => {
+            const help = input.closest(".switch-row, .event-setting")?.querySelector(".rule-help");
+            if (help) help.classList.toggle("visible", input.checked);
+          });
+        },
+
+        syncHomeState() {
+          document.body.classList.toggle(
+            "home-active",
+            document.querySelector(".screen.active")?.id === "screen-home",
+          );
         },
 
         restoreSessionState() {
@@ -3765,8 +4347,36 @@
             Number(state.discussionSecondsLeft) || 180;
           this.timerRunning = Boolean(state.timerRunning);
           this.dayCount = Number(state.dayCount) || 1;
-          this.rules = state.rules || this.rules;
+          this.rules = {
+            ...this.rules,
+            ...(state.rules || {}),
+            events: {
+              ...this.rules.events,
+              ...(state.rules?.events || {}),
+            },
+          };
           this.lovers = Array.isArray(state.lovers) ? state.lovers : [];
+          this.mafiaNote = state.mafiaNote || "";
+          this.playerNotes = state.playerNotes || {};
+          this.currentEvents = state.currentEvents || this.currentEvents;
+          this.executionerTarget = state.executionerTarget || null;
+          this.mayorRevealed = state.mayorRevealed || {};
+          this.lastNightAttacks = Array.isArray(state.lastNightAttacks)
+            ? state.lastNightAttacks
+            : [];
+          this.lastEventDay = Number(state.lastEventDay) || 0;
+          this.badges = Array.isArray(state.badges) ? state.badges : [];
+          this.firstDeathPlayerId = state.firstDeathPlayerId || null;
+          this.deathOrder = Array.isArray(state.deathOrder) ? state.deathOrder : [];
+          this.jesterCurseTarget = state.jesterCurseTarget || null;
+          this.curfewPlayerId = state.curfewPlayerId || null;
+          this.copycatClaimed = Boolean(state.copycatClaimed);
+          this.sniperBullets = Number.isInteger(state.sniperBullets)
+            ? state.sniperBullets
+            : state.sniperBulletAvailable === false
+              ? 0
+              : 1;
+          this.sniperBulletAvailable = this.sniperBullets > 0;
 
           const revealRoleControl = document.getElementById("rule-reveal-role");
           const showVotesControl = document.getElementById("rule-show-votes");
@@ -3779,6 +4389,7 @@
             showVotesControl.checked = this.rules.showVoteBreakdown;
           if (discussionTimeControl)
             discussionTimeControl.value = String(this.rules.discussionTime);
+          this.syncRuleControls();
 
           this.assignedPlayers.forEach((player) => {
             player.isAlive = Array.isArray(state.alivePlayers)
@@ -3881,6 +4492,8 @@
               points: 0,
               wins: 0,
               losses: 0,
+              killsCount: 0,
+              badges: [],
               winningRoles: [],
             };
           } else {
@@ -3890,6 +4503,11 @@
               Number(this.playerStats[name].wins) || 0;
             this.playerStats[name].losses =
               Number(this.playerStats[name].losses) || 0;
+            this.playerStats[name].killsCount =
+              Number(this.playerStats[name].killsCount) || 0;
+            this.playerStats[name].badges = Array.isArray(this.playerStats[name].badges)
+              ? this.playerStats[name].badges
+              : [];
             this.playerStats[name].winningRoles = Array.isArray(
               this.playerStats[name].winningRoles,
             )
@@ -3992,7 +4610,7 @@
             card.className = `role-toggle-card ${this.selectedRolesCounts[key] > 0 ? "active" : ""}`;
             card.id = `role-card-${key}`;
             card.innerHTML = `
-            <img class="role-card-image" src="${role.image}" alt="${localized.name}" />
+            ${role.image ? `<img class="role-card-image" src="${role.image}" alt="${localized.name}" />` : `<div class="role-card-image" style="display:grid;place-items:center;font-size:3rem">${role.icon}</div>`}
             <div class="role-name">${localized.name.split(" ")[0]}</div>
             <span class="role-type-badge team-${role.team}">${this.localizedTeam(role.team)}</span>
             <div class="role-counter" onclick="event.stopPropagation()">
@@ -4086,6 +4704,7 @@
 
         /* =================== توزيع الأدوار السرية =================== */
         showSeatingArrangement() {
+          this.readRuleControls();
           const totalRoles = Object.values(this.selectedRolesCounts).reduce(
             (a, b) => a + b,
             0,
@@ -4139,6 +4758,7 @@
         },
 
         startRoleDistribution() {
+          this.readRuleControls();
           const totalRoles = Object.values(this.selectedRolesCounts).reduce(
             (a, b) => a + b,
             0,
@@ -4200,9 +4820,37 @@
           this.scoreEvents = [];
           this.witchPoisonUsed = false;
           this.witchHealUsed = false;
-          this.sniperBulletAvailable = true;
+          this.sniperBullets = this.rules.doubleSniper ? 2 : 1;
+          this.sniperBulletAvailable = this.sniperBullets > 0;
           this.doctorSelfHealUsed = false;
           this.lovers = [];
+          this.mafiaNote = "";
+          this.playerNotes = {};
+          this.currentEvents = {
+            eclipse: false,
+            fog: false,
+            decree: false,
+            sandstorm: false,
+            festival: false,
+            rumors: false,
+            curfew: false,
+            doctorDisabled: false,
+            mafiaKillsDisabled: false,
+            serialKillerKillsDisabled: false,
+          };
+          this.lastEventDay = 0;
+          this.curfewPlayerId = null;
+          this.copycatClaimed = false;
+          this.mayorRevealed = {};
+          this.lastNightAttacks = [];
+          this.badges = [];
+          this.firstDeathPlayerId = null;
+          this.deathOrder = [];
+          const executioner = this.assignedPlayers.find((p) => p.roleKey === "executioner");
+          const knightTargets = this.assignedPlayers.filter((p) => p.roleKey !== "executioner" && ROLES_DATA[p.roleKey].team === "town");
+          this.executionerTarget = executioner && knightTargets.length
+            ? knightTargets[Math.floor(Math.random() * knightTargets.length)].id
+            : null;
 
           this.showScreen("screen-reveal");
           document.getElementById("distribution-view").classList.add("hidden");
@@ -4237,8 +4885,8 @@
                 teammate.id !== player.id &&
                 teammate.isAlive &&
                 (player.roleKey === "mafia"
-                  ? ["mafia", "godfather"].includes(teammate.roleKey)
-                  : teammate.roleKey === "mafia"),
+                  ? ["mafia", "godfather", "framer"].includes(teammate.roleKey)
+                  : ["mafia", "framer"].includes(teammate.roleKey)),
             );
             const names = teammates.length
               ? teammates.map((teammate) => this.escapeHtml(teammate.name)).join(this.language === "ar" ? "، " : ", ")
@@ -4249,6 +4897,19 @@
               ? this.t(player.roleKey === "mafia" ? "mafiaPartners" : "godfatherMafia", { names })
               : this.t("soloMafia");
             desc.appendChild(awareness);
+            const noteLabel = document.createElement("label");
+            noteLabel.style.cssText = "display:block;margin-top:0.75rem;color:var(--gold);font-size:0.8rem;text-align:right;";
+            noteLabel.innerText = "صندوق الرسائل السرية";
+            const noteInput = document.createElement("textarea");
+            noteInput.value = this.mafiaNote;
+            noteInput.placeholder = "اتفقوا على الهدف...";
+            noteInput.style.cssText = "display:block;width:100%;min-height:60px;margin-top:0.35rem;padding:0.45rem;background:#0c0c12;border:1px solid #3d3d52;border-radius:7px;color:#fff;font:0.8rem var(--font-body);";
+            noteInput.addEventListener("input", (event) => {
+              this.mafiaNote = event.target.value;
+              this.saveSessionState();
+            });
+            desc.appendChild(noteLabel);
+            desc.appendChild(noteInput);
           }
 
           this.saveSessionState();
@@ -4297,9 +4958,11 @@
             this.t("passToPlayer", { name: player.name });
           document.getElementById("distribution-confirm-prompt").innerText =
             this.t("confirmPlayer", { name: player.name });
+          this.startTurnTimer("distribution-handover");
         },
 
         confirmDistributionHandover() {
+          this.clearTurnTimer();
           document
             .getElementById("distribution-handover")
             .classList.remove("active");
@@ -4312,6 +4975,7 @@
 
         /* =================== المرحلة الليلية (Night Phase) =================== */
         startNightPhase() {
+          this.rollNightEvents();
           // تصفير إجراءات الليلة
           this.nightActions = {
             mafiaTarget: null,
@@ -4326,6 +4990,7 @@
             witchKillTarget: null,
             mafiaActorId: null,
             cupidLovers: [],
+            framedPlayer: null,
           };
 
           // إعداد طابور الليل لكل اللاعبين الأحياء (لضمان التمويه الكامل وحمل الجميع للهاتف)
@@ -4347,6 +5012,7 @@
             current.name;
           const nightPrompt = document.querySelector("#night-handover-box p");
           if (nightPrompt) nightPrompt.innerText = this.t("passNight");
+          this.startTurnTimer("night-handover");
           SoundEngine.playTone(330, "sine", 0.2);
         },
 
@@ -4380,9 +5046,23 @@
 
           const alivePlayers = this.assignedPlayers.filter((p) => p.isAlive);
 
+          if (player.id === this.curfewPlayerId) {
+            instruction.innerText = "⛓️ حظر التجول: لا يمكنك استخدام قدرتك هذه الليلة.";
+            this.startTurnTimer("night-action");
+            this.saveSessionState();
+            return;
+          }
+
           // بناء الشاشات حسب الدور
           if (player.roleKey === "mafia" || player.roleKey === "godfather") {
             instruction.innerText = this.t("mafiaPrompt");
+            extraContainer.style.display = "block";
+            extraContainer.innerHTML = `<label style="display:block;color:var(--gold);font-size:0.85rem">صندوق الرسائل السرية</label><textarea id="mafia-note-input" style="width:100%;min-height:70px;margin-top:0.4rem;padding:0.5rem;background:#0c0c12;border:1px solid #3d3d52;border-radius:8px;color:#fff;font:0.85rem var(--font-body)" placeholder="اتفقوا على الهدف..."></textarea>`;
+            document.getElementById("mafia-note-input").value = this.mafiaNote;
+            document.getElementById("mafia-note-input").addEventListener("input", (event) => {
+              this.mafiaNote = event.target.value;
+              this.saveSessionState();
+            });
             const mafiaPartners = alivePlayers.filter(
               (target) =>
                 target.id !== player.id &&
@@ -4395,8 +5075,7 @@
               .filter(
                 (target) =>
                   target.id !== player.id &&
-                  target.roleKey !== "mafia" &&
-                  target.roleKey !== "godfather",
+                  !["mafia", "godfather", "framer"].includes(target.roleKey),
               )
               .forEach((target) => {
                 const btn = document.createElement("button");
@@ -4463,6 +5142,27 @@
                 };
                 listContainer.appendChild(btn);
               });
+          } else if (player.roleKey === "framer") {
+            instruction.innerText = "اختر فارساً بريئاً لتحريف نتيجة التحقيق الليلة:";
+            alivePlayers
+              .filter((target) => target.id !== player.id && ROLES_DATA[target.roleKey].team === "town")
+              .forEach((target) => {
+                const btn = document.createElement("button");
+                btn.className = `player-btn ${this.nightActions.framedPlayer === target.id ? "selected" : ""}`;
+                btn.innerHTML = `<span>🧙 ${this.escapeHtml(target.name)}</span>`;
+                btn.onclick = () => {
+                  const wasSelected = this.nightActions.framedPlayer === target.id;
+                  this.nightActions.framedPlayer = wasSelected ? null : target.id;
+                  this.refreshSelection(listContainer, wasSelected ? null : btn);
+                };
+                listContainer.appendChild(btn);
+              });
+          } else if (player.roleKey === "copycat" || player.roleKey === "mayor" || player.roleKey === "executioner") {
+            instruction.innerText = player.roleKey === "mayor"
+              ? "لا توجد مهمة ليلية. ستظهر قدرتك في التصويت النهاري."
+              : player.roleKey === "executioner"
+                ? "لا توجد مهمة ليلية. راقب هدفك المحدد."
+                : "🪞 لا تملك قدرة بعد. ستنسخ دور أول لاعب يموت.";
           } else if (player.roleKey === "slasher") {
             instruction.innerText = this.t("slasherPrompt");
             alivePlayers
@@ -4619,6 +5319,7 @@
               listContainer.appendChild(btn);
             });
           }
+          this.startTurnTimer("night-action");
           this.saveSessionState();
         },
 
@@ -4632,6 +5333,7 @@
         },
 
         submitNightAction() {
+          this.clearTurnTimer();
           const player = this.nightQueue[this.nightQueueIndex];
 
           // إشعار فحص المحقق إن وجد
@@ -4642,6 +5344,14 @@
             const target = this.assignedPlayers.find(
               (p) => p.id === this.nightActions.investigatorTarget,
             );
+            if (
+              target &&
+              !this.currentEvents.fog &&
+              (ROLES_DATA[target.roleKey].team === "mafia" ||
+                this.nightActions.framedPlayer === target.id)
+            ) {
+              this.recordScoreEvent("investigatorReveal", player.id, target.id);
+            }
             this.openInvestigationModal(target, () =>
               this.finishNightAction(player),
             );
@@ -4652,6 +5362,15 @@
         },
 
         getInvestigationResult(targetPlayer) {
+          if (this.currentEvents.fog) {
+            return { text: "", badgeClass: "text-warning" };
+          }
+          if (this.nightActions.framedPlayer === targetPlayer.id) {
+            return {
+              text: this.t("mafiaTeamInvestigation"),
+              badgeClass: "text-danger",
+            };
+          }
           switch (targetPlayer.roleKey) {
             case "slasher":
               return {
@@ -4665,6 +5384,7 @@
               };
             case "mafia":
             case "godfather":
+            case "framer":
               return {
                 text: this.t("mafiaTeamInvestigation"),
                 badgeClass: "text-danger",
@@ -4700,6 +5420,7 @@
         },
 
         finishNightAction(player) {
+          this.clearTurnTimer();
           if (player.roleKey === "doctor" && this.nightActions.doctorTarget === player.id) {
             this.doctorSelfHealUsed = true;
           }
@@ -4715,7 +5436,18 @@
           }
 
           if (player.roleKey === "sniper" && this.nightActions.sniperTarget) {
-            this.sniperBulletAvailable = false;
+            this.sniperBullets = Math.max(0, (this.sniperBullets ?? (this.sniperBulletAvailable ? 1 : 0)) - 1);
+            this.sniperBulletAvailable = this.sniperBullets > 0;
+            const target = this.assignedPlayers.find((item) => item.id === this.nightActions.sniperTarget);
+            if (this.rules.doubleSniper && target) {
+              const targetRole = ROLES_DATA[target.roleKey];
+              const isHostileTarget =
+                targetRole?.team === "mafia" || target.roleKey === "slasher";
+              if (!isHostileTarget) {
+                this.sniperBullets = 0;
+                this.sniperBulletAvailable = false;
+              }
+            }
           }
 
           if (
@@ -4752,6 +5484,26 @@
           this.killHistory.push({ actorId, targetId, source });
         },
 
+        markDeath(player) {
+          if (!player || this.deathOrder.includes(player.id)) return;
+          this.deathOrder.push(player.id);
+          if (!this.firstDeathPlayerId) this.firstDeathPlayerId = player.id;
+        },
+
+        claimCopycatRole(deceasedPlayer) {
+          if (this.copycatClaimed || !deceasedPlayer) return;
+          const copycat = this.assignedPlayers.find(
+            (player) => player.id !== deceasedPlayer.id && player.isAlive && player.roleKey === "copycat",
+          );
+          if (!copycat) return;
+          copycat.roleKey = deceasedPlayer.roleKey;
+          copycat.inheritedRoleKey = deceasedPlayer.roleKey;
+          this.copycatClaimed = true;
+          this.morningReports.push(
+            `🪞 ${this.escapeHtml(copycat.name)} ورث دور ${this.escapeHtml(this.localizedRole(deceasedPlayer.roleKey).name)} بعد أول وفاة.`,
+          );
+        },
+
         recordScoreEvent(type, playerId, targetId = null) {
           if (!playerId) return;
           this.scoreEvents.push({
@@ -4771,7 +5523,7 @@
           );
           if (!target || !actor) return;
           this.recordKill(actorId, targetId, source);
-          if (!["mafia", "godfather"].includes(target.roleKey)) return;
+          if (!["mafia", "godfather", "framer"].includes(target.roleKey)) return;
           if (!this.specialMafiaKills[actorId])
             this.specialMafiaKills[actorId] = [];
           this.specialMafiaKills[actorId].push({ targetId, source });
@@ -4791,13 +5543,22 @@
             witchHealTarget,
             witchKillTarget,
           } = this.nightActions;
+          if (this.currentEvents.sandstorm)
+            this.morningReports.push("🌪️ عاصفة الرمل: تعطل علاج الطبيب هذه الليلة.");
+          if (this.currentEvents.festival)
+            this.morningReports.push("👑 عيد الفرسان: أُحبطت هجمات المافيا والسفاح هذه الليلة.");
+          const attackTargets = [
+            mafiaTarget && !this.currentEvents.mafiaKillsDisabled ? mafiaTarget : null,
+            slasherTarget && !this.currentEvents.serialKillerKillsDisabled ? slasherTarget : null,
+            sniperTarget,
+            witchKillTarget,
+          ].filter(Boolean);
+          this.lastNightAttacks = attackTargets;
 
           // 1. هجوم المافيا
-          if (mafiaTarget) {
+          if (mafiaTarget && !this.currentEvents.mafiaKillsDisabled) {
             let saved = false;
-            if (doctorTarget === mafiaTarget || witchHealTarget === mafiaTarget) {
-              saved = true;
-            } else if (bodyguardTarget === mafiaTarget) {
+            if (bodyguardTarget === mafiaTarget) {
               // الحارس الشخصي يموت بدلاً منه
               const bg = this.assignedPlayers.find(
                 (p) => p.roleKey === "bodyguard" && p.isAlive,
@@ -4808,8 +5569,14 @@
                 this.morningReports.push(
                   this.t("bodyguardDeath", { name: bg.name }),
                 );
+                if (this.rules.fierceBodyguard && this.nightActions.mafiaActorId) {
+                  deadIds.add(this.nightActions.mafiaActorId);
+                  this.recordKill(bg.id, this.nightActions.mafiaActorId, "bodyguard");
+                }
                 saved = true;
               }
+            } else if (!this.currentEvents.doctorDisabled && (doctorTarget === mafiaTarget || witchHealTarget === mafiaTarget)) {
+              saved = true;
             }
 
             if (!saved) {
@@ -4827,7 +5594,7 @@
                 this.t("mafiaDeath", { name: victim.name }),
               );
             } else if (doctorTarget === mafiaTarget || witchHealTarget === mafiaTarget) {
-              if (doctorTarget === mafiaTarget) {
+              if (!this.currentEvents.doctorDisabled && doctorTarget === mafiaTarget) {
                 const doctor = this.assignedPlayers.find(
                   (p) => p.roleKey === "doctor" && p.isAlive,
                 );
@@ -4839,7 +5606,7 @@
           }
 
           // 2. هجوم السفاح
-          if (slasherTarget && slasherTarget !== doctorTarget) {
+          if (slasherTarget && !this.currentEvents.serialKillerKillsDisabled && (bodyguardTarget === slasherTarget || this.currentEvents.doctorDisabled || slasherTarget !== doctorTarget)) {
             deadIds.add(slasherTarget);
             const victim = this.assignedPlayers.find(
               (p) => p.id === slasherTarget,
@@ -4847,12 +5614,22 @@
             this.morningReports.push(
               this.t("slasherDeath", { name: victim.name }),
             );
+            if (this.rules.fierceBodyguard && bodyguardTarget === slasherTarget) {
+              const bg = this.assignedPlayers.find((p) => p.roleKey === "bodyguard" && p.isAlive);
+              const slasher = this.assignedPlayers.find((p) => p.roleKey === "slasher" && p.isAlive);
+              if (bg && slasher) {
+                deadIds.delete(slasherTarget);
+                deadIds.add(bg.id);
+                deadIds.add(slasher.id);
+                this.recordKill(bg.id, slasher.id, "bodyguard");
+              }
+            }
           }
 
           // 3. هجوم القناص
           if (
             sniperTarget &&
-            sniperTarget !== doctorTarget &&
+            (bodyguardTarget === sniperTarget || this.currentEvents.doctorDisabled || sniperTarget !== doctorTarget) &&
             !deadIds.has(sniperTarget)
           ) {
             deadIds.add(sniperTarget);
@@ -4895,6 +5672,46 @@
             );
           }
 
+          if (bodyguardTarget && attackTargets.includes(bodyguardTarget)) {
+            const bg = this.assignedPlayers.find((p) => p.id === bodyguardTarget && p.isAlive);
+            const attackerId = mafiaTarget === bodyguardTarget
+              ? this.nightActions.mafiaActorId
+              : slasherTarget === bodyguardTarget
+                ? this.assignedPlayers.find((p) => p.roleKey === "slasher" && p.isAlive)?.id
+                : sniperTarget === bodyguardTarget
+                  ? this.assignedPlayers.find((p) => p.roleKey === "sniper" && p.isAlive)?.id
+                  : witchKillTarget === bodyguardTarget
+                    ? this.assignedPlayers.find((p) => p.roleKey === "witch" && p.isAlive)?.id
+                    : null;
+            if (bg) {
+              deadIds.delete(bodyguardTarget);
+              deadIds.add(bg.id);
+              this.morningReports.push(this.t("bodyguardDeath", { name: bg.name }));
+              if (this.rules.fierceBodyguard && attackerId) {
+                deadIds.add(attackerId);
+                this.recordKill(bg.id, attackerId, "bodyguard");
+              }
+            }
+          }
+
+          if (!this.currentEvents.doctorDisabled && doctorTarget && attackTargets.includes(doctorTarget)) {
+            const doctor = this.assignedPlayers.find(
+              (p) => p.roleKey === "doctor" && p.isAlive,
+            );
+            if (
+              doctor &&
+              !this.scoreEvents.some(
+                (event) =>
+                  event.type === "doctorHeal" &&
+                  event.playerId === doctor.id &&
+                  event.targetId === doctorTarget &&
+                  event.day === this.dayCount,
+              )
+            ) {
+              this.recordScoreEvent("doctorHeal", doctor.id, doctorTarget);
+            }
+          }
+
           // إذا لم يمت أحد
           if (deadIds.size === 0) {
             this.morningReports.push(this.t("quietNight"));
@@ -4903,8 +5720,23 @@
           // تطبيق الوفيات
           deadIds.forEach((id) => {
             const p = this.assignedPlayers.find((x) => x.id === id);
-            if (p) p.isAlive = false;
+            if (p) {
+              this.markDeath(p);
+              p.isAlive = false;
+            }
           });
+
+          const firstNightDeath = [...deadIds]
+            .map((id) => this.assignedPlayers.find((player) => player.id === id))
+            .find(Boolean);
+          this.claimCopycatRole(firstNightDeath);
+
+          const executioner = this.assignedPlayers.find((p) => p.roleKey === "executioner");
+          if (executioner && this.executionerTarget && deadIds.has(this.executionerTarget)) {
+            executioner.roleKey = "jester";
+            this.executionerTarget = null;
+            this.morningReports.push("🎭 مات هدف الجلاد ليلاً، فتحول الجلاد إلى مهرج.");
+          }
 
           // التحقق من موت المربوطين بالتزامن
           if (this.lovers.length === 2) {
@@ -4939,6 +5771,7 @@
         },
 
         renderMorningScreen() {
+          this.rollDayEvents();
           this.showScreen("screen-morning");
           document.getElementById("morning-day-number").innerText =
             this.dayCount;
@@ -4981,6 +5814,9 @@
           this.updateTimerDisplay();
           this.dayVotingVisible = false;
           this.startTimer();
+          if (this.currentEvents.eclipse) {
+            this.toast("🌑 كسوف الشمس: لا يوجد تصويت أو إقصاء اليوم.");
+          }
           this.saveSessionState();
         },
 
@@ -5036,10 +5872,151 @@
         clearIntervals() {
           if (this.discussionTimerInterval)
             clearInterval(this.discussionTimerInterval);
+          this.clearTurnTimer();
+        },
+
+        startTurnTimer(kind) {
+          this.clearTurnTimer();
+          if (!this.rules.speedVoting) return;
+          this.turnTimerKind = kind;
+          this.turnSecondsLeft = 15;
+          const element = kind === "distribution-handover"
+            ? document.getElementById("distribution-turn-timer")
+            : kind === "night-handover"
+            ? document.getElementById("night-turn-timer")
+            : kind === "night-action"
+              ? document.getElementById("night-action-timer")
+              : kind === "voting-handover"
+                ? document.getElementById("voting-turn-timer")
+                : document.getElementById("voting-action-timer");
+          const update = () => {
+            if (element) element.innerText = `⏱️ ${this.turnSecondsLeft} ثانية`;
+          };
+          update();
+          this.turnTimerInterval = setInterval(() => {
+            this.turnSecondsLeft -= 1;
+            update();
+            if (this.turnSecondsLeft <= 0) {
+              this.clearTurnTimer();
+              if (kind === "distribution-handover") {
+                this.nextDistributionPlayer();
+              } else if (kind === "night-handover") {
+                const player = this.nightQueue[this.nightQueueIndex];
+                if (player) this.finishNightAction(player);
+              } else if (kind === "night-action") {
+                const player = this.nightQueue[this.nightQueueIndex];
+                if (player) this.finishNightAction(player);
+              } else if (kind === "voting-handover" || kind === "voting-action") {
+                this.skipVote();
+              }
+            }
+          }, 1000);
+        },
+
+        clearTurnTimer() {
+          if (this.turnTimerInterval) clearInterval(this.turnTimerInterval);
+          this.turnTimerInterval = null;
+          this.turnTimerKind = null;
+          ["distribution-turn-timer", "night-turn-timer", "night-action-timer", "voting-turn-timer", "voting-action-timer"].forEach((id) => {
+            const element = document.getElementById(id);
+            if (element) element.innerText = "";
+          });
+        },
+
+        rollDayEvents() {
+          if (this.lastEventDay === this.dayCount) return;
+          const events = this.rules.events || {};
+          const roll = (event) => Boolean(
+            event?.enabled &&
+              Math.random() * 100 <
+                Math.min(100, Math.max(20, Number(event.rate) || 30)),
+          );
+          const previousCurfew = this.curfewPlayerId;
+          if (previousCurfew) {
+            const previousPlayer = this.assignedPlayers.find((player) => player.id === previousCurfew);
+            if (previousPlayer && previousPlayer.roleKey !== "idiot") previousPlayer.cannotVote = false;
+          }
+          this.currentEvents.eclipse = roll(events.eclipse);
+          this.currentEvents.decree = roll(events.decree);
+          this.currentEvents.rumors = roll(events.rumors);
+          this.currentEvents.curfew = roll(events.curfew);
+          this.curfewPlayerId = null;
+          const alivePlayers = this.assignedPlayers.filter((player) => player.isAlive);
+          if (this.currentEvents.curfew && alivePlayers.length) {
+            const target = alivePlayers[Math.floor(Math.random() * alivePlayers.length)];
+            this.curfewPlayerId = target.id;
+            target.cannotVote = true;
+          }
+          this.lastEventDay = this.dayCount;
+          const messages = [];
+          if (this.currentEvents.eclipse)
+            messages.push("🌑 كسوف الشمس: أُغلقت منصة التصويت اليوم.");
+          if (this.currentEvents.fog)
+            messages.push("🌫️ ضباب الليل: فشلت التحقيقات السرية هذه الليلة.");
+          if (this.currentEvents.decree)
+            messages.push("📜 مرسوم الملك: أصبحت أصوات المجلس مجهولة.");
+          const livingKnights = alivePlayers.filter(
+            (player) => ROLES_DATA[player.roleKey]?.team === "town",
+          );
+          if (this.currentEvents.rumors && livingKnights.length) {
+            const target = livingKnights[Math.floor(Math.random() * livingKnights.length)];
+            messages.push(
+              `📣 وصلت شائعة في السوق أن [${this.escapeHtml(target.name)}] ينتمي لفرسان المملكة!`,
+            );
+          }
+          if (this.currentEvents.curfew && this.curfewPlayerId) {
+            messages.push("⛓️ فُرض حظر التجول على لاعب حي.");
+          }
+          this.morningReports.push(...messages);
+          this.saveSessionState();
+        },
+
+        rollNightEvents() {
+          const events = this.rules.events || {};
+          const roll = (event) => Boolean(
+            event?.enabled && Math.random() * 100 < Math.min(100, Math.max(20, Number(event.rate) || 30)),
+          );
+          this.currentEvents.sandstorm = roll(events.sandstorm);
+          this.currentEvents.festival = roll(events.festival);
+          this.currentEvents.fog = roll(events.fog);
+          this.currentEvents.doctorDisabled = this.currentEvents.sandstorm;
+          this.currentEvents.mafiaKillsDisabled = this.currentEvents.festival;
+          this.currentEvents.serialKillerKillsDisabled = this.currentEvents.festival;
+        },
+
+        startAmbientAudio() {
+          if (this.ambientAudio) return;
+          try {
+            SoundEngine.init();
+            if (!SoundEngine.ctx) return;
+            const oscillator = SoundEngine.ctx.createOscillator();
+            const gain = SoundEngine.ctx.createGain();
+            oscillator.type = "sine";
+            oscillator.frequency.value = 80;
+            gain.gain.value = 0.012;
+            oscillator.connect(gain);
+            gain.connect(SoundEngine.ctx.destination);
+            oscillator.start();
+            this.ambientAudio = { oscillator, gain };
+          } catch (error) {}
+        },
+
+        stopAmbientAudio() {
+          if (!this.ambientAudio) return;
+          try {
+            this.ambientAudio.oscillator.stop();
+            this.ambientAudio.oscillator.disconnect();
+            this.ambientAudio.gain.disconnect();
+          } catch (error) {}
+          this.ambientAudio = null;
         },
 
         /* =================== مرحلة التصويت والإقصاء =================== */
         startVotingPhase(candidates = null, isRevote = false) {
+          if (this.currentEvents.eclipse) {
+            this.showSkipVoteModal();
+            return;
+          }
           this.clearIntervals();
           document.getElementById("day-discussion-box").style.display = "none";
           document.getElementById("day-voting-box").style.display = "block";
@@ -5056,7 +6033,7 @@
 
         showVotingHandover() {
           const eligibleVoters = this.assignedPlayers.filter(
-            (p) => p.isAlive && !p.cannotVote,
+            (p) => p.isAlive && !p.cannotVote && p.id !== this.curfewPlayerId,
           );
           if (this.currentVoterIndex >= eligibleVoters.length) {
             this.votingHandoverVisible = false;
@@ -5073,10 +6050,12 @@
           );
           document.getElementById("btn-confirm-voting-handover").innerText =
             this.t("readyToVote", { name: nextVoter.name });
+          this.startTurnTimer("voting-handover");
           this.saveSessionState();
         },
 
         confirmVotingHandover() {
+          this.clearTurnTimer();
           this.votingHandoverVisible = false;
           document.getElementById("voting-handover-box").style.display = "none";
           document.getElementById("voting-turn-box").style.display = "block";
@@ -5086,7 +6065,7 @@
 
         renderVotingTurn() {
           const eligibleVoters = this.assignedPlayers.filter(
-            (p) => p.isAlive && !p.cannotVote,
+            (p) => p.isAlive && !p.cannotVote && p.id !== this.curfewPlayerId,
           );
 
           if (this.currentVoterIndex >= eligibleVoters.length) {
@@ -5113,6 +6092,19 @@
           );
           candidatesList.innerHTML = "";
 
+          if (voter.roleKey === "mayor" && !this.mayorRevealed[voter.id]) {
+            const mayorButton = document.createElement("button");
+            mayorButton.className = "btn btn-outline";
+            mayorButton.style.marginBottom = "0.75rem";
+            mayorButton.innerText = "كشف الهوية كعمدة";
+            mayorButton.onclick = () => {
+              this.mayorRevealed[voter.id] = true;
+              this.renderVotingTurn();
+              this.saveSessionState();
+            };
+            candidatesList.appendChild(mayorButton);
+          }
+
           const aliveCandidates = this.assignedPlayers.filter(
             (p) =>
               p.isAlive &&
@@ -5133,12 +6125,13 @@
             candidatesList.appendChild(btn);
           });
 
+          this.startTurnTimer("voting-action");
           SoundEngine.playTone(380, "triangle", 0.1);
         },
 
         submitVote() {
           const eligibleVoters = this.assignedPlayers.filter(
-            (p) => p.isAlive && !p.cannotVote,
+            (p) => p.isAlive && !p.cannotVote && p.id !== this.curfewPlayerId,
           );
           const voter = eligibleVoters[this.currentVoterIndex];
           const selectedTargetId = voter ? this.votes[voter.id] : null;
@@ -5161,7 +6154,7 @@
 
         skipVote() {
           const eligibleVoters = this.assignedPlayers.filter(
-            (p) => p.isAlive && !p.cannotVote,
+            (p) => p.isAlive && !p.cannotVote && p.id !== this.curfewPlayerId,
           );
           const voter = eligibleVoters[this.currentVoterIndex];
           if (!voter) return;
@@ -5185,7 +6178,11 @@
           Object.keys(this.votes).forEach((voterId) => {
             const targetId = this.votes[voterId];
             const voter = this.assignedPlayers.find((p) => p.id == voterId);
-            const weight = voter && voter.roleKey === "colonel" ? 2 : 1;
+            const weight = voter && voter.roleKey === "colonel"
+              ? 2
+              : voter && voter.roleKey === "mayor" && this.mayorRevealed[voter.id]
+                ? 3
+                : 1;
             if (targetId === null || targetId === undefined) {
               skipVotes += weight;
               return;
@@ -5193,7 +6190,7 @@
             const target = this.assignedPlayers.find((p) => p.id == targetId);
             counts[targetId] = (counts[targetId] || 0) + weight;
 
-            if (voter && target) {
+            if (voter && target && !this.currentEvents.decree) {
               votersDetails.push(
                 `• [${this.escapeHtml(voter.name)}] ${this.t("voteAgainst")} [${this.escapeHtml(target.name)}] ${weight > 1 ? this.t("doubleWeight") : ""}`,
               );
@@ -5247,15 +6244,37 @@
           const executedPlayer = this.assignedPlayers.find(
             (p) => p.id === executedId,
           );
+          this.claimCopycatRole(executedPlayer);
+
+          if (this.executionerTarget === executedPlayer.id) {
+            const executioner = this.assignedPlayers.find((player) => player.roleKey === "executioner");
+            if (executioner) this.recordScoreEvent("executionerVictory", executioner.id, executedPlayer.id);
+            this.endGame("executioner", `⚖️ نجح الجلاد في إقصاء هدفه: ${executedPlayer.name}!`);
+            return;
+          }
 
           // قاعدة المهرج (Jester)
           if (executedPlayer.roleKey === "jester") {
             this.recordScoreEvent("jokerVictory", executedPlayer.id);
             executedPlayer.isAlive = false;
-            this.endGame(
-              "jester",
-              this.t("jesterWin", { name: executedPlayer.name }),
-            );
+            const finishJester = (curseTargetId = null) => {
+              this.jesterCurseTarget = curseTargetId;
+              if (curseTargetId) {
+                const curseTarget = this.assignedPlayers.find((p) => p.id === curseTargetId);
+                if (curseTarget) curseTarget.isAlive = false;
+              }
+              this.endGame("jester", this.t("jesterWin", { name: executedPlayer.name }));
+            };
+            if (this.rules.jesterCurse) {
+              this.openSpecialModal(
+                "انتقام المهرج",
+                "اختر أحداً ممن صوتوا ضدك لتأخذه معك للقبر",
+                finishJester,
+                (candidate) => this.voteHistory.some((vote) => vote.voterId === candidate.id && vote.targetId === executedPlayer.id),
+              );
+            } else {
+              finishJester();
+            }
             return;
           }
 
@@ -5280,7 +6299,7 @@
             loverName: null,
           };
           this.votedOutByDay.push(executedPlayer.id);
-          if (["mafia", "godfather"].includes(executedPlayer.roleKey)) {
+          if (["mafia", "godfather", "framer"].includes(executedPlayer.roleKey)) {
             Object.keys(this.votes).forEach((voterId) => {
               const voter = this.assignedPlayers.find(
                 (player) => player.id === Number(voterId),
@@ -5298,6 +6317,7 @@
             });
           }
           executedPlayer.isAlive = false;
+          this.markDeath(executedPlayer);
           SoundEngine.swordSlash();
 
           titleEl.innerText = this.t("executionTitle", {
@@ -5326,6 +6346,7 @@
               (p) => p.id === otherLoverId,
             );
             if (otherLover && otherLover.isAlive) {
+              this.markDeath(otherLover);
               otherLover.isAlive = false;
               this.executionState.loverName = otherLover.name;
               descEl.innerHTML += `<br><span style="color:#ff6b6b;">${this.t("loverDeath", { name: otherLover.name })}</span>`;
@@ -5385,6 +6406,8 @@
                   (p) => p.id === targetId,
                 );
                 if (target) {
+                  this.claimCopycatRole(target);
+                  this.markDeath(target);
                   target.isAlive = false;
                   this.recordSpecialMafiaKill(
                     hunterPlayer.id,
@@ -5419,6 +6442,8 @@
                   (p) => p.id === targetId,
                 );
                 if (target) {
+                  this.claimCopycatRole(target);
+                  this.markDeath(target);
                   target.isAlive = false;
                   const wasVoter = this.voteHistory.some(
                     (vote) =>
@@ -5440,14 +6465,14 @@
           }, 1000);
         },
 
-        openSpecialModal(title, desc, callback) {
+        openSpecialModal(title, desc, callback, candidateFilter = null) {
           document.getElementById("special-modal-title").innerText = title;
           document.getElementById("special-modal-desc").innerText = desc;
           const container = document.getElementById("special-modal-targets");
           container.innerHTML = "";
 
           let chosenTargetId = null;
-          const alivePlayers = this.assignedPlayers.filter((p) => p.isAlive);
+          const alivePlayers = this.assignedPlayers.filter((p) => p.isAlive && (!candidateFilter || candidateFilter(p)));
 
           alivePlayers.forEach((p) => {
             const btn = document.createElement("button");
@@ -5500,8 +6525,8 @@
         /* =================== شروط النصر والختام (Win Conditions) =================== */
         checkWinCondition() {
           const alive = this.assignedPlayers.filter((p) => p.isAlive);
-          const aliveMafia = alive.filter(
-            (p) => p.roleKey === "mafia" || p.roleKey === "godfather",
+          const aliveMafia = alive.filter((p) =>
+            ["mafia", "godfather", "framer"].includes(p.roleKey),
           );
           const aliveSlasher = alive.filter((p) => p.roleKey === "slasher");
           const aliveTown = alive.filter((p) => {
@@ -5547,6 +6572,8 @@
 
         endGame(winningTeam, message) {
           this.clearIntervals();
+          this.lastWinningTeam = winningTeam;
+          this.calculateBadges();
           this.recordGameResults(winningTeam);
           localStorage.removeItem("mafia_active_session");
           this.showScreen("screen-gameover");
@@ -5577,6 +6604,10 @@
             titleEl.innerText = this.t("loversVictoryTitle");
             iconEl.innerText = "💖";
             titleEl.style.color = "#ff85a2";
+          } else if (winningTeam === "executioner") {
+            titleEl.innerText = "⚖️ انتصار الجلاد!";
+            iconEl.innerText = "⚖️";
+            titleEl.style.color = "#f3c969";
           }
 
           const rolesList = document.getElementById("gameover-roles-list");
@@ -5593,6 +6624,9 @@
             rolesList.appendChild(item);
           });
 
+          this.renderAchievements();
+          setTimeout(() => document.getElementById("modal-achievements")?.classList.add("active"), 250);
+
           SoundEngine.victory();
         },
 
@@ -5602,12 +6636,15 @@
           this.assignedPlayers.forEach((player) => {
             const stats = this.ensurePlayerStats(player.name);
             const role = ROLES_DATA[player.roleKey];
+            const sessionKills = this.killHistory.filter(
+              (kill) => kill.actorId === player.id,
+            ).length;
             let isWinner = false;
             const votedCorrectly = this.voteHistory.some(
               (vote) =>
                 vote.voterId === player.id &&
                 vote.targetId !== null &&
-                ["mafia", "godfather"].includes(
+                ["mafia", "godfather", "framer"].includes(
                   this.assignedPlayers.find(
                     (target) => target.id === vote.targetId,
                   )?.roleKey,
@@ -5621,7 +6658,7 @@
                   votedCorrectly);
             } else if (winningTeam === "mafia") {
               isWinner =
-                player.roleKey === "mafia" || player.roleKey === "godfather";
+                ["mafia", "godfather", "framer"].includes(player.roleKey);
             } else if (winningTeam === "slasher") {
               isWinner = player.roleKey === "slasher";
             } else if (winningTeam === "jester") {
@@ -5631,8 +6668,14 @@
             }
 
             let points = isWinner ? 10 : 0;
+            if (winningTeam === "mafia" && role.team === "mafia" && player.isAlive)
+              points = 20;
+            if (winningTeam === "town" && role.team === "town" && player.isAlive)
+              points = 10;
             if (winningTeam === "jester" && player.roleKey === "jester")
-              points = 15;
+              points = 50;
+            if (winningTeam === "slasher" && player.roleKey === "slasher")
+              points = 70;
 
             this.killHistory
               .filter((kill) => kill.actorId === player.id)
@@ -5643,7 +6686,7 @@
                 if (!target) return;
                 if (
                   role.team === "town" &&
-                  ["mafia", "godfather"].includes(target.roleKey)
+                  ["mafia", "godfather", "framer"].includes(target.roleKey)
                 ) {
                   points += target.roleKey === "godfather" ? 15 : 5;
                 }
@@ -5668,7 +6711,8 @@
               .forEach((event) => {
                 const eventPoints = {
                   bodyguardSacrifice: 15,
-                  doctorHeal: 5,
+                  doctorHeal: 25,
+                  investigatorReveal: 15,
                   friendlyFire: -10,
                   hunterDyingShot: 10,
                   colonelLead: 15,
@@ -5725,6 +6769,12 @@
               }
             }
             stats.points += points;
+            stats.killsCount += sessionKills;
+            this.badges
+              .filter((badge) => badge.playerId === player.id)
+              .forEach((badge) => {
+                if (!stats.badges.includes(badge.title)) stats.badges.push(badge.title);
+              });
             if (!isWinner) stats.losses += 1;
           });
 
@@ -5739,6 +6789,99 @@
           } else {
             this.goToSetup();
           }
+        },
+
+        calculateBadges() {
+          const players = this.assignedPlayers;
+          const roleOf = (player) => ROLES_DATA[player.roleKey] || ROLES_DATA.citizen;
+          const correctVoteCount = (player) =>
+            this.voteHistory.filter((vote) => {
+              if (vote.voterId !== player.id || vote.targetId === null) return false;
+              const target = this.assignedPlayers.find((candidate) => candidate.id === vote.targetId);
+              return ["mafia", "godfather", "framer", "slasher"].includes(target?.roleKey);
+            }).length;
+          const investigationCount = (player) =>
+            this.scoreEvents.filter((event) => event.playerId === player.id && event.type === "investigatorReveal").length;
+          const wonThisSession = (player) => {
+            const role = roleOf(player);
+            if (this.lastWinningTeam === "town") return role.team === "town" && player.isAlive;
+            if (this.lastWinningTeam === "mafia") return role.team === "mafia";
+            if (this.lastWinningTeam === "jester") return player.roleKey === "jester";
+            if (this.lastWinningTeam === "slasher") return player.roleKey === "slasher";
+            if (this.lastWinningTeam === "executioner") return player.roleKey === "executioner";
+            if (this.lastWinningTeam === "lovers") return this.lovers.includes(player.id);
+            return false;
+          };
+          const best = (score, allowZero = false) => {
+            const ranked = players
+              .map((player) => ({ player, value: score(player) }))
+              .sort((first, second) => second.value - first.value);
+            return ranked[0] && (allowZero || ranked[0].value > 0) ? ranked[0].player : null;
+          };
+          const badge = (icon, title, player) =>
+            player ? { icon, title, name: player.name, playerId: player.id } : null;
+          const firstVictim = this.firstDeathPlayerId
+            ? players.find((player) => player.id === this.firstDeathPlayerId)
+            : null;
+          this.badges = [
+            badge("🕵🏻‍♂️", "سينشي كودو", best((player) => correctVoteCount(player) + investigationCount(player) * 1.5)),
+            badge("🎭", "الداهية", best((player) =>
+              wonThisSession(player) && (roleOf(player).team === "mafia" || player.roleKey === "jester") ? 1 : 0,
+            )),
+            badge("🛡️", "ملاك الرحمة", best((player) =>
+              this.scoreEvents.filter((event) => event.playerId === player.id && event.type === "doctorHeal").length,
+            )),
+            badge("🔫", "الطخيخ", best((player) =>
+              this.killHistory.filter((kill) => kill.actorId === player.id).length,
+            )),
+            badge("👻", "الضحية الأولى (المنحوس)", firstVictim),
+            badge("⚖️", "قاضي المملكة", best((player) => correctVoteCount(player))),
+            badge("🦊", "الثعلب الصامت", best((player) =>
+              wonThisSession(player) && !this.voteHistory.some((vote) => vote.targetId === player.id) ? 1 : 0,
+            )),
+            badge("💣", "ملك الظلال", best((player) =>
+              wonThisSession(player) && ["slasher", "jester", "executioner", "copycat"].includes(player.roleKey) ? 1 : 0,
+            )),
+            badge("📜", "البريء المحترف", best((player) =>
+              wonThisSession(player) && roleOf(player).team === "town" && player.isAlive ? correctVoteCount(player) : 0,
+            )),
+          ].filter(Boolean);
+        },
+
+        renderAchievements() {
+          const container = document.getElementById("achievements-list");
+          if (!container) return;
+          container.innerHTML = this.badges.length
+            ? this.badges
+                .map(
+                  (badge) =>
+                    `<div class="achievement-item"><strong>${badge.icon} ${badge.title}</strong><div style="color:var(--gold-light);margin-top:0.25rem">${this.escapeHtml(badge.name)}</div></div>`,
+                )
+                .join("")
+            : '<div class="stats-empty">لا توجد إنجازات كافية.</div>';
+        },
+
+        openChangelog() {
+          document.getElementById("modal-changelog")?.classList.add("active");
+        },
+
+        toggleNotepad() {
+          const panel = document.getElementById("notepad-panel");
+          const activePlayer = this.nightQueue[this.nightQueueIndex] ||
+            this.assignedPlayers.filter((player) => player.isAlive)[this.currentVoterIndex];
+          if (activePlayer) {
+            document.getElementById("player-notepad").value = this.playerNotes[activePlayer.id] || "";
+            panel.dataset.playerId = activePlayer.id;
+          }
+          panel.classList.toggle("active");
+        },
+
+        saveNotepad() {
+          const panel = document.getElementById("notepad-panel");
+          const playerId = Number(panel.dataset.playerId);
+          if (playerId) this.playerNotes[playerId] = document.getElementById("player-notepad").value;
+          this.saveSessionState();
+          panel.classList.remove("active");
         },
 
         /* =================== الموسوعة والمودالات =================== */
@@ -5781,8 +6924,10 @@
             .map(([name, stats]) => ({
               name,
               points: Number(stats.points) || 0,
+              killsCount: Number(stats.killsCount) || 0,
               wins: Number(stats.wins) || 0,
               losses: Number(stats.losses) || 0,
+              badges: Array.isArray(stats.badges) ? stats.badges : [],
               winningRoles: Array.isArray(stats.winningRoles)
                 ? stats.winningRoles
                 : [],
@@ -5804,9 +6949,11 @@
                 <tr>
                   <th>${this.t("player")}</th>
                   <th>${this.t("points")}</th>
+                  <th>${this.t("kills")}</th>
                   <th>${this.t("wins")}</th>
                   <th>${this.t("losses")}</th>
                   <th>${this.t("rolesWon")}</th>
+                  <th>${this.t("badges")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -5816,6 +6963,7 @@
                   <tr>
                     <td class="stats-player-name">${this.escapeHtml(entry.name)}</td>
                     <td>${entry.points}</td>
+                    <td>${entry.killsCount}</td>
                     <td>${entry.wins}</td>
                     <td>${entry.losses}</td>
                     <td>
@@ -5830,6 +6978,13 @@
                                 .join("")
                             : '<span style="color:var(--text-muted);">-</span>'
                         }
+                      </div>
+                    </td>
+                    <td>
+                      <div class="stats-role-badges">
+                        ${entry.badges.length
+                          ? entry.badges.map((badge) => `<span class="stats-role-badge">${this.escapeHtml(badge)}</span>`).join("")
+                          : '<span style="color:var(--text-muted);">-</span>'}
                       </div>
                     </td>
                   </tr>
@@ -5895,11 +7050,72 @@
       });
     </script>
     <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('./sw.js')
-            .then(reg => console.log('Service Worker registered successfully:', reg.scope))
-            .catch(err => console.error('Service Worker registration failed:', err));
+      function showUpdateNotification() {
+        if (document.querySelector(".update-toast")) return;
+
+        const toast = document.createElement("div");
+        toast.className = "update-toast";
+        toast.innerHTML = `
+          <span>توجد نسخة جديدة ومحدثة من الموقع!</span>
+          <button type="button">تحديث الآن</button>
+        `;
+        document.body.appendChild(toast);
+
+        toast.querySelector("button").addEventListener("click", async () => {
+          const registration = await navigator.serviceWorker.getRegistration();
+          if (registration?.waiting) {
+            registration.waiting.postMessage({ action: "skipWaiting" });
+          } else {
+            window.location.reload();
+          }
+        });
+      }
+
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", () => {
+          let refreshing = false;
+
+          navigator.serviceWorker.addEventListener("controllerchange", () => {
+            if (refreshing) return;
+            refreshing = true;
+            sessionStorage.setItem("mafia_show_v2_changelog", "1");
+            window.location.reload();
+          });
+
+          navigator.serviceWorker
+            .register("./sw.js")
+            .then((registration) => {
+              console.log("SW registered:", registration.scope);
+
+              if (navigator.onLine) {
+                registration.update().catch((error) => {
+                  console.warn("SW update check failed:", error);
+                });
+              }
+
+              window.addEventListener("online", () => {
+                registration.update().catch((error) => {
+                  console.warn("SW update check failed:", error);
+                });
+              });
+
+              registration.addEventListener("updatefound", () => {
+                const newWorker = registration.installing;
+                if (!newWorker) return;
+
+                newWorker.addEventListener("statechange", () => {
+                  if (
+                    newWorker.state === "installed" &&
+                    navigator.serviceWorker.controller
+                  ) {
+                    showUpdateNotification();
+                  }
+                });
+              });
+            })
+            .catch((error) => {
+              console.error("SW registration failed:", error);
+            });
         });
       }
     </script>
