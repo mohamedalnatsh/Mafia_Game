@@ -360,6 +360,30 @@
         color: var(--text-muted);
       }
 
+      .target-reveal-box {
+        margin: 0 0 0.65rem;
+        padding: 0.8rem 1rem;
+        border: 1px solid var(--gold);
+        border-radius: 8px;
+        background: rgba(212, 175, 55, 0.12);
+        color: var(--gold-light);
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+      }
+
+      .highlight-target {
+        color: #fff;
+        font-weight: 800;
+      }
+
+      .role-hint {
+        margin: 0 0 1rem;
+        color: var(--parchment);
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
       .team-mafia {
         color: #ff6b6b;
         background: rgba(255, 107, 107, 0.12);
@@ -1976,6 +2000,7 @@
           >
             اختر لاعباً للتحقق من هويته وولائه الحقيقي للمملكة:
           </p>
+          <div id="night-role-reveal" style="display: none"></div>
           <div id="night-action-timer" class="turn-timer" aria-live="polite"></div>
 
           <!-- حقول إضافية لبعض الأدوار (مثل الساحرة أو المربوطين) -->
@@ -5058,8 +5083,12 @@
           const instruction = document.getElementById(
             "night-action-instruction",
           );
+          const roleReveal = document.getElementById("night-role-reveal");
           const listContainer = document.getElementById("night-targets-list");
           const extraContainer = document.getElementById("night-extra-options");
+          instruction.style.display = "block";
+          roleReveal.style.display = "none";
+          roleReveal.innerHTML = "";
           listContainer.innerHTML = "";
           extraContainer.style.display = "none";
           extraContainer.innerHTML = "";
@@ -5178,11 +5207,20 @@
                 listContainer.appendChild(btn);
               });
           } else if (player.roleKey === "copycat" || player.roleKey === "mayor" || player.roleKey === "executioner") {
-            instruction.innerText = player.roleKey === "mayor"
-              ? "لا توجد مهمة ليلية. ستظهر قدرتك في التصويت النهاري."
-              : player.roleKey === "executioner"
-                ? "لا توجد مهمة ليلية. راقب هدفك المحدد."
+            if (player.roleKey === "executioner") {
+              const target = this.assignedPlayers.find(
+                (candidate) => candidate.id === this.executionerTarget,
+              );
+              instruction.style.display = "none";
+              roleReveal.style.display = "block";
+              roleReveal.innerHTML = target
+                ? `<div class="target-reveal-box">🎯 <strong>هدف الثأر المكتوب:</strong> <span class="highlight-target">${this.escapeHtml(target.name)}</span></div><p class="role-hint">مهمتك: راقب تحركاته وأقنع الفرسان بتصويت إعدامه خلال النهار ليفوز دورك!</p>`
+                : `<p class="role-hint">لا يوجد هدف ثأر محدد.</p>`;
+            } else {
+              instruction.innerText = player.roleKey === "mayor"
+                ? "لا توجد مهمة ليلية. ستظهر قدرتك في التصويت النهاري."
                 : "🪞 لا تملك قدرة بعد. ستنسخ دور أول لاعب يموت.";
+            }
           } else if (player.roleKey === "slasher") {
             instruction.innerText = this.t("slasherPrompt");
             alivePlayers
