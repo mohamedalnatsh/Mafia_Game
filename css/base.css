@@ -1,0 +1,176 @@
+
+      :root {
+        --bg-main: #0c0c10;
+        --bg-card: #15151e;
+        --bg-card-hover: #1f1f2c;
+        --crimson-dark: #4a000d;
+        --crimson: #7a0016;
+        --crimson-bright: #a30822;
+        --crimson-glow: rgba(163, 8, 34, 0.4);
+        --gold: #d4af37;
+        --gold-light: #f3e5ab;
+        --gold-dark: #997d1e;
+        --parchment: #f5eedc;
+        --text-main: #f0f0f4;
+        --text-muted: #9e9eb0;
+        --border-color: #2e2428;
+        --border-gold: #5e4b1a;
+        --shadow-crimson: 0 8px 32px rgba(122, 0, 22, 0.35);
+        --font-body:
+          "Tajawal", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+        --font-title: "Amiri", serif;
+      }
+
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        user-select: none;
+        -webkit-user-select: none;
+        -webkit-touch-callout: none;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      html,
+      body,
+      #app-root,
+      .screen-container {
+        background-color: #0b0c10 !important;
+        -webkit-tap-highlight-color: transparent;
+      }
+
+      body {
+        background: radial-gradient(
+          circle at center top,
+          #230b12 0%,
+          #0b0c10 70%,
+          #050507 100%
+        );
+        color: var(--text-main);
+        font-family: var(--font-body);
+        min-height: 100vh;
+        overflow-x: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        overscroll-behavior-y: contain;
+      }
+
+      /* خلفية الزخارف الملكية */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image:
+          radial-gradient(var(--crimson-glow) 1px, transparent 1px),
+          radial-gradient(rgba(212, 175, 55, 0.08) 1px, transparent 1px);
+        background-size: 40px 40px;
+        background-position:
+          0 0,
+          20px 20px;
+        opacity: 0.5;
+        pointer-events: none;
+        z-index: 0;
+        background-attachment: initial;
+      }
+
+      @media (max-width: 768px) {
+        .card-panel,
+        .modal-content,
+        .modal-overlay,
+        .chronicle-paper,
+        .news-modal-content {
+          backdrop-filter: none !important;
+          -webkit-backdrop-filter: none !important;
+        }
+      }
+
+      .app-container {
+        width: 100%;
+        max-width: 540px;
+        min-height: 100vh;
+        padding: 1.25rem 1rem 3rem 1rem;
+        position: relative;
+        z-index: 1;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* شريط العنوان العلوي */
+      header {
+        text-align: center;
+        margin-bottom: 1.5rem;
+        position: relative;
+      }
+
+      .title-crown {
+        width: 48px;
+        height: 48px;
+        fill: var(--gold);
+        filter: drop-shadow(0 0 10px rgba(212, 175, 55, 0.5));
+        margin-bottom: 0.25rem;
+        animation: floatSlow 4s ease-in-out infinite;
+      }
+
+      @keyframes floatSlow {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-5px);
+        }
+      }
+
+      h1.app-title {
+        font-family: var(--font-title);
+        font-size: 2.2rem;
+        color: var(--gold-light);
+        text-shadow:
+          0 2px 8px rgba(0, 0, 0, 0.8),
+          0 0 20px var(--crimson);
+        letter-spacing: 0.5px;
+      }
+
+      .app-subtitle {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.15rem;
+        line-height: 1.6;
+      }
+
+      p,
+      li,
+      ul,
+      ol,
+      .switch-row > div,
+      .rule-help,
+      .scoring-guide-section p,
+      .news-section ul,
+      .news-section li,
+      .exit-warning,
+      .modal-content p,
+      .modal-content div,
+      .screen p,
+      .screen li {
+        line-height: 1.7;
+      }
+
+      .start-menu-image {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 0.75rem;
+        border: 2px solid rgba(212, 175, 55, 0.65);
+        border-radius: 50%;
+        display: block;
+        object-fit: cover;
+        box-shadow:
+          0 6px 18px rgba(0, 0, 0, 0.55),
+          0 0 14px rgba(212, 175, 55, 0.18);
+      }
+
+      /* الأزرار الملكية */
+      

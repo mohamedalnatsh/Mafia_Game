@@ -1,0 +1,181 @@
+.seating-panel {
+        text-align: center;
+        padding: 1.5rem 1rem 1.25rem;
+      }
+
+      .seating-title {
+        font-family: var(--font-title);
+        font-size: 2rem;
+        color: var(--gold-light);
+        margin-bottom: 0.35rem;
+      }
+
+      .seating-subtitle {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        line-height: 1.5;
+        margin-bottom: 1rem;
+      }
+
+      #seating-circle {
+        width: min(86vw, 360px);
+        aspect-ratio: 1;
+        position: relative;
+        margin: 0 auto 1.25rem;
+        border: 1px dashed rgba(212, 175, 55, 0.42);
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(122, 0, 22, 0.2),
+          rgba(12, 12, 16, 0.25) 62%,
+          transparent 63%
+        );
+      }
+
+      .seating-node {
+        position: absolute;
+        width: 92px;
+        transform: translate(-50%, -50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        color: var(--text-main);
+        font-size: 0.78rem;
+        font-weight: 700;
+        line-height: 1.25;
+        text-align: center;
+      }
+
+      .seating-number {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border: 2px solid var(--gold);
+        border-radius: 50%;
+        background: var(--crimson-dark);
+        color: var(--gold-light);
+        box-shadow: 0 0 14px rgba(212, 175, 55, 0.28);
+        font-size: 1rem;
+      }
+
+      .seating-name {
+        max-width: 100%;
+        overflow-wrap: anywhere;
+      }
+
+      .seating-center-mark {
+        position: absolute;
+        inset: 50% auto auto 50%;
+        transform: translate(-50%, -50%);
+        color: rgba(243, 229, 171, 0.7);
+        font-family: var(--font-title);
+        font-size: 1.3rem;
+        pointer-events: none;
+      }
+
+      .home-footer {
+        margin-top: auto;
+        padding: 1.25rem 0 0.5rem;
+        text-align: center;
+        color: var(--text-muted);
+        font-size: 0.82rem;
+      }
+
+      .gold-gradient-link {
+        background: linear-gradient(
+          135deg,
+          #ffe066 0%,
+          #d4af37 50%,
+          #aa7c11 100%
+        );
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+        font-weight: bold;
+        text-decoration: none;
+        transition: filter 0.3s ease;
+      }
+
+      .gold-gradient-link:hover {
+        filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.8));
+      }
+
+      .top-bar-controls {
+        position: fixed;
+        top: 0.75rem;
+        left: 0.75rem;
+        right: 0.75rem;
+        z-index: 90;
+        display: flex;
+        justify-content: space-between;
+        pointer-events: none;
+      }
+
+      .btn-top-bar {
+        pointer-events: auto;
+        border: 1px solid var(--border-gold);
+        border-radius: 8px;
+        padding: 0.45rem 0.7rem;
+        font: 700 0.8rem var(--font-body);
+        cursor: pointer;
+        box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      }
+
+      .btn-lang {
+        background: #181822;
+        color: var(--gold-light);
+      }
+
+      .btn-exit-icon {
+        display: none;
+        background: #6f111b;
+        color: #fff;
+        border-color: #dc3545;
+        font-size: 1rem;
+      }
+
+      body.game-active .btn-exit-icon {
+        display: inline-flex;
+      }
+
+      .exit-warning {
+        margin: 1rem 0;
+        padding: 0.8rem;
+        border: 1px solid #9b6b1a;
+        border-radius: 8px;
+        background: rgba(212, 175, 55, 0.1);
+        color: var(--gold-light);
+        line-height: 1.5;
+        font-size: 0.9rem;
+      }
+
+      .exit-actions {
+        display: flex;
+        gap: 0.65rem;
+      }
+
+      .exit-actions .btn {
+        flex: 1;
+      }
+
+      .btn-exit-confirm {
+        background: #dc3545;
+        color: #fff;
+      }
+
+      .btn-continue {
+        background: var(--gold);
+        color: #1a0000;
+      }
+
+      [dir="ltr"] .app-container {
+        direction: ltr;
+      }
+
+      [dir="ltr"] .panel-header,
+      [dir="ltr"] .switch-row {
+        text-align: left;
+      }
+    
