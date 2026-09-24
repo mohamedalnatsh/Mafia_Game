@@ -112,6 +112,13 @@
         display: none !important;
       }
 
+      .setup-step-panel {
+        display: flex;
+        flex-direction: column;
+        max-height: 72vh;
+        overflow-y: auto;
+      }
+
       .card-panel {
         background: rgba(21, 21, 30, 0.85);
         border: 1px solid var(--border-color);
@@ -329,6 +336,8 @@
         padding: 0.25rem;
         scrollbar-width: thin;
         scrollbar-color: var(--crimson) transparent;
+        flex: 1;
+        min-height: 0;
       }
 
       .roles-grid::-webkit-scrollbar {
